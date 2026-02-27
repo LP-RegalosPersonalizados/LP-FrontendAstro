@@ -1,0 +1,113 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+
+const projects = [
+  {
+    title: 'Sets corporativos para Tech Empresa SA',
+    description: 'Producción de 150 tazas mágicas con logo y diseño personalizado para regalo de fin de año.',
+    image: 'https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=800&q=80',
+    category: 'Corporativo',
+    quantity: '150 unidades',
+  },
+  {
+    title: 'Álbumes de egresados — Promo 2024',
+    description: 'Álbumes personalizados para una promoción de 80 alumnos. Tapa dura con nombre y año.',
+    image: 'https://images.unsplash.com/photo-1512070679279-8988d32161be?w=800&q=80',
+    category: 'Educativo',
+    quantity: '80 unidades',
+  },
+  {
+    title: 'Cuadros para Hotel Boutique',
+    description: 'Decoración personalizada para 12 habitaciones con cuadros canvas de autor.',
+    image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800&q=80',
+    category: 'Decoración',
+    quantity: '24 cuadros',
+  },
+  {
+    title: 'Kit Navideño — Estudio Contable',
+    description: 'Kit regalo navideño con taza + tarjeta para 60 empleados y clientes.',
+    image: 'https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=800&q=80',
+    category: 'Corporativo',
+    quantity: '60 kits',
+  },
+  {
+    title: 'Regalos Día de la Madre',
+    description: 'Set especial para mamá con taza mágica personalizada + álbum mini para 30 familias.',
+    image: 'https://images.unsplash.com/photo-1558470598-a5dda9640f68?w=800&q=80',
+    category: 'Particular',
+    quantity: '30 sets',
+  },
+  {
+    title: 'Cuadros collage familiar',
+    description: 'Colección de cuadros collage para una familia numerosa con fotos de tres generaciones.',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    category: 'Particular',
+    quantity: '8 cuadros',
+  },
+];
+
+const categoryColors: Record<string, string> = {
+  Corporativo: 'bg-primary text-white',
+  Educativo: 'bg-accent text-white',
+  Decoración: 'bg-secondary text-primary',
+  Particular: 'bg-neutral-light text-gray-700',
+};
+---
+
+<MainLayout
+  title="Trabajos Previos"
+  description="Conocé algunos de nuestros trabajos más especiales. Proyectos corporativos, regalos personalizados y más."
+>
+  <section class="section-padding">
+    <div class="container-main">
+      <SectionTitle
+        title="Trabajos Previos"
+        subtitle="Algunos de los proyectos que más nos enorgullecen"
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
+        {projects.map(({ title, description, image, category, quantity }) => (
+          <article class="card overflow-hidden group">
+            <div class="aspect-video overflow-hidden">
+              <img
+                src={image}
+                alt={title}
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class={`text-xs font-medium px-3 py-1 rounded-full ${categoryColors[category] ?? 'bg-neutral-light text-gray-700'}`}>
+                  {category}
+                </span>
+                <span class="text-xs text-gray-400 font-mono">{quantity}</span>
+              </div>
+              <h3 class="font-display font-semibold text-primary text-lg leading-snug mb-2">
+                {title}
+              </h3>
+              <p class="text-gray-500 text-sm leading-relaxed">{description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 text-center">
+        <p class="text-gray-500 text-lg mb-6">¿Querés que hagamos algo similar para vos?</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/empresas" class="btn-primary">Ver opciones para empresas</a>
+          <a
+            href="https://wa.me/5491100000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-outline"
+          >
+            Contactar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

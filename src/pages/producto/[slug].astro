@@ -1,0 +1,58 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ProductDetail from '../../components/product/ProductDetail';
+import ProductCard from '../../components/product/ProductCard';
+import { products, getProductBySlug, getRelatedProducts } from '../../data/products';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+  }));
+};
+
+const { slug } = Astro.params;
+const product = getProductBySlug(slug);
+
+if (!product) {
+  return Astro.redirect('/catalogo');
+}
+
+const related = getRelatedProducts(product, 3);
+---
+
+<MainLayout
+  title={product.name}
+  description={product.description}
+  ogImage={product.image}
+>
+  <section class="section-padding">
+    <div class="container-main">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-gray-400 mb-10" aria-label="Navegación de migas de pan">
+        <a href="/" class="hover:text-primary transition-colors duration-200">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/catalogo" class="hover:text-primary transition-colors duration-200">Catálogo</a>
+        <span aria-hidden="true">/</span>
+        <span class="text-gray-700 font-medium" aria-current="page">{product.name}</span>
+      </nav>
+
+      <!-- Product detail -->
+      <ProductDetail product={product} client:load />
+
+      <!-- Related products -->
+      {related.length > 0 && (
+        <div class="mt-20">
+          <h2 class="font-display font-bold text-primary text-2xl mb-8">
+            También te puede gustar
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {related.map((p) => (
+              <ProductCard product={p} client:visible />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</MainLayout>

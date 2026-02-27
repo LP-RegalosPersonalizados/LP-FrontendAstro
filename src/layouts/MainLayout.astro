@@ -1,0 +1,59 @@
+---
+import '../styles/globals.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import CartPanel from '../components/cart/CartPanel';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Regalos personalizados para momentos especiales. Tazas, álbumes, cuadros y más.',
+  ogImage = '/og-image.jpg',
+} = Astro.props;
+
+const siteUrl = Astro.site ?? 'https://regalospersonalizados.com';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title} | Regalos Personalizados</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Regalos Personalizados`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, siteUrl)} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | Regalos Personalizados`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, siteUrl)} />
+  </head>
+  <body class="bg-white text-gray-900 font-body antialiased">
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Cart panel rendered as React island -->
+    <CartPanel client:load />
+  </body>
+</html>

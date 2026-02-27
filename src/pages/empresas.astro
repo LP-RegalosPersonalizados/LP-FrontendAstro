@@ -1,0 +1,37 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import BusinessIntro from '../components/business/BusinessIntro.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import ProductGrid from '../components/product/ProductGrid';
+import CartModeSync from '../components/cart/CartModeSync';
+import { getBusinessProducts } from '../data/products';
+
+const businessProducts = getBusinessProducts();
+---
+
+<MainLayout
+  title="Para Empresas"
+  description="Regalos corporativos y personalizados al por mayor. Producción con logo, diseño y marca para tu empresa o evento."
+>
+  <section class="section-padding">
+    <div class="container-main">
+      <BusinessIntro />
+
+      <SectionTitle
+        title="Productos para Empresas"
+        subtitle="Todos disponibles en producción al por mayor con personalización"
+        align="left"
+      />
+
+      <!-- Set cart to business mode when page loads -->
+      <CartModeSync mode="business" client:load />
+
+      <ProductGrid
+        products={businessProducts}
+        showBusinessBadge={true}
+        businessMode={true}
+        client:load
+      />
+    </div>
+  </section>
+</MainLayout>
