@@ -4,7 +4,8 @@ import type { CartItem } from '../store/useCart';
 // CONFIG — replace with real number
 // ============================================================
 
-export const WHATSAPP_NUMBER = '5491100000000'; // Format: country code + number, no +
+//nro cambiado
+export const WHATSAPP_NUMBER = '59162699702'; // Format: country code + number, no +
 
 // ============================================================
 // MESSAGE GENERATORS
