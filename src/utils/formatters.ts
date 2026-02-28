@@ -2,16 +2,36 @@
 // FORMATTERS
 // ============================================================
 
-/**
- * Format a price in ARS (Argentine Pesos)
- */
-export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('es-AR', {
+type CurrencyCode = 'BOB' | 'USD' | 'ARS';
+
+export function formatPrice(
+  price: number,
+  currency: CurrencyCode = 'BOB'
+): string {
+  const localeMap: Record<CurrencyCode, string> = {
+    BOB: 'es-BO',
+    USD: 'en-US',
+    ARS: 'es-AR',
+  };
+
+  return new Intl.NumberFormat(localeMap[currency], {
     style: 'currency',
-    currency: 'ARS',
-    minimumFractionDigits: 0,
+    currency,
+    minimumFractionDigits: 2,
   }).format(price);
 }
+
+/*MODO DE USO EN COMPONENTE:
+import { formatPrice } from '../utils/formatters';
+
+const price = 150;
+const formattedPrice = formatPrice(price, 'BOB'); // "Bs. 150,00"
+
+formatPrice(1500); // BOB por defecto
+formatPrice(1500, 'USD');
+formatPrice(1500, 'ARS');
+
+*/
 
 /**
  * Truncate a string to a given length
