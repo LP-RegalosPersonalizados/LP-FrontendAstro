@@ -56,7 +56,7 @@ const featuredProducts = getFeaturedProducts();
 
         <!-- Hero image grid -->
         <div class="grid grid-cols-2 gap-3 animate-fade-in-up" style="animation-delay:0.2s">
-          {featuredProducts.slice(0, 4).map((product, i) => (
+          {featuredProducts.slice(0, 3).map((product, i) => (
             <a
               href={`/producto/${product.slug}`}
               class={`rounded-2xl overflow-hidden aspect-square bg-white/5 hover:ring-2 hover:ring-accent/60 transition-all duration-300 ${i === 0 ? 'col-span-2 aspect-video' : ''}`}
@@ -192,7 +192,7 @@ const featuredProducts = getFeaturedProducts();
             Contanos qué necesitás y lo hacemos realidad. Escribinos por WhatsApp ahora mismo.
           </p>
           <a
-            href="https://wa.me/5491100000000"
+            href="https://wa.me/59162699702"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 bg-white text-accent hover:bg-secondary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 text-base"
