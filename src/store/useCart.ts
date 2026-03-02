@@ -66,13 +66,11 @@ export const useCart = create<CartState>()(
         })),
 
       updateQuantity: (id, quantity) => {
-        if (quantity < 1) {
-          get().removeItem(id);
-          return;
-        }
         set((state) => ({
           items: state.items.map((i) =>
-            i.id === id ? { ...i, quantity } : i
+            i.id === id
+              ? { ...i, quantity: Math.max(1, quantity) }
+              : i
           ),
         }));
       },
