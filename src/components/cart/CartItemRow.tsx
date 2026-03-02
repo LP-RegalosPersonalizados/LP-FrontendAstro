@@ -1,4 +1,5 @@
 import { useCart, type CartItem } from '../../store/useCart';
+import { useState, useEffect } from 'react';
 
 interface Props {
   item: CartItem;
@@ -6,8 +7,38 @@ interface Props {
 
 export default function CartItemRow({ item }: Props) {
   const { removeItem, updateQuantity, updatePersonalization } = useCart();
-
   const isMin = item.quantity === 1;
+
+  // Estado local para manejar la edición de cantidad por teclado
+  const [localQuantity, setLocalQuantity] = useState<string>(String(item.quantity));
+
+  // Mantener el estado local sincronizado con la store
+  useEffect(() => {
+    setLocalQuantity(String(item.quantity));
+  }, [item.quantity]);
+
+  const handleQuantityChange = (value: string) => {
+    // Permitir que quede vacío temporalmente
+    if (value === '') {
+      setLocalQuantity('');
+      return;
+    }
+
+    // Solo permitir números positivos
+    const number = parseInt(value, 10);
+    if (!isNaN(number) && number > 0) {
+      setLocalQuantity(String(number));
+      updateQuantity(item.id, number);
+    }
+  };
+
+  const handleBlur = () => {
+    // Si el input quedó vacío al salir, establecer mínimo 1
+    if (localQuantity === '') {
+      setLocalQuantity('1');
+      updateQuantity(item.id, 1);
+    }
+  };
 
   return (
     <li className="bg-neutral-light/30 rounded-xl p-3 space-y-3">
@@ -51,25 +82,26 @@ export default function CartItemRow({ item }: Props) {
             className={`
               w-8 h-8 rounded-full bg-white border flex items-center justify-center
               transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-primary text-gray-700
-              ${
-                isMin
-                  ? "border-neutral-light opacity-40 cursor-not-allowed"
-                  : "border-neutral-light hover:bg-primary hover:text-white hover:border-primary"
-              }
-            `}
+              ${isMin
+                ? 'border-neutral-light opacity-40 cursor-not-allowed'
+                : 'border-neutral-light hover:bg-primary hover:text-white hover:border-primary'
+              }`}
             aria-label="Disminuir cantidad"
           >
             <span className="text-base leading-none">−</span>
           </button>
 
-          {/* Quantity display */}
-          <span
-            className={`w-8 text-center text-sm font-medium transition-colors ${
-              isMin ? "text-gray-400" : "text-gray-800"
-            }`}
-          >
-            {item.quantity}
-          </span>
+          {/* Editable Quantity */}
+          <input
+            type="text"
+            value={localQuantity}
+            onChange={(e) => handleQuantityChange(e.target.value)}
+            onBlur={handleBlur}
+            className={`w-12 text-center text-sm font-medium border rounded-md px-1 py-0.5
+              ${isMin ? 'text-gray-400 border-neutral-light' : 'text-gray-800 border-gray-300'}
+            `}
+            aria-label="Cantidad editable"
+          />
 
           {/* Increase */}
           <button
