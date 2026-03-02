@@ -41,11 +41,17 @@ export default function CartItemRow({ item }: Props) {
 
         <div className="flex items-center gap-1">
           <button
-            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-            className="w-6 h-6 rounded-full bg-white border border-neutral-light flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-primary text-gray-700"
-            aria-label="Disminuir cantidad"
-          >
-            <span className="text-sm leading-none">−</span>
+          disabled={item.quantity === 1}
+          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+          className={`w-6 h-6 rounded-full bg-white border flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-primary text-gray-700
+                    ${
+                      item.quantity === 1
+                        ? "border-neutral-light opacity-40 cursor-not-allowed"
+                        : "border-neutral-light hover:bg-primary hover:text-white hover:border-primary"
+                      }`}
+                      aria-label="Disminuir cantidad"
+                    >
+                    <span className="text-sm leading-none">−</span>
           </button>
 
           <span className="w-6 text-center text-sm font-medium">
