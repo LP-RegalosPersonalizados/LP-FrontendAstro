@@ -13,7 +13,13 @@ export default function ProductDetail({ product }: Props) {
   const { addItem, hasItem, openCart } = useCart();
   const [personalization, setPersonalization] = useState('');
   const [added, setAdded] = useState(false);
+  const [activeImage, setActiveImage] = useState(product.image);
   const isInCart = hasItem(product.id);
+
+  // Crear un array de todas las imágenes (principal + galería)
+  const allImages = product.gallery && product.gallery.length > 0 
+    ? [product.image, ...product.gallery]
+    : [product.image];
 
   const handleAdd = () => {
     addItem({ id: product.id, name: product.name, personalization: personalization || undefined });
@@ -29,12 +35,36 @@ export default function ProductDetail({ product }: Props) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
       {/* Image */}
-      <div className="rounded-2xl overflow-hidden bg-neutral-light/30 aspect-square">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover"
-        />
+      <div className="space-y-4">
+        {/* Main Image with transition */}
+        <div className="rounded-2xl overflow-hidden bg-neutral-light/30 aspect-square">
+          <img
+            src={activeImage}
+            alt={product.name}
+            className="w-full h-full object-cover transition-opacity duration-300"
+          />
+        </div>
+
+        {/* Thumbnails Gallery */}
+        {allImages.length > 1 && (
+          <div className="flex flex-row gap-3 overflow-x-auto scrollbar-hide pb-2">
+            {allImages.map((img, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveImage(img)}
+                className={
+                  'w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ' +
+                  (activeImage === img
+                    ? 'border-primary ring-2 ring-primary/20'
+                    : 'border-transparent hover:border-primary/50')
+                }
+                aria-label={`Ver imagen ${index + 1}`}
+              >
+                <img src={img} className="w-full h-full object-cover" alt={`${product.name} - Vista ${index + 1}`} />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Info */}

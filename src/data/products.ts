@@ -11,6 +11,7 @@ export interface Product {
   category: ProductCategory;
   price?: number;
   image: string;
+  gallery?: string[];
   description: string;
   isBusinessAvailable: boolean;
   customizable: boolean;
@@ -25,11 +26,15 @@ export interface Product {
 export const products: Product[] = [
   {
     id: '1',
-    name: 'Taza Mágica Personalizada',
-    slug: 'taza-magica-personalizada',
+    name: 'Taza Personalizada',
+    slug: 'taza-personalizada',
     category: 'tazas',
     price: 150,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772401228/IMG_20251124_093901_k0sz2e.jpg',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499256/1771980558259_edit_896474717698750_pedllb.png',
+    gallery: [
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499259/1771980858971_edit_896464833453025_jrcd41.png',
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499275/TAZAS_SAN_VALENTIN_soe5xy.png',
+    ],
     description: 'Taza mágica que revela tu foto o mensaje al calentarse. Perfecta para regalar en cualquier ocasión. Material de alta calidad, apta para microondas.',
     isBusinessAvailable: true,
     customizable: true,
@@ -67,6 +72,10 @@ export const products: Product[] = [
     category: 'cuadros',
     price: 400,
     image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&q=80',
+    gallery: [
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772401170/IMG-20260211-WA0050_qm4s2p.jpg',
+      'https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=600&q=80',
+    ],
     description: 'Cuadro en lienzo canvas de alta definición. Disponible en múltiples tamaños. Perfecto para decorar hogares o como regalo especial.',
     isBusinessAvailable: true,
     customizable: true,
