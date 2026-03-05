@@ -17,7 +17,7 @@ export default function ProductDetail({ product }: Props) {
   const isInCart = hasItem(product.id);
 
   // Crear un array de todas las imágenes (principal + galería)
-  const allImages = product.gallery && product.gallery.length > 0 
+  const allImages = product.gallery && product.gallery.length > 0
     ? [product.image, ...product.gallery]
     : [product.image];
 
@@ -74,12 +74,12 @@ export default function ProductDetail({ product }: Props) {
           <span className="text-xs bg-secondary text-primary px-3 py-1 rounded-full font-medium">
             {categoryLabels[product.category]}
           </span>
-          {product.customizable && (
+          {product.audience.general.customizable && (
             <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium border border-accent/20">
               Personalizable
             </span>
           )}
-          {product.isBusinessAvailable && (
+          {product.audience.business.available && (
             <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium border border-primary/20">
               Disponible para empresas
             </span>
@@ -100,7 +100,7 @@ export default function ProductDetail({ product }: Props) {
         <p className="text-gray-600 leading-relaxed">{product.description}</p>
 
         {/* Personalization field */}
-        {product.customizable && (
+        {product.audience.general.customizable && (
           <div>
             <label
               htmlFor="personalization"

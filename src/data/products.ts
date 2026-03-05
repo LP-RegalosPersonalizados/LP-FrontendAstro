@@ -4,6 +4,11 @@
 
 export type ProductCategory = 'tazas' | 'albumes' | 'cuadros' | 'festivos';
 
+export interface ProductAudience {
+  available: boolean;
+  customizable: boolean;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -13,8 +18,10 @@ export interface Product {
   image: string;
   gallery?: string[];
   description: string;
-  isBusinessAvailable: boolean;
-  customizable: boolean;
+  audience: {
+    general: ProductAudience;
+    business: ProductAudience;
+  };
   tags?: string[];
   featured?: boolean;
 }
@@ -26,110 +33,134 @@ export interface Product {
 export const products: Product[] = [
   {
     id: '1',
-    name: 'Fotos Polaroid Impresas',
-    slug: 'fotos-polaroid-impresas',
+    name: 'Fotos Polaroid Personalizadas',
+    slug: 'fotos-polaroid-personalizadas',
     category: 'albumes',
     price: 25,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499246/IMG-20260131-WA0043_xeh2bv.jpg',
-    description: 'Impresiones fotográficas estilo Polaroid con calidad profesional y acabado mate. Imágenes impresas a pedido con la durabilidad que tus recuerdos merecen. Disponibles en diferentes tamaños y cantidades, ideales para álbumes, decoración o regalos.',
-    isBusinessAvailable: false,
-    customizable: true,
-    tags: ['fotos', 'polaroid', 'impresiones', 'fotografia'],
-    featured: false,
-  },
-  {
-    id: '2',
-    name: 'Esferas de Navidad Personalizadas',
-    slug: 'esferas-navidad-personalizadas',
-    category: 'festivos',
-    price: 45,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499241/IMG-20251220-WA0023_mhzwyg.jpg',
-    description: 'Esferas navideñas personalizadas con diseños exclusivos para decorar tu árbol. Ideales para empresas que buscan detalles únicos para sus empleados o clientes. Pedidos por cantidad disponibles con posibilidad de incluir logos corporativos.',
-    isBusinessAvailable: true,
-    customizable: true,
-    tags: ['navidad', 'esferas', 'decoracion', 'temporada'],
+    description:
+      'Impresiones fotográficas estilo Polaroid con acabado mate y calidad profesional. Perfectas para conservar tus recuerdos favoritos, decorar espacios o regalar en ocasiones especiales. Disponibles en diferentes tamaños y cantidades.',
+    audience: {
+      general: { available: true, customizable: true },
+      business: { available: false, customizable: false },
+    },
+    tags: ['fotos', 'polaroid', 'impresiones', 'fotografia', 'recuerdos'],
     featured: false,
   },
   {
     id: '3',
-    name: 'Tazas Cerámicas por Cantidad',
-    slug: 'tazas-ceramicas-cantidad',
+    name: 'Tazas Cerámicas Personalizadas por Cantidad',
+    slug: 'tazas-ceramicas-personalizadas-cantidad',
     category: 'tazas',
-    price: 95,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499273/IMG-20251124-WA0037_j0zgnt.jpg',
-    description: 'Tazas de cerámica de alta calidad para pedidos al por mayor. Disponibles con diseños generales o personalización completa con logos y diseños corporativos. Ideales para empresas, eventos promocionales, campañas de marketing y regalos empresariales. Consulta por precios especiales por volumen.',
-    isBusinessAvailable: true,
-    customizable: true,
-    tags: ['ceramica', 'mayorista', 'corporativo', 'empresarial'],
+    price: 35,
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499257/IMG-20260117-WA0009_rkpedn.jpg',
+    description:
+      'Tazas de cerámica de alta calidad disponibles para pedidos al por mayor. Pueden personalizarse con logos, diseños corporativos o mensajes especiales. Ideales para empresas, eventos promocionales, campañas de marketing o regalos empresariales. Consulta precios especiales por volumen.',
+    audience: {
+      general: { available: true, customizable: true },
+      business: { available: true, customizable: true },
+    },
+    tags: ['ceramica', 'mayorista', 'corporativo', 'empresarial', 'tazas personalizadas'],
     featured: false,
   },
   {
     id: '4',
-    name: 'Logo Empresa Coffee Bolivia',
-    slug: 'logo-empresa-coffee-bolivia',
+    name: 'Tazas con Logo para Empresas',
+    slug: 'tazas-logo-empresas',
     category: 'tazas',
-    price: 250,
+    price: 35,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499335/IMG-20260205-WA0106_jlrngi.jpg',
-    gallery:[
+    gallery: [
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499336/IMG-20260205-WA0112_kwvuy6.jpg',
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499334/IMG-20260205-WA0009_aemyll.jpg',
     ],
-    description: 'Servicio especializado para empresas: personalización de tazas y artículos promocionales con el logo de Coffee Bolivia. Incluye asesoría en diseño, impresión de alta calidad y entrega oportuna. Ideal para campañas de branding, merchandising y regalos corporativos.',
-    isBusinessAvailable: true,
-    customizable: true,
-    tags: ['corporativo', 'logo', 'coffee', 'bolivia', 'branding'],
+    description:
+      'Servicio de personalización de tazas y artículos promocionales con el logo de tu empresa. Incluye asesoría en diseño, impresión de alta calidad y entrega puntual. Ideal para campañas de branding, merchandising y regalos corporativos.',
+    audience: {
+      general: { available: false, customizable: false },
+      business: { available: true, customizable: true },
+    },
+    tags: ['corporativo', 'logo', 'empresa', 'branding', 'merchandising'],
     featured: false,
   },
   {
     id: '5',
-    name: 'Taza Metálica Personalizada',
-    slug: 'taza-metalica-personalizada',
+    name: 'Taza Metálica Personalizable',
+    slug: 'taza-metalica-personalizable',
     category: 'tazas',
-    price: 180,
+    price: 45,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499337/1771977619993_edit_892912116716359_ka1sud.png',
-    description: 'Taza metálica de acero inoxidable con tecnología de doble pared que mantiene la temperatura por horas. Personalizable con fotos, nombres, diseños o logos empresariales. Resistente, reutilizable y ecológica, perfecta para uso diario, oficina o como regalo promocional.',
-    isBusinessAvailable: false,
-    customizable: false,
-    tags: ['metalica', 'termica', 'acero', 'ecologica'],
+    description:
+      'Taza metálica de acero inoxidable con doble pared que ayuda a mantener la temperatura por más tiempo. Puede personalizarse con fotos, nombres, diseños o logos. Resistente, reutilizable y ecológica, ideal para uso diario, oficina o como regalo especial.',
+    audience: {
+      general: { available: true, customizable: true },
+      business: { available: false, customizable: false },
+    },
+    tags: ['metalica', 'acero', 'termica', 'personalizada', 'ecologica'],
     featured: false,
   },
   {
     id: '6',
-    name: 'Taza Cerámica Diseños Personalizados',
-    slug: 'taza-ceramica-disenos-personalizados',
+    name: 'Taza Cerámica con Diseño Personalizado',
+    slug: 'taza-ceramica-diseno-personalizado',
     category: 'tazas',
-    price: 120,
+    price: 40,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499275/TAZAS_SAN_VALENTIN_soe5xy.png',
-    description: 'Taza de cerámica con amplia variedad de diseños disponibles. Aceptamos pedidos personalizados tanto para clientes individuales como para empresas. Ideal para cumpleaños, aniversarios, promociones, eventos especiales o para uso diario con tu estilo único.',
-    isBusinessAvailable: false,
-    customizable: true,
-    tags: ['ceramica', 'diseños', 'personalizado', 'eventos'],
+    description:
+      'Taza de cerámica con variedad de diseños disponibles. También aceptamos pedidos personalizados para clientes individuales. Ideal para cumpleaños, aniversarios, eventos especiales o para disfrutar tu bebida favorita con un diseño único.',
+    audience: {
+      general: { available: true, customizable: true },
+      business: { available: false, customizable: false },
+    },
+    tags: ['ceramica', 'diseños', 'personalizado', 'regalos', 'tazas con foto'],
     featured: false,
   },
   {
     id: '7',
-    name: 'Taza Metálica Diseños Exclusivos',
-    slug: 'taza-metalica-disenos-exclusivos',
+    name: 'Taza Metálica Térmica con Diseños Exclusivos',
+    slug: 'taza-metalica-termica-disenos-exclusivos',
     category: 'tazas',
-    price: 50,
+    price: 40,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499276/1771979776328_edit_896519787370295_ncvzvj.png',
-    description: 'Taza metálica térmica con diseños exclusivos y acabado premium. Disponible para personalización individual y pedidos empresariales. Mantiene bebidas calientes por 6 horas y frías por 12 horas. Ideal para empresas que buscan regalos promocionales de alta calidad y durabilidad.',
-    isBusinessAvailable: false,
-    customizable: true,
-    tags: ['metalica', 'termica', 'exclusivo', 'premium'],
-    featured: false,
+    description:
+      'Taza metálica térmica con diseños exclusivos y acabado premium. Mantiene bebidas calientes hasta 6 horas y frías hasta 12 horas. Ideal para quienes buscan estilo, durabilidad y funcionalidad en su día a día.',
+    audience: {
+      general: { available: true, customizable: false },
+      business: { available: false, customizable: false },
+    },
+    tags: ['metalica', 'termica', 'premium', 'exclusivo'],
+    featured: true,
   },
   {
     id: '8',
-    name: 'Pack de Regalos Personalizado',
-    slug: 'pack-regalos-personalizado',
+    name: 'Pack de Regalo Personalizado',
+    slug: 'pack-regalo-personalizado',
     category: 'festivos',
-    price: 150,
+    price: 100,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499248/IMG-20260203-WA0028_cd2lh7.jpg',
-    description: 'Pack especial que incluye: 2 tazas personalizadas con diseños a elección, 2 llaveros con fotos impresas y 1 alcancía pequeña con imagen personalizada. Set completo ideal para parejas, aniversarios, cumpleaños o regalos especiales. Incluye presentación en caja de regalo con lazo.',
-    isBusinessAvailable: false,
-    customizable: true,
-    tags: ['pack', 'set', 'tazas', 'llaveros', 'alcancia', 'combo'],
+    description:
+      'Pack especial que incluye: 2 tazas personalizadas con diseños a elección, 2 llaveros con fotos impresas y 1 alcancía pequeña personalizada. Un set ideal para parejas, aniversarios, cumpleaños o regalos especiales. Incluye presentación en caja de regalo con lazo.',
+    audience: {
+      general: { available: true, customizable: true },
+      business: { available: false, customizable: false },
+    },
+    tags: ['pack', 'regalo', 'combo', 'tazas', 'llaveros', 'alcancia'],
+    featured: true,
+  },
+  {
+    id: '9',
+    name: 'Pack de Regalo Premium Personalizado',
+    slug: 'pack-regalo-premium-personalizado',
+    category: 'festivos',
+    price: 100,
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772658612/pack4_kq2mhm.png',
+    description:
+      'Pack de regalo personalizado que incluye 2 tazas con diseño a elección, 2 llaveros con fotos impresas y 1 alcancía personalizada. Perfecto para sorprender en aniversarios, cumpleaños o fechas especiales. Incluye presentación en caja de regalo lista para entregar.',
+    audience: {
+      general: { available: true, customizable: true },
+      business: { available: false, customizable: false },
+    },
+    tags: ['pack', 'regalo', 'personalizado', 'combo', 'tazas', 'llaveros'],
     featured: true,
   },
 ];
@@ -148,7 +179,10 @@ export const getFeaturedProducts = (): Product[] =>
   products.filter((p) => p.featured);
 
 export const getBusinessProducts = (): Product[] =>
-  products.filter((p) => p.isBusinessAvailable);
+  products.filter((p) => p.audience.business.available);
+
+export const getGeneralProducts = (): Product[] =>
+  products.filter((p) => p.audience.general.available);
 
 export const getRelatedProducts = (product: Product, limit = 3): Product[] =>
   products
