@@ -97,7 +97,7 @@ export const products: Product[] = [
       business: { available: false, customizable: false },
     },
     tags: ['metalica', 'acero', 'termica', 'personalizada', 'ecologica'],
-    featured: false,
+    featured: true,
   },
   {
     id: '6',
@@ -129,7 +129,7 @@ export const products: Product[] = [
       business: { available: false, customizable: false },
     },
     tags: ['metalica', 'termica', 'premium', 'exclusivo'],
-    featured: true,
+    featured: false,
   },
   {
     id: '8',
