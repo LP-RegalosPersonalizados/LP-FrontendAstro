@@ -3,6 +3,8 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
+  site: 'https://regalospersonalizados-sc.netlify.app',
+  output: 'static',
   integrations: [
     react(),
     tailwind({
