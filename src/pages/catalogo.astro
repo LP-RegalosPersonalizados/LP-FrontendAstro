@@ -2,7 +2,9 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import SectionTitle from '../components/ui/SectionTitle.astro';
 import ProductGrid from '../components/product/ProductGrid';
-import { products } from '../data/products';
+import { getGeneralProducts } from '../data/products';
+
+const generalProducts = getGeneralProducts();
 ---
 
 <MainLayout
@@ -27,7 +29,7 @@ import { products } from '../data/products';
       </div>
 
       <ProductGrid
-        products={products}
+        products={generalProducts}
         client:load
       />
     </div>

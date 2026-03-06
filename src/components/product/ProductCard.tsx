@@ -43,12 +43,12 @@ export default function ProductCard({ product, showBusinessBadge, businessMode }
         />
         {/* Badges */}
         <div className="absolute top-2 left-2 flex flex-col gap-1">
-          {showBusinessBadge && product.isBusinessAvailable && (
+          {showBusinessBadge && product.audience.business.available && (
             <span className="bg-primary text-white text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
               Venta por Mayor
             </span>
           )}
-          {product.customizable && (
+          {(businessMode ? product.audience.business.customizable : product.audience.general.customizable) && (
             <span className="bg-accent text-white text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
               Personalizable
             </span>
