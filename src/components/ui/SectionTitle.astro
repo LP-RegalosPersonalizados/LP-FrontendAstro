@@ -4,6 +4,7 @@ interface Props {
   subtitle?: string;
   align?: 'left' | 'center' | 'right';
   accentColor?: 'primary' | 'accent';
+  id?: string;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
   subtitle,
   align = 'center',
   accentColor = 'primary',
+  id,
 } = Astro.props;
 
 const alignClass = {
@@ -26,7 +28,7 @@ const accentClass = {
 ---
 
 <div class={`max-w-2xl ${alignClass} mb-12`}>
-  <h2 class={`font-display font-bold text-3xl md:text-4xl ${accentClass} leading-tight`}>
+  <h2 id={id} class={`font-display font-bold text-3xl md:text-4xl ${accentClass} leading-tight`}>
     {title}
   </h2>
   {subtitle && (

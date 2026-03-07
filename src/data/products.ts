@@ -37,7 +37,7 @@ export const products: Product[] = [
     slug: 'fotos-polaroid-personalizadas',
     category: 'albumes',
     price: 25,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499246/IMG-20260131-WA0043_xeh2bv.jpg',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499246/IMG-20260131-WA0043_xeh2bv.jpg',
     description:
       'Impresiones fotográficas estilo Polaroid con acabado mate y calidad profesional. Perfectas para conservar tus recuerdos favoritos, decorar espacios o regalar en ocasiones especiales. Disponibles en diferentes tamaños y cantidades.',
     audience: {
@@ -53,7 +53,7 @@ export const products: Product[] = [
     slug: 'tazas-ceramicas-personalizadas-cantidad',
     category: 'tazas',
     price: 35,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499257/IMG-20260117-WA0009_rkpedn.jpg',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499257/IMG-20260117-WA0009_rkpedn.jpg',
     description:
       'Tazas de cerámica de alta calidad disponibles para pedidos al por mayor. Pueden personalizarse con logos, diseños corporativos o mensajes especiales. Ideales para empresas, eventos promocionales, campañas de marketing o regalos empresariales. Consulta precios especiales por volumen.',
     audience: {
@@ -69,10 +69,10 @@ export const products: Product[] = [
     slug: 'tazas-logo-empresas',
     category: 'tazas',
     price: 35,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499335/IMG-20260205-WA0106_jlrngi.jpg',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499335/IMG-20260205-WA0106_jlrngi.jpg',
     gallery: [
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499336/IMG-20260205-WA0112_kwvuy6.jpg',
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499334/IMG-20260205-WA0009_aemyll.jpg',
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499336/IMG-20260205-WA0112_kwvuy6.jpg',
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499334/IMG-20260205-WA0009_aemyll.jpg',
     ],
     description:
       'Servicio de personalización de tazas y artículos promocionales con el logo de tu empresa. Incluye asesoría en diseño, impresión de alta calidad y entrega puntual. Ideal para campañas de branding, merchandising y regalos corporativos.',
@@ -89,7 +89,7 @@ export const products: Product[] = [
     slug: 'taza-metalica-personalizable',
     category: 'tazas',
     price: 45,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499337/1771977619993_edit_892912116716359_ka1sud.png',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499337/1771977619993_edit_892912116716359_ka1sud.png',
     description:
       'Taza metálica de acero inoxidable con doble pared que ayuda a mantener la temperatura por más tiempo. Puede personalizarse con fotos, nombres, diseños o logos. Resistente, reutilizable y ecológica, ideal para uso diario, oficina o como regalo especial.',
     audience: {
@@ -105,7 +105,7 @@ export const products: Product[] = [
     slug: 'taza-ceramica-diseno-personalizado',
     category: 'tazas',
     price: 40,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499275/TAZAS_SAN_VALENTIN_soe5xy.png',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499275/TAZAS_SAN_VALENTIN_soe5xy.png',
     description:
       'Taza de cerámica con variedad de diseños disponibles. También aceptamos pedidos personalizados para clientes individuales. Ideal para cumpleaños, aniversarios, eventos especiales o para disfrutar tu bebida favorita con un diseño único.',
     audience: {
@@ -121,7 +121,7 @@ export const products: Product[] = [
     slug: 'taza-metalica-termica-disenos-exclusivos',
     category: 'tazas',
     price: 40,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499276/1771979776328_edit_896519787370295_ncvzvj.png',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499276/1771979776328_edit_896519787370295_ncvzvj.png',
     description:
       'Taza metálica térmica con diseños exclusivos y acabado premium. Mantiene bebidas calientes hasta 6 horas y frías hasta 12 horas. Ideal para quienes buscan estilo, durabilidad y funcionalidad en su día a día.',
     audience: {
@@ -137,7 +137,7 @@ export const products: Product[] = [
     slug: 'pack-regalo-personalizado',
     category: 'festivos',
     price: 150,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499248/IMG-20260203-WA0028_cd2lh7.jpg',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499248/IMG-20260203-WA0028_cd2lh7.jpg',
     description:
       'Pack especial que incluye: 2 tazas personalizadas con diseños a elección, 2 llaveros con fotos impresas y 1 alcancía pequeña personalizada. Un set ideal para parejas, aniversarios, cumpleaños o regalos especiales. Incluye presentación en caja de regalo con lazo.',
     audience: {
@@ -153,7 +153,7 @@ export const products: Product[] = [
   slug: 'pack-regalo-premium-personalizado',
   category: 'festivos',
   price: 150,
-  image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772658612/pack4_kq2mhm.png',
+  image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772658612/pack4_kq2mhm.png',
   description: 'Pack exclusivo que incluye un vaso chopero de 16 oz, una taza metálica y un llavero, todos personalizados con el diseño de tu preferencia. Ideal para celebrar ocasiones especiales como cumpleaños, aniversarios, eventos deportivos o reuniones con amigos. Cada pieza está elaborada con materiales de alta calidad: el vaso chopero mantiene la temperatura ideal de tus bebidas, la taza metálica es resistente y perfecta para el día a día, y el llavero personalizado añade un detalle único. Incluye empaque tipo regalo listo para sorprender.',
   audience: {
     general: { available: true, customizable: true },
