@@ -136,7 +136,7 @@ export const products: Product[] = [
     name: 'Pack de Regalo Personalizado',
     slug: 'pack-regalo-personalizado',
     category: 'festivos',
-    price: 100,
+    price: 150,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499248/IMG-20260203-WA0028_cd2lh7.jpg',
     description:
       'Pack especial que incluye: 2 tazas personalizadas con diseños a elección, 2 llaveros con fotos impresas y 1 alcancía pequeña personalizada. Un set ideal para parejas, aniversarios, cumpleaños o regalos especiales. Incluye presentación en caja de regalo con lazo.',
@@ -147,22 +147,21 @@ export const products: Product[] = [
     tags: ['pack', 'regalo', 'combo', 'tazas', 'llaveros', 'alcancia'],
     featured: true,
   },
-  {
-    id: '9',
-    name: 'Pack de Regalo Premium Personalizado',
-    slug: 'pack-regalo-premium-personalizado',
-    category: 'festivos',
-    price: 100,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772658612/pack4_kq2mhm.png',
-    description:
-      'Pack de regalo personalizado que incluye 2 tazas con diseño a elección, 2 llaveros con fotos impresas y 1 alcancía personalizada. Perfecto para sorprender en aniversarios, cumpleaños o fechas especiales. Incluye presentación en caja de regalo lista para entregar.',
-    audience: {
-      general: { available: true, customizable: true },
-      business: { available: false, customizable: false },
-    },
-    tags: ['pack', 'regalo', 'personalizado', 'combo', 'tazas', 'llaveros'],
-    featured: true,
+{
+  id: '9',
+  name: 'Pack de Regalo Premium Personalizado',
+  slug: 'pack-regalo-premium-personalizado',
+  category: 'festivos',
+  price: 150,
+  image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772658612/pack4_kq2mhm.png',
+  description: 'Pack exclusivo que incluye un vaso chopero de 16 oz, una taza metálica y un llavero, todos personalizados con el diseño de tu preferencia. Ideal para celebrar ocasiones especiales como cumpleaños, aniversarios, eventos deportivos o reuniones con amigos. Cada pieza está elaborada con materiales de alta calidad: el vaso chopero mantiene la temperatura ideal de tus bebidas, la taza metálica es resistente y perfecta para el día a día, y el llavero personalizado añade un detalle único. Incluye empaque tipo regalo listo para sorprender.',
+  audience: {
+    general: { available: true, customizable: true },
+    business: { available: false, customizable: false },
   },
+  tags: ['pack', 'regalo', 'personalizado', 'combo', 'vaso chopero', 'taza metálica', 'llavero'],
+  featured: true,
+}
 ];
 
 // ============================================================
