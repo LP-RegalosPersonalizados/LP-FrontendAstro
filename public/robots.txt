@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.regalospersonalizados-cznl.sarl/sitemap-index.xml
