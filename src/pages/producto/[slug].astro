@@ -22,8 +22,12 @@ const related = getRelatedProducts(product, 3);
 ---
 
 <MainLayout
-  title={product.name}
-  description={product.description}
+  title={`${product.name} | Regalos Personalizados`}
+  description={`${product.description} Cómpralo personalizado y hecho a tu medida. Cotiza en WhatsApp con nuestros expertos.`}
+  keywords={`${product.name}, regalo personalizado, ${product.category}, regalo único`}
+  author="Regalos Personalizados"
+  robots="index, follow"
+  canonical={`https://www.regalospersonalizados-cznl.sarl/producto/${slug}`}
   ogImage={product.image}
 >
   <section class="section-padding">

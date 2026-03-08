@@ -7,45 +7,105 @@ import CartPanel from '../components/cart/CartPanel';
 interface Props {
   title: string;
   description?: string;
+  keywords?: string;
   ogImage?: string;
+  canonical?: string;
+  robots?: string;
+  author?: string;
 }
 
 const {
   title,
   description = 'Regalos personalizados para momentos especiales. Tazas, álbumes, cuadros y más.',
+  keywords = 'regalos personalizados, tazas, álbumes, cuadros, regalos únicos',
   ogImage = '/og-image.jpg',
+  canonical,
+  robots = 'index, follow',
+  author = 'Regalos Personalizados',
 } = Astro.props;
 
 const siteUrl = Astro.site ?? 'https://www.regalospersonalizados-cznl.sarl';
-const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const canonicalURL = canonical ? new URL(canonical, siteUrl) : new URL(Astro.url.pathname, siteUrl);
+const fullOgImageUrl = new URL(ogImage, siteUrl);
 ---
 
 <!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
+    <!-- BASIC META TAGS -->
     <meta charset="UTF-8" />
-    <meta name="google-site-verification" content="VEAqz0lcY8TAH0941wwqQQy6RGdS1MzVqcH1n9em65Y" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- SEO -->
+    <!-- GOOGLE SITE VERIFICATION -->
+    <meta name="google-site-verification" content="VEAqz0lcY8TAH0941wwqQQy6RGdS1MzVqcH1n9em65Y" />
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- SEO FUNDAMENTALS -->
     <title>{title} | Regalos Personalizados</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="robots" content={robots} />
+    <meta name="language" content="Spanish" />
+    <meta name="revisit-after" content="3 days" />
 
-    <!-- Open Graph -->
+    <!-- CANONICAL URL -->
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={canonicalURL} />
+
+    <!-- OPEN GRAPH (SOCIAL SHARING) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} | Regalos Personalizados`} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, siteUrl)} />
+    <meta property="og:image" content={fullOgImageUrl} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:site_name" content="Regalos Personalizados" />
+    <meta property="og:locale" content="es_AR" />
 
-    <!-- Twitter -->
+    <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} | Regalos Personalizados`} />
+    <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, siteUrl)} />
+    <meta name="twitter:image" content={fullOgImageUrl} />
+    <meta name="twitter:image:alt" content={title} />
+    <meta name="twitter:creator" content="@regalospersonl" />
+
+    <!-- PERFORMANCE HINTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+    <!-- STRUCTURED DATA (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Regalos Personalizados",
+      "url": "https://www.regalospersonalizados-cznl.sarl",
+      "logo": "https://www.regalospersonalizados-cznl.sarl/logo.png",
+      "description": "Regalos personalizados únicos para cumpleaños, aniversarios y ocasiones especiales.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AR",
+        "addressRegion": "Santa Cruz"
+      },
+      "sameAs": [
+        "https://www.instagram.com/regalospersonalizados",
+        "https://www.facebook.com/regalospersonalizados",
+        "https://wa.me/mensaje"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "availableLanguage": ["es"]
+      }
+    }
+    </script>
   </head>
   <body class="bg-white text-gray-900 font-body antialiased">
     <Header />

@@ -1,0 +1,89 @@
+---
+/**
+ * SEO Component - Gestiona todas las meta tags y configuración SEO
+ * Uso en páginas:
+ *
+ * ---
+ * import SEO from "../components/seo/SEO.astro";
+ * ---
+ *
+ * <SEO
+ *   title="Título de la página"
+ *   description="Descripción de la página"
+ *   keywords="palabra1, palabra2, palabra3"
+ *   image="/og-image.jpg"
+ *   url="https://dominio.com/pagina"
+ *   type="website"
+ *   author="Regalos Personalizados"
+ *   robots="index, follow"
+ * />
+ */
+
+interface Props {
+  title: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  url?: string;
+  type?: 'website' | 'article' | 'product';
+  author?: string;
+  robots?: string;
+  canonical?: string;
+  twitterHandle?: string;
+}
+
+const {
+  title,
+  description = 'Regalos personalizados para momentos especiales. Tazas, álbumes, cuadros y más.',
+  keywords = 'regalos personalizados, tazas, álbumes, cuadros',
+  image = '/og-image.jpg',
+  url = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined,
+  type = 'website',
+  author = 'Regalos Personalizados',
+  robots = 'index, follow',
+  canonical = url,
+  twitterHandle = '@regalospersonl',
+} = Astro.props;
+
+const siteUrl = Astro.site ?? 'https://www.regalospersonalizados-cznl.sarl';
+const fullImageUrl = new URL(image, siteUrl).toString();
+const fullUrl = url ?? new URL(Astro.url.pathname, siteUrl).toString();
+---
+
+<!-- BASIC META TAGS -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- SEO -->
+<title>{title} | Regalos Personalizados</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+<meta name="robots" content={robots} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph (Redes Sociales) -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={fullImageUrl} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:url" content={fullUrl} />
+<meta property="og:site_name" content="Regalos Personalizados" />
+<meta property="og:locale" content="es_AR" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullImageUrl} />
+<meta name="twitter:image:alt" content={title} />
+<meta name="twitter:creator" content={twitterHandle} />
+
+<!-- Additional SEO -->
+<link rel="alternate" hreflang="es" href={fullUrl} />
+<meta name="language" content="Spanish" />
+<meta name="revisit-after" content="3 days" />
