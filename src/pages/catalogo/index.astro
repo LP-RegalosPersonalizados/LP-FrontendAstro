@@ -1,0 +1,42 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import SectionTitle from '../../components/shared/ui/SectionTitle.astro';
+import ProductGrid from '../../components/shared/product/ProductGrid';
+import { getGeneralProducts } from '../../data/products';
+
+const generalProducts = getGeneralProducts();
+---
+
+<MainLayout
+  title="Catálogo de Regalos Personalizados"
+  description="Explora nuestro catálogo completo de regalos personalizados. Tazas, álbumes de fotos, cuadros canvas y productos festivos. ¡Personaliza y cotiza en WhatsApp!"
+  keywords="catálogo regalos, tazas personalizadas, álbumes fotos, cuadros personalizados, regalos empresariales, regalos personalizados"
+  author="Regalos Personalizados"
+  robots="index, follow"
+  canonical="https://www.regalospersonalizados-cznl.sarl/catalogo"
+  ogImage="/og-image.jpg"
+>
+  <section class="section-padding">
+    <div class="container-main">
+      <SectionTitle
+        title="Catálogo General"
+        subtitle="Seleccioná los productos que te interesan y generamos un mensaje de WhatsApp para cotizar"
+        align="left"
+      />
+
+      <!-- Info banner -->
+      <div class="flex items-center gap-3 bg-secondary/30 border border-secondary rounded-xl px-5 py-4 mb-8 max-w-2xl">
+        <span class="text-2xl shrink-0" aria-hidden="true">💡</span>
+        <p class="text-sm text-gray-700">
+          Hacé clic en <strong>Agregar a lista</strong> en los productos que te gusten. 
+          Luego abrí tu lista y mandanoslá por WhatsApp para cotizar todo de una vez.
+        </p>
+      </div>
+
+      <ProductGrid
+        products={generalProducts}
+        client:load
+      />
+    </div>
+  </section>
+</MainLayout>
