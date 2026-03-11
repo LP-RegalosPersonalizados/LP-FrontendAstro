@@ -55,9 +55,6 @@ export const products: Product[] = [
     category: 'tazas',
     price: 35,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499255/1771979978916_edit_896506792213842_uex2sy.png',
-    gallery: [
-      "",
-    ],
     description:
       'Tazas de cerámica personalizadas con fotos, diseños o logos. Ideales para regalos, eventos o empresas. Disponibles por unidad o pedidos por cantidad.',
     audience: {
