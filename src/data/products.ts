@@ -122,41 +122,24 @@ export const products: Product[] = [
     featured: true,
   },
   {
-  id: '6',
-  name: 'Tazas Cerámicas Corporativas (Por Mayor)',
-  slug: 'tazas-ceramicas-corporativas-por-mayor',
-  category: 'tazas',
-  image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?q=80&w=1200&auto=format&fit=crop',
-  gallery: [
-    'https://images.unsplash.com/photo-1589365278144-c9e705f843ba?q=80&w=1200&auto=format&fit=crop',
-  ],
-  description:
-    'Tazas de cerámica diseñadas especialmente para empresas. Ideales para regalos corporativos, eventos, campañas promocionales o merchandising. Se pueden personalizar completamente con logos, frases corporativas, colores de marca o diseños exclusivos. Disponibles únicamente en pedidos al por mayor.',
-  audience: {
-    general: { available: false, customizable: false },
-    business: { available: true, customizable: true },
+    id: '6',
+    name: 'Tazas Metálicas Corporativas (Por Mayor)',
+    slug: 'tazas-metalicas-corporativas-por-mayor',
+    category: 'tazas',
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499335/IMG-20260205-WA0106_jlrngi.jpg',
+    gallery: [
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772891741/taza_UAGRM_mxjuvw.jpg',
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499338/1771978387342_edit_893550947852678_kpx6tf.png'
+    ],
+    description:
+      'Tazas metálicas ideales para uso corporativo y promociones empresariales. Perfectas para personalizar con logotipos, frases, dedicatorias o diseños de marca. Son una excelente opción para eventos, campañas publicitarias, regalos para empleados o clientes. Disponibles exclusivamente para pedidos al por mayor.',
+    audience: {
+      general: { available: false, customizable: false },
+      business: { available: true, customizable: true },
+    },
+    tags: ['tazas', 'metalica', 'empresa', 'corporativo', 'branding', 'merchandising'],
+    featured: false,
   },
-  tags: ['tazas', 'ceramica', 'corporativo', 'empresa', 'branding', 'merchandising'],
-  featured: false,
-},
-{
-  id: '7',
-  name: 'Tazas Metálicas Corporativas (Por Mayor)',
-  slug: 'tazas-metalicas-corporativas-por-mayor',
-  category: 'tazas',
-  image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=1200&auto=format&fit=crop',
-  gallery: [
-    'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?q=80&w=1200&auto=format&fit=crop',
-  ],
-  description:
-    'Tazas metálicas resistentes ideales para uso corporativo y promociones empresariales. Perfectas para personalizar con logotipos, frases, dedicatorias o diseños de marca. Son una excelente opción para eventos, campañas publicitarias, regalos para empleados o clientes. Disponibles exclusivamente para pedidos al por mayor.',
-  audience: {
-    general: { available: false, customizable: false },
-    business: { available: true, customizable: true },
-  },
-  tags: ['tazas', 'metalica', 'empresa', 'corporativo', 'branding', 'merchandising'],
-  featured: false,
-},
 ];
 
 // ============================================================
