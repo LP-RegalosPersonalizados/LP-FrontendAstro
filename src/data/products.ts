@@ -53,7 +53,7 @@ export const products: Product[] = [
     name: 'Tazas Cerámicas Personalizadas',
     slug: 'tazas-ceramicas-personalizadas',
     category: 'tazas',
-    price: 35,
+    price: 30,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499255/1771979978916_edit_896506792213842_uex2sy.png',
     description:
       'Tazas de cerámica personalizadas con fotos, diseños o logos. Ideales para regalos, eventos o empresas. Disponibles por unidad o pedidos por cantidad.',
@@ -70,7 +70,7 @@ export const products: Product[] = [
     name: 'Taza Metálica Personalizada',
     slug: 'taza-metalica-personalizada',
     category: 'tazas',
-    price: 45,
+    price: 40,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499276/IMG-20260116-WA0028_exkret.jpg',
     gallery: [
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499276/1771979776328_edit_896519787370295_ncvzvj.png',
