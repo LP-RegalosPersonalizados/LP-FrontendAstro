@@ -27,7 +27,7 @@ export interface Product {
 }
 
 // ============================================================
-// SAMPLE PRODUCTS (replace images with real ones)
+// PRODUCTS
 // ============================================================
 
 export const products: Product[] = [
@@ -39,107 +39,65 @@ export const products: Product[] = [
     price: 25,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499246/IMG-20260131-WA0043_xeh2bv.jpg',
     description:
-      'Impresiones fotográficas estilo Polaroid con acabado mate y calidad profesional. Perfectas para conservar tus recuerdos favoritos, decorar espacios o regalar en ocasiones especiales. Disponibles en diferentes tamaños y cantidades.',
+      'Fotos estilo Polaroid con acabado mate y excelente calidad. Perfectas para decorar, guardar recuerdos o regalar. Disponibles en diferentes cantidades.',
     audience: {
       general: { available: true, customizable: true },
       business: { available: false, customizable: false },
     },
     tags: ['fotos', 'polaroid', 'impresiones', 'fotografia', 'recuerdos'],
-    featured: false,
-  },
-  {
-    id: '3',
-    name: 'Tazas Cerámicas Personalizadas por Cantidad',
-    slug: 'tazas-ceramicas-personalizadas-cantidad',
-    category: 'tazas',
-    price: 35,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499257/IMG-20260117-WA0009_rkpedn.jpg',
-    description:
-      'Tazas de cerámica de alta calidad disponibles para pedidos al por mayor. Pueden personalizarse con logos, diseños corporativos o mensajes especiales. Ideales para empresas, eventos promocionales, campañas de marketing o regalos empresariales. Consulta precios especiales por volumen.',
-    audience: {
-      general: { available: true, customizable: true },
-      business: { available: true, customizable: true },
-    },
-    tags: ['ceramica', 'mayorista', 'corporativo', 'empresarial', 'tazas personalizadas'],
-    featured: false,
-  },
-  {
-    id: '4',
-    name: 'Tazas con Logo para Empresas',
-    slug: 'tazas-logo-empresas',
-    category: 'tazas',
-    price: 35,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499335/IMG-20260205-WA0106_jlrngi.jpg',
-    gallery: [
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499336/IMG-20260205-WA0112_kwvuy6.jpg',
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499334/IMG-20260205-WA0009_aemyll.jpg',
-    ],
-    description:
-      'Servicio de personalización de tazas y artículos promocionales con el logo de tu empresa. Incluye asesoría en diseño, impresión de alta calidad y entrega puntual. Ideal para campañas de branding, merchandising y regalos corporativos.',
-    audience: {
-      general: { available: false, customizable: false },
-      business: { available: true, customizable: true },
-    },
-    tags: ['corporativo', 'logo', 'empresa', 'branding', 'merchandising'],
-    featured: false,
-  },
-  {
-    id: '5',
-    name: 'Taza Metálica Personalizable',
-    slug: 'taza-metalica-personalizable',
-    category: 'tazas',
-    price: 45,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499337/1771977619993_edit_892912116716359_ka1sud.png',
-    description:
-      'Taza metálica de acero inoxidable con doble pared que ayuda a mantener la temperatura por más tiempo. Puede personalizarse con fotos, nombres, diseños o logos. Resistente, reutilizable y ecológica, ideal para uso diario, oficina o como regalo especial.',
-    audience: {
-      general: { available: true, customizable: true },
-      business: { available: false, customizable: false },
-    },
-    tags: ['metalica', 'acero', 'termica', 'personalizada', 'ecologica'],
     featured: true,
   },
+
   {
-    id: '6',
-    name: 'Taza Cerámica con Diseño Personalizado',
-    slug: 'taza-ceramica-diseno-personalizado',
+    id: '2',
+    name: 'Tazas Cerámicas Personalizadas',
+    slug: 'tazas-ceramicas-personalizadas',
     category: 'tazas',
-    price: 40,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499275/TAZAS_SAN_VALENTIN_soe5xy.png',
+    price: 35,
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499255/1771979978916_edit_896506792213842_uex2sy.png',
+    gallery: [
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499335/IMG-20260205-WA0106_jlrngi.jpg',
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499336/IMG-20260205-WA0112_kwvuy6.jpg',
+    ],
     description:
-      'Taza de cerámica con variedad de diseños disponibles. También aceptamos pedidos personalizados para clientes individuales. Ideal para cumpleaños, aniversarios, eventos especiales o para disfrutar tu bebida favorita con un diseño único.',
+      'Tazas de cerámica personalizadas con fotos, diseños o logos. Ideales para regalos, eventos o empresas. Disponibles por unidad o pedidos por cantidad.',
     audience: {
       general: { available: true, customizable: true },
-      business: { available: false, customizable: false },
+      business: { available: true, customizable: true },
     },
-    tags: ['ceramica', 'diseños', 'personalizado', 'regalos', 'tazas con foto'],
-    featured: false,
+    tags: ['ceramica', 'tazas', 'personalizadas', 'regalos', 'corporativo'],
+    featured: true,
   },
+
   {
-    id: '7',
-    name: 'Taza Metálica Térmica con Diseños Exclusivos',
-    slug: 'taza-metalica-termica-disenos-exclusivos',
+    id: '3',
+    name: 'Taza Metálica Personalizada',
+    slug: 'taza-metalica-personalizada',
     category: 'tazas',
-    price: 40,
-    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499276/1771979776328_edit_896519787370295_ncvzvj.png',
+    price: 45,
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499276/IMG-20260116-WA0028_exkret.jpg',
+    gallery: [
+      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,w_700/v1772499276/1771979776328_edit_896519787370295_ncvzvj.png',
+    ],
     description:
-      'Taza metálica térmica con diseños exclusivos y acabado premium. Mantiene bebidas calientes hasta 6 horas y frías hasta 12 horas. Ideal para quienes buscan estilo, durabilidad y funcionalidad en su día a día.',
+      'Taza metálica resistente y reutilizable, ideal para uso diario o regalo. Se puede personalizar con nombres, fotos o logos. Disponible por unidad o en pedidos por cantidad.',
     audience: {
-      general: { available: true, customizable: false },
-      business: { available: false, customizable: false },
+      general: { available: true, customizable: true },
+      business: { available: true, customizable: true },
     },
-    tags: ['metalica', 'termica', 'premium', 'exclusivo'],
-    featured: false,
+    tags: ['metalica', 'acero', 'termica', 'personalizada'],
+    featured: true,
   },
+
   {
-    id: '8',
+    id: '4',
     name: 'Pack de Regalo Personalizado',
     slug: 'pack-regalo-personalizado',
     category: 'festivos',
     price: 150,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499248/IMG-20260203-WA0028_cd2lh7.jpg',
     description:
-      'Pack especial que incluye: 2 tazas personalizadas con diseños a elección, 2 llaveros con fotos impresas y 1 alcancía pequeña personalizada. Un set ideal para parejas, aniversarios, cumpleaños o regalos especiales. Incluye presentación en caja de regalo con lazo.',
+      'Pack especial con 2 tazas personalizadas, 2 llaveros con foto y 1 alcancía personalizada. Incluye presentación en caja de regalo.',
     audience: {
       general: { available: true, customizable: true },
       business: { available: false, customizable: false },
@@ -147,21 +105,23 @@ export const products: Product[] = [
     tags: ['pack', 'regalo', 'combo', 'tazas', 'llaveros', 'alcancia'],
     featured: true,
   },
-{
-  id: '9',
-  name: 'Pack de Regalo Premium Personalizado',
-  slug: 'pack-regalo-premium-personalizado',
-  category: 'festivos',
-  price: 150,
-  image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772658612/pack4_kq2mhm.png',
-  description: 'Pack exclusivo que incluye un vaso chopero de 16 oz, una taza metálica y un llavero, todos personalizados con el diseño de tu preferencia. Ideal para celebrar ocasiones especiales como cumpleaños, aniversarios, eventos deportivos o reuniones con amigos. Cada pieza está elaborada con materiales de alta calidad: el vaso chopero mantiene la temperatura ideal de tus bebidas, la taza metálica es resistente y perfecta para el día a día, y el llavero personalizado añade un detalle único. Incluye empaque tipo regalo listo para sorprender.',
-  audience: {
-    general: { available: true, customizable: true },
-    business: { available: false, customizable: false },
+
+  {
+    id: '5',
+    name: 'Pack Día del Padre',
+    slug: 'pack-regalo-dia-padre',
+    category: 'festivos',
+    price: 150,
+    image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772658612/pack4_kq2mhm.png',
+    description:
+      'Pack especial con vaso chopero 16 oz, taza metálica y llavero personalizado. Incluye empaque listo para regalo.',
+    audience: {
+      general: { available: true, customizable: true },
+      business: { available: false, customizable: false },
+    },
+    tags: ['pack', 'regalo', 'personalizado', 'vaso chopero', 'taza metalica'],
+    featured: true,
   },
-  tags: ['pack', 'regalo', 'personalizado', 'combo', 'vaso chopero', 'taza metálica', 'llavero'],
-  featured: true,
-}
 ];
 
 // ============================================================
