@@ -16,12 +16,12 @@ interface Props {
 
 const {
   title,
-  description = 'Regalos personalizados para momentos especiales. Tazas, álbumes, cuadros y más.',
-  keywords = 'regalos personalizados, tazas, álbumes, cuadros, regalos únicos',
-  ogImage = '/og-image.jpg',
+  description = 'Recuerdos personalizados para momentos especiales en Santa Cruz de la Sierra. Tazas, álbumes, cuadros y más.',
+  keywords = 'recuerdos compartidos Santa Cruz, regalos personalizados Bolivia, tazas personalizadas, álbumes fotos',
+  ogImage = '/og-image.png',
   canonical,
   robots = 'index, follow',
-  author = 'Regalos Personalizados',
+  author = 'Recuerdos Compartidos',
 } = Astro.props;
 
 const siteUrl = Astro.site ?? 'https://www.regalospersonalizados-cznl.sarl';
@@ -49,13 +49,19 @@ const fullOgImageUrl = new URL(ogImage, siteUrl);
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- SEO FUNDAMENTALS -->
-    <title>{title} | Regalos Personalizados</title>
+    <title>{title} | Recuerdos Compartidos</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="author" content={author} />
     <meta name="robots" content={robots} />
     <meta name="language" content="Spanish" />
     <meta name="revisit-after" content="3 days" />
+
+    <!-- GEO TAGS (Local SEO - Santa Cruz de la Sierra, Bolivia) -->
+    <meta name="geo.region" content="BO-CR" />
+    <meta name="geo.placename" content="Santa Cruz de la Sierra" />
+    <meta name="geo.position" content="-17.7833;-63.1821" />
+    <meta name="ICBM" content="-17.7833, -63.1821" />
 
     <!-- CANONICAL URL -->
     <link rel="canonical" href={canonicalURL} />
@@ -68,8 +74,8 @@ const fullOgImageUrl = new URL(ogImage, siteUrl);
     <meta property="og:description" content={description} />
     <meta property="og:image" content={fullOgImageUrl} />
     <meta property="og:image:alt" content={title} />
-    <meta property="og:site_name" content="Regalos Personalizados" />
-    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Recuerdos Compartidos" />
+    <meta property="og:locale" content="es_BO" />
 
     <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -77,7 +83,7 @@ const fullOgImageUrl = new URL(ogImage, siteUrl);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullOgImageUrl} />
     <meta name="twitter:image:alt" content={title} />
-    <meta name="twitter:creator" content="@regalospersonl" />
+    <meta name="twitter:creator" content="@recuerdoscompartidos" />
 
     <!-- PERFORMANCE HINTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -87,25 +93,82 @@ const fullOgImageUrl = new URL(ogImage, siteUrl);
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Regalos Personalizados",
+      "@type": "LocalBusiness",
+      "@id": "https://www.regalospersonalizados-cznl.sarl/#localbusiness",
+      "name": "Recuerdos Compartidos",
+      "image": "https://www.regalospersonalizados-cznl.sarl/og-image.png",
       "url": "https://www.regalospersonalizados-cznl.sarl",
       "logo": "https://www.regalospersonalizados-cznl.sarl/logo.png",
-      "description": "Regalos personalizados únicos para cumpleaños, aniversarios y ocasiones especiales.",
+      "description": "Recuerdos compartidos personalizados en Santa Cruz de la Sierra, Bolivia. Tazas mágicas, álbumes de fotos, cuadros canvas y regalos únicos para momentos especiales.",
+      "priceRange": "$$",
+      "telephone": "+591 62699702",
+      "currenciesAccepted": "BOB",
+      "paymentAccepted": "Cash, Transfer",
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "AR",
-        "addressRegion": "Santa Cruz"
+        "addressLocality": "Santa Cruz de la Sierra",
+        "addressRegion": "Santa Cruz",
+        "addressCountry": {
+          "@type": "Country",
+          "name": "Bolivia"
+        }
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -17.7833,
+        "longitude": -63.1821
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Santa Cruz de la Sierra",
+        "containedInPlace": {
+          "@type": "Country",
+          "name": "Bolivia"
+        }
       },
       "sameAs": [
-        "https://www.instagram.com/regalospersonalizados",
-        "https://www.facebook.com/regalospersonalizados",
-        "https://wa.me/mensaje"
+        "https://wa.me/59162699702"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
-        "contactType": "Customer Service",
-        "availableLanguage": ["es"]
+        "telephone": "+591 62699702",
+        "contactType": "customer service",
+        "areaServed": "BO",
+        "availableLanguage": ["Spanish"]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Recuerdos Compartidos",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Tazas Personalizadas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Álbumes de Fotos Personalizados"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Cuadros Canvas Personalizados"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Regalos Corporativos"
+            }
+          }
+        ]
       }
     }
     </script>
