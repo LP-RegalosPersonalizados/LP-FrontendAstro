@@ -122,6 +122,7 @@ export const products: Product[] = [
     id: '6',
     name: 'Tazas Metálicas Corporativas (Por Mayor)',
     slug: 'tazas-metalicas-corporativas-por-mayor',
+    price: 40,
     category: 'tazas',
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1772499335/IMG-20260205-WA0106_jlrngi.jpg',
     gallery: [
