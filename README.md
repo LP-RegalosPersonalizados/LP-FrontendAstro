@@ -206,7 +206,7 @@ Este proyecto está bajo licencia MIT. Ver archivo LICENSE para detalles.
 
 **Recuerdos Compartidos**
 - Sitio Web: https://www.regalospersonalizados-cznl.sarl
-- WhatsApp: https://wa.me/591234567890
+- WhatsApp: https://wa.me/59162699702
 - Ubicación: Santa Cruz de la Sierra, Bolivia
 - Email: contacto@regalospersonalizados-cznl.sarl
 
