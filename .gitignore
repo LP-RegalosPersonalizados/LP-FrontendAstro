@@ -24,5 +24,7 @@ pnpm-debug.log*
 .idea/
 # vscode setting folder
 .vscode/
-#carpeta guia de funcionamiento del proyecto
+#carpetas de guia para el funcionamiento del proyecto
 STRUCTURE/
+ZANALISIS/
+PLANS/

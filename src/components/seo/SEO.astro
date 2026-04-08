@@ -34,15 +34,15 @@ interface Props {
 
 const {
   title,
-  description = 'Regalos personalizados para momentos especiales. Tazas, álbumes, cuadros y más.',
-  keywords = 'regalos personalizados, tazas, álbumes, cuadros',
-  image = '/og-image.jpg',
+  description = 'Recuerdos compartidos personalizados en Santa Cruz de la Sierra, Bolivia.',
+  keywords = 'recuerdos compartidos, regalos personalizados Santa Cruz, tazas personalizadas Bolivia',
+  image = '/og-image.png',
   url = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined,
   type = 'website',
-  author = 'Regalos Personalizados',
+  author = 'Recuerdos Compartidos',
   robots = 'index, follow',
   canonical = url,
-  twitterHandle = '@regalospersonl',
+  twitterHandle = '@recuerdoscompartidos',
 } = Astro.props;
 
 const siteUrl = Astro.site ?? 'https://www.regalospersonalizados-cznl.sarl';
@@ -56,7 +56,7 @@ const fullUrl = url ?? new URL(Astro.url.pathname, siteUrl).toString();
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <!-- SEO -->
-<title>{title} | Regalos Personalizados</title>
+<title>{title} | {author}</title>
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
@@ -72,8 +72,8 @@ const fullUrl = url ?? new URL(Astro.url.pathname, siteUrl).toString();
 <meta property="og:image" content={fullImageUrl} />
 <meta property="og:image:alt" content={title} />
 <meta property="og:url" content={fullUrl} />
-<meta property="og:site_name" content="Regalos Personalizados" />
-<meta property="og:locale" content="es_AR" />
+<meta property="og:site_name" content="Recuerdos Compartidos" />
+<meta property="og:locale" content="es_BO" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />

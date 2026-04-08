@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import ProductDetail from '../../components/producto/ProductDetail';
-import ProductCard from '../../components/shared/product/ProductCard';
+import ProductDetail from '../../components/productos/ProductDetail';
+import ProductCard from '../../components/productos/ProductCard';
 import { products, getProductBySlug, getRelatedProducts } from '../../data/products';
 import type { GetStaticPaths } from 'astro';
 
@@ -28,13 +28,71 @@ if (!product) {
 }
 
 const related = getRelatedProducts(product, 3);
+
+// Schema Product para SEO
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.name,
+  "description": product.description,
+  "image": product.image,
+  "url": `https://www.regalospersonalizados-cznl.sarl/producto/${slug}`,
+  "brand": {
+    "@type": "Brand",
+    "name": "Recuerdos Compartidos"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": `https://wa.me/59162699702?text=${encodeURIComponent(`Hola, me interesa el producto ${product.name}`)}`,
+    "priceCurrency": "BOB",
+    "price": product.price ? product.price.toString() : "0",
+    "priceValidUntil": "2026-12-31",
+    "itemCondition": "https://schema.org/NewCondition",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "LocalBusiness",
+      "name": "Recuerdos Compartidos"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Bolivia"
+    }
+  },
+  "category": product.category
+};
+
+// Schema BreadcrumbList
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://www.regalospersonalizados-cznl.sarl/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Catálogo",
+      "item": "https://www.regalospersonalizados-cznl.sarl/catalogo"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": product.name,
+      "item": `https://www.regalospersonalizados-cznl.sarl/producto/${slug}`
+    }
+  ]
+};
 ---
 
 <MainLayout
-  title={`${product.name} | Regalos Personalizados`}
-  description={`${product.description} Cómpralo personalizado y hecho a tu medida. Cotiza en WhatsApp con nuestros expertos.`}
-  keywords={`${product.name}, regalos personalizados, ${product.category}, regalo único`}
-  author="Regalos Personalizados"
+  title={`${product.name} | Recuerdos Compartidos`}
+  description={`${product.description} Personalizado y hecho a tu medida en Santa Cruz de la Sierra. Cotizá por WhatsApp.`}
+  keywords={`${product.name}, recuerdos compartidos Santa Cruz, ${product.category}, regalo personalizado Bolivia`}
+  author="Recuerdos Compartidos"
   robots="index, follow"
   canonical={`https://www.regalospersonalizados-cznl.sarl/producto/${slug}`}
   ogImage={product.image}
@@ -68,4 +126,10 @@ const related = getRelatedProducts(product, 3);
       )}
     </div>
   </section>
+
+  <!-- Schema Product -->
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
+  <!-- Schema Breadcrumb -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 </MainLayout>

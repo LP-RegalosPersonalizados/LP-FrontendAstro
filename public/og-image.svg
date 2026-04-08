@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Fondo principal -->
+  <rect width="1200" height="630" fill="#124734"/>
+  
+  <!-- Decoración superior izquierda -->
+  <circle cx="0" cy="0" r="200" fill="#1a6349" opacity="0.3"/>
+  <circle cx="100" cy="50" r="150" fill="#DA9928" opacity="0.15"/>
+  
+  <!-- Decoración inferior derecha -->
+  <circle cx="1200" cy="630" r="180" fill="#DEE2B1" opacity="0.1"/>
+  <circle cx="1100" cy="580" r="100" fill="#DA9928" opacity="0.15"/>
+  
+  <!-- Contenedor principal -->
+  <rect x="60" y="60" width="1080" height="510" rx="30" fill="#0c3124" opacity="0.6"/>
+  
+  <!-- Icono decorativo -->
+  <circle cx="600" cy="130" r="35" fill="#DEE2B1" opacity="0.2"/>
+  <text x="600" y="143" text-anchor="middle" fill="#DA9928" font-size="38">🎁</text>
+  
+  <!-- Título principal - RECUERDOS COMPARTIDOS -->
+  <text x="600" y="230" text-anchor="middle" fill="#DEE2B1" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="bold">Recuerdos Compartidos</text>
+  
+  <!-- Subtítulo - Santa Cruz de la Sierra -->
+  <text x="600" y="310" text-anchor="middle" fill="#DA9928" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="500">Santa Cruz de la Sierra</text>
+  
+  <!-- País -->
+  <text x="600" y="365" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" opacity="0.8">Bolivia</text>
+  
+  <!-- Línea separadora -->
+  <line x1="350" y1="405" x2="850" y2="405" stroke="#DA9928" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Productos/Servicios -->
+  <text x="600" y="460" text-anchor="middle" fill="#DEE2B1" font-family="Arial, Helvetica, sans-serif" font-size="26">Regalos Personalizados • Tazas • Álbumes • Cuadros</text>
+  
+  <!-- Call to action - WhatsApp -->
+  <text x="600" y="520" text-anchor="middle" fill="#DA9928" font-family="Arial, Helvetica, sans-serif" font-size="20" opacity="0.9">Cotizá por WhatsApp: +591 62699702</text>
+</svg>
