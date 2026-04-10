@@ -2,7 +2,7 @@
 
 > Tienda en línea moderna de regalos personalizados ubicada en Santa Cruz de la Sierra, Bolivia.
 
-**Sitio Web**: https://www.regalospersonalizados-cznl.sarl
+**Sitio Web**: https://www.recuerdoscompartidos.sarl
 
 ## Tabla de Contenidos
 
@@ -205,10 +205,10 @@ Este proyecto está bajo licencia MIT. Ver archivo LICENSE para detalles.
 ## Contacto
 
 **Recuerdos Compartidos**
-- Sitio Web: https://www.regalospersonalizados-cznl.sarl
+- Sitio Web: https://www.recuerdoscompartidos.sarl
 - WhatsApp: https://wa.me/59162699702
 - Ubicación: Santa Cruz de la Sierra, Bolivia
-- Email: contacto@regalospersonalizados-cznl.sarl
+- Email: contacto@recuerdoscompartidos.sarl
 
 ## Recursos Útiles
 
