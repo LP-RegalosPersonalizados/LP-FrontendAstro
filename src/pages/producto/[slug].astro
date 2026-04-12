@@ -36,7 +36,7 @@ const productSchema = {
   "name": product.name,
   "description": product.description,
   "image": product.image,
-  "url": `https://www.regalospersonalizados-cznl.sarl/producto/${slug}`,
+  "url": `https://www.recuerdoscompartidos.sarl/producto/${slug}`,
   "brand": {
     "@type": "Brand",
     "name": "Recuerdos Compartidos"
@@ -70,19 +70,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Inicio",
-      "item": "https://www.regalospersonalizados-cznl.sarl/"
+      "item": "https://www.recuerdoscompartidos.sarl/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Catálogo",
-      "item": "https://www.regalospersonalizados-cznl.sarl/catalogo"
+      "item": "https://www.recuerdoscompartidos.sarl/catalogo"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": product.name,
-      "item": `https://www.regalospersonalizados-cznl.sarl/producto/${slug}`
+      "item": `https://www.recuerdoscompartidos.sarl/producto/${slug}`
     }
   ]
 };
@@ -94,7 +94,7 @@ const breadcrumbSchema = {
   keywords={`${product.name}, recuerdos compartidos Santa Cruz, ${product.category}, regalo personalizado Bolivia`}
   author="Recuerdos Compartidos"
   robots="index, follow"
-  canonical={`https://www.regalospersonalizados-cznl.sarl/producto/${slug}`}
+  canonical={`https://www.recuerdoscompartidos.sarl/producto/${slug}`}
   ogImage={product.image}
 >
   <section class="section-padding">

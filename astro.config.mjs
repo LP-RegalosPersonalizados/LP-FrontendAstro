@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://www.regalospersonalizados-cznl.sarl',
+  site: 'https://www.recuerdoscompartidos.sarl',
   output: 'static',
   integrations: [
     react(),
@@ -16,7 +16,7 @@ export default defineConfig({
       priority: 0.7,
       serialize(item) {
         // Página principal → máxima prioridad
-        if (item.url === 'https://www.regalospersonalizados-cznl.sarl/') {
+        if (item.url === 'https://www.recuerdoscompartidos.sarl/') {
           return { ...item, priority: 1.0, changefreq: 'daily' };
         }
         // Páginas de producto → prioridad alta

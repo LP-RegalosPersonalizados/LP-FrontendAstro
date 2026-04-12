@@ -8,4 +8,4 @@ Disallow: /admin/
 Crawl-delay: 1
 
 # Referencia al sitemap
-Sitemap: https://www.regalospersonalizados-cznl.sarl/sitemap-index.xml
+Sitemap: https://www.recuerdoscompartidos.sarl/sitemap-index.xml
