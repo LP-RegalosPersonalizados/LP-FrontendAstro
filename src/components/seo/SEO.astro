@@ -45,7 +45,7 @@ const {
   twitterHandle = '@recuerdoscompartidos',
 } = Astro.props;
 
-const siteUrl = Astro.site ?? 'https://www.regalospersonalizados-cznl.sarl';
+const siteUrl = Astro.site ?? 'https://www.recuerdoscompartidos.sarl';
 const fullImageUrl = new URL(image, siteUrl).toString();
 const fullUrl = url ?? new URL(Astro.url.pathname, siteUrl).toString();
 ---
