@@ -1,0 +1,134 @@
+---
+/**
+ * WhyChooseUs Component
+ * Sección de beneficios y diferenciales con contenido SEO
+ */
+import SectionTitle from '../ui/SectionTitle.astro';
+
+const beneficios = [
+  {
+    icon: '✨',
+    title: '100% Personalizable',
+    description:
+      'Cada regalo es 100% personalizable. Tu diseño, tu mensaje, tu estilo único. Desde el color hasta el tamaño, tú decides. Ofrecemos infinitas posibilidades de personalización sin límites de creatividad para que el regalo sea exactamente como lo imaginaste.',
+  },
+  {
+    icon: '🏆',
+    title: 'Calidad Premium Garantizada',
+    description:
+      'Utilizamos únicamente materiales de primera línea y duraderos. Cada producto es revisado minuciosamente antes de dejarnos el taller para garantizar que recibas un regalo en perfectas condiciones con acabados profesionales.',
+  },
+  {
+    icon: '⚡',
+    title: 'Entrega Rápida en Santa Cruz',
+    description:
+      'Producimos tus regalos en 3-5 días hábiles. Con servicio de entrega rápido en Santa Cruz de la Sierra, recibirás tu pedido sin demoras. Delivery gratis en la zona urbana o retira directamente en nuestro taller.',
+  },
+  {
+    icon: '💬',
+    title: 'Atención Personalizada',
+    description:
+      'Te acompañamos en todo el proceso desde la selección del producto, personalización, revisión de diseños y entrega. Nuestro equipo está disponible por WhatsApp para resolver todas tus dudas y asegurar que estés completamente satisfecho.',
+  },
+  {
+    icon: '🏢',
+    title: 'Soluciones Empresariales',
+    description:
+      'Somos tu mejor opción para regalos corporativos y merchandise personalizado. Ofrecemos descuentos especiales en pedidos al por mayor, diseños ajustados a tu marca y entregas estratégicas para eventos y campañas empresariales.',
+  },
+  {
+    icon: '❤️',
+    title: 'Pasión por los Detalles',
+    description:
+      'Cada producto que sale de nuestro taller es resultado de nuestra pasión por la excelencia. Creemos que los detalles importan, por eso en Recuerdos Compartidos, cada regalo es único, especial y hecho con amor.',
+  },
+];
+---
+
+<section
+  class="section-padding bg-secondary/20"
+  aria-labelledby="elegirnos-id"
+>
+  <div class="container-main">
+    <SectionTitle
+      id="elegirnos-id"
+      title="¿Por Qué Elegirnos?"
+      subtitle="Lo que nos diferencia en el mercado de regalos personalizados"
+    />
+
+    <div class="mb-12">
+      <p class="text-center max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed">
+        En <strong>Recuerdos Compartidos</strong>, nos destacamos por ofrecer soluciones integrales de regalos personalizados 
+        de alta calidad en Santa Cruz, Bolivia. Nuestro compromiso es transformar tus ideas en realidad con 
+        <strong>profesionalismo, creatividad y atención al detalle</strong>.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+      {
+        beneficios.map(({ icon, title, description }) => (
+          <div class="card p-6 text-center group hover:-translate-y-1 transition-all duration-300">
+            <div class="text-5xl mb-4" aria-hidden="true">
+              {icon}
+            </div>
+            <h3 class="font-display font-semibold text-primary text-lg mb-3">
+              {title}
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              {description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Contenido adicional SEO -->
+    <div class="mt-16 bg-white rounded-2xl p-8 shadow-card">
+      <h3 class="font-display font-bold text-primary text-2xl mb-6 text-center">
+        Comprometidos con tu Satisfacción
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h4 class="font-display font-semibold text-primary text-lg mb-3 flex items-center gap-2">
+            <span class="text-accent text-xl">✓</span>
+            Proceso Transparente
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Te enviamos vista previa del diseño antes de producir cualquier pedido. Junto con nuestro equipo, revisan cada detalle 
+            y ajusta hasta que esté perfecto. Tu aprobación es nuestro punto de partida para la producción final.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold text-primary text-lg mb-3 flex items-center gap-2">
+            <span class="text-accent text-xl">✓</span>
+            Flexibilidad de Pagos
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Aceptamos múltiples formas de pago. Normalmente solicita el 50% para comenzar la producción y 50% al momento de 
+            la entrega. Trabajamos con transferencias bancarias y efectivo para tu comodidad.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold text-primary text-lg mb-3 flex items-center gap-2">
+            <span class="text-accent text-xl">✓</span>
+            Garantía de Calidad
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Si el producto no cumple con tus expectativas, ofrecemos cambios sin costo. Queremos que estés 100% satisfecho 
+            con tu compra. La calidad es nuestro compromiso garantizado.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold text-primary text-lg mb-3 flex items-center gap-2">
+            <span class="text-accent text-xl">✓</span>
+            Experiencia Local
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Somos una empresa 100% local de Santa Cruz de la Sierra, con profundo conocimiento del mercado boliviano 
+            y las necesidades específicas de nuestros clientes. Trabajamos con valores locales y compromiso comunitario.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,71 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+
+/**
+ * AboutUs Component
+ * Sección "Sobre Nosotros" para explicar la historia y valores de la empresa
+ * Mejora SEO con contenido textual extenso
+ */
+---
+
+<section class="section-padding bg-white" aria-labelledby="about-title">
+  <div class="container-main">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Imagen del taller -->
+      <div class="relative animate-fade-in-up">
+        <img
+          src="/images/taller.jpg"
+          alt="Nuestro taller de Recuerdos Compartidos en Santa Cruz de la Sierra"
+          class="rounded-2xl w-full object-cover aspect-[4/3] shadow-card"
+        />
+        <!-- Decoración flotante -->
+        <div
+          class="absolute -bottom-4 -right-4 bg-accent text-white p-4 rounded-xl shadow-lg flex items-center justify-center w-16 h-16"
+          aria-hidden="true"
+        >
+          <span class="text-3xl">🎨</span>
+        </div>
+      </div>
+
+      <!-- Texto - Contenido SEO -->
+      <div class="animate-fade-in-up">
+        <SectionTitle
+          title="Sobre Recuerdos Compartidos"
+          subtitle="Creando momentos que perduran en el tiempo"
+          accentColor="primary"
+        />
+
+        <div class="space-y-6 text-gray-600 leading-relaxed">
+          <p>
+            Somos <strong>Recuerdos Compartidos</strong>, una empresa local de <strong>Santa Cruz de la Sierra, Bolivia</strong> dedicada a crear <strong>regalos personalizados únicos y memorables</strong>. Desde hace más de 5 años, nos especializamos en transformar tus momentos especiales en objetos tangibles que perduran en el tiempo.
+          </p>
+
+          <p>
+            Nuestro enfoque va más allá de simplemente vender productos. Cada <strong>regalo personalizado</strong> que creamos lleva consigo la <strong>magia de un momento especial</strong>, diseñado con cariño y dedicación para ti, tu familia o tu empresa. Creemos que los mejores regalos son aquellos que cuentan una historia.
+          </p>
+
+          <p>
+            En nuestro taller en Santa Cruz, contamos con tecnología de vanguardia y un equipo de profesionales especializados en personalización. Trabajamos con <strong>materiales de primera calidad</strong> para garantizar que cada producto sea duradero y hermoso. Desde <strong>tazas mágicas revolucionarias</strong> hasta <strong>álbumes de fotos artesanales</strong> y <strong>cuadros canvas personalizados</strong>, tenemos opciones para cada ocasión.
+          </p>
+
+          <p>
+            Nuestra misión es ser tu aliado en momentos importantes: cumpleaños, aniversarios, compromisos, despedidas, regalos corporativos y cualquier ocasión especial que merezca un toque personalizado. Entendemos que cada cliente es único, por eso ofrecemos <strong>soluciones completamente personalizables</strong> adaptadas a tus necesidades específicas.
+          </p>
+
+          <p>
+            Ya seas una persona buscando un regalo memorable para alguien especial, una empresa que necesita <strong>regalos corporativos y merchandise personalizado</strong>, o alguien que quiere crear algo verdaderamente único, estamos aquí para hacerlo realidad. Tu satisfacción es nuestro éxito.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 mt-10">
+          <a href="/catalogo" class="btn-primary py-3 px-6 text-base">
+            Explorar Catálogo
+          </a>
+          <a href="https://wa.me/59162699702" target="_blank" rel="noopener noreferrer" class="btn-outline py-3 px-6 text-base">
+            Contáctanos por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

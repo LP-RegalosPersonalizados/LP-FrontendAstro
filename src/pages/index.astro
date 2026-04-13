@@ -3,6 +3,14 @@ import MainLayout from '../layouts/MainLayout.astro';
 import SectionTitle from '../components/ui/SectionTitle.astro';
 import ProductCard from '../components/productos/ProductCard';
 import ProductCarousel from '../components/home/ProductCarousel';
+import AboutUs from '../components/home/AboutUs.astro';
+import WhyChooseUs from '../components/home/WhyChooseUs.astro';
+import ProductCategories from '../components/home/ProductCategories.astro';
+import Stats from '../components/home/Stats.astro';
+import PersonalizationProcess from '../components/home/PersonalizationProcess.astro';
+import WorkPreview from '../components/home/WorkPreview.astro';
+import TrustBadges from '../components/home/TrustBadges.astro';
+import QuickFAQ from '../components/home/QuickFAQ.astro';
 import { getFeaturedProducts } from '../data/products';
 
 const featuredProducts = getFeaturedProducts();
@@ -66,6 +74,9 @@ const featuredProducts = getFeaturedProducts();
     </div>
   </section>
 
+  <!-- ============ ABOUT US ============ -->
+  <AboutUs />
+
   <!-- ============ HOW IT WORKS ============ -->
   <section class="section-padding bg-secondary/20" aria-labelledby="como-comprar-title">
     <div class="container-main">
@@ -106,6 +117,12 @@ const featuredProducts = getFeaturedProducts();
     </div>
   </section>
 
+  <!-- ============ WHY CHOOSE US ============ -->
+  <WhyChooseUs />
+
+  <!-- ============ PRODUCT CATEGORIES ============ -->
+  <ProductCategories />
+
   <!-- ============ FEATURED PRODUCTS ============ -->
   <section class="section-padding" aria-labelledby="destacados-title">
     <div class="container-main">
@@ -126,6 +143,15 @@ const featuredProducts = getFeaturedProducts();
       </div>
     </div>
   </section>
+
+  <!-- ============ STATS ============ -->
+  <Stats />
+
+  <!-- ============ PERSONALIZATION PROCESS ============ -->
+  <PersonalizationProcess />
+
+  <!-- ============ WORK PREVIEW ============ -->
+  <WorkPreview />
 
   <!-- ============ BUYER TYPES ============ -->
   <section class="section-padding bg-neutral-light/40" aria-labelledby="tipos-comprador-title">
@@ -169,6 +195,12 @@ const featuredProducts = getFeaturedProducts();
       </div>
     </div>
   </section>
+
+  <!-- ============ TRUST BADGES ============ -->
+  <TrustBadges />
+
+  <!-- ============ QUICK FAQ ============ -->
+  <QuickFAQ />
 
   <!-- ============ CTA BANNER ============ -->
   <section class="section-padding" aria-label="Llamada a la acción">

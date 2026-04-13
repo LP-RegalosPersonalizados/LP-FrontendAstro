@@ -1,0 +1,163 @@
+---
+/**
+ * WorkPreview Component
+ * Galería de trabajos realizados para demostrar calidad y creatividad
+ */
+import SectionTitle from '../ui/SectionTitle.astro';
+
+const trabajos = [
+  {
+    imagen: '/images/trabajos/1.jpg',
+    alt: 'Taza mágica personalizada con foto familiar de cliente en Santa Cruz',
+    titulo: 'Taza Mágica Familiar',
+  },
+  {
+    imagen: '/images/trabajos/2.jpg',
+    alt: 'Álbum de fotos infantil personalizado para cumpleaños',
+    titulo: 'Álbum del Cumpleaños',
+  },
+  {
+    imagen: '/images/trabajos/3.jpg',
+    alt: 'Cuadro canvas personalizado con foto de pareja para aniversario',
+    titulo: 'Canvas para Aniversario',
+  },
+  {
+    imagen: '/images/trabajos/4.jpg',
+    alt: 'Taza corporativa empresarial con logo personalizado',
+    titulo: 'Merchandise Corporativo',
+  },
+  {
+    imagen: '/images/trabajos/5.jpg',
+    alt: 'Pack de regalos personalizados para sorpresa de cumpleaños',
+    titulo: 'Pack Sorpresa',
+  },
+  {
+    imagen: '/images/trabajos/6.jpg',
+    alt: 'Llavero fotográfico personalizado con foto de mascota',
+    titulo: 'Llavero Mascota',
+  },
+  {
+    imagen: '/images/trabajos/7.jpg',
+    alt: 'Alcancia personalizada decorativa con diseño artístico',
+    titulo: 'Alcancia Artística',
+  },
+  {
+    imagen: '/images/trabajos/8.jpg',
+    alt: 'Set completo de regalos personalizados para empresa',
+    titulo: 'Set Empresarial',
+  },
+];
+---
+
+<section class="section-padding" aria-labelledby="trabajos-id">
+  <div class="container-main">
+    <div class="flex items-end justify-between mb-10 flex-wrap gap-4 flex-col md:flex-row">
+      <div>
+        <SectionTitle
+          id="trabajos-id"
+          title="Algunos de Nuestros Trabajos"
+          subtitle="Inspiración real de regalos ya realizados"
+          align="left"
+        />
+      </div>
+      <a href="/trabajos-previos" class="btn-outline text-sm py-2.5 shrink-0" aria-label="Ver galería completa de trabajos">
+        Ver galería completa →
+      </a>
+    </div>
+
+    <div class="mb-12">
+      <p class="text-gray-600 text-base leading-relaxed max-w-3xl">
+        Cada proyecto en nuestra galería representa un momento especial transformado en un regalo memorable. 
+        Estos son algunos de los trabajos que hemos realizado para <strong>particulares y empresas en Santa Cruz de la Sierra</strong>. 
+        Cada uno demuestra nuestra dedicación a la calidad, creatividad y satisfacción del cliente.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
+      {
+        trabajos.map(({ imagen, alt, titulo }) => (
+          <a
+            href="/trabajos-previos"
+            class="group relative overflow-hidden rounded-xl aspect-square shadow-card hover:shadow-card-hover transition-all duration-300"
+            aria-label={`${titulo}. ${alt}`}
+          >
+            <img
+              src={imagen}
+              alt={alt}
+              class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/40 transition-colors flex items-center justify-center">
+              <span class="text-white opacity-0 group-hover:opacity-100 text-3xl transition-opacity" aria-hidden="true">
+                🔍
+              </span>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
+              <p class="text-white text-xs md:text-sm font-semibold">
+                {titulo}
+              </p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Contenido SEO adicional -->
+    <div class="mt-16 bg-primary text-white rounded-2xl p-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-display font-bold text-secondary text-2xl mb-4">
+            Diversidad de Proyectos Realizados
+          </h3>
+          <p class="text-white/80 text-sm leading-relaxed mb-6">
+            Desde tazas mágicas personalizadas para regales familiares, hasta álbumes de fotos artesanales, 
+            cuadros canvas para decoración especial y merchandise corporativo: nuestro portafolio demuestra 
+            nuestra capacidad de adaptarnos a cualquier necesidad de personalización.
+          </p>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li>✓ Regalos para particulares en Santa Cruz</li>
+            <li>✓ Packages corporativos para empresas</li>
+            <li>✓ Compromisos, bodas y eventos especiales</li>
+            <li>✓ Personalizaciones creativas y únicas</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-display font-bold text-secondary text-2xl mb-4">
+            Historias de Clientes Satisfechos
+          </h3>
+          <p class="text-white/80 text-sm leading-relaxed mb-6">
+            Cada trabajo es una historia. Clientes que nos confiaron sus momentos más especiales y recibieron 
+            un regalo que superó sus expectativas. Son historias de familias sorprendidas, empleados valorados, 
+            y momentos que quedaron grabados gracias a nuestro compromiso con la calidad.
+          </p>
+          <div class="bg-white/10 rounded-lg p-4">
+            <p class="text-white/90 text-sm italic">
+              "No es solo un producto. Es el cuidado y dedicación que le ponen en cada detalle lo que hace la diferencia."
+            </p>
+            <p class="text-white/60 text-xs mt-2">
+              — Clientela satisfecha de Recuerdos Compartidos
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-8 border-t border-white/20 text-center">
+        <p class="text-white/80 mb-6">
+          ¿Inspirado? Tu regalo personalizado podría ser parte de nuestro próximo portafolio. ¡Comenzá ahora!
+        </p>
+        <a
+          href="https://wa.me/59162699702"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
+          aria-label="Comenzar tu proyecto"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          Contáctanos Hoy
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

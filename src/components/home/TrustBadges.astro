@@ -1,0 +1,156 @@
+---
+/**
+ * TrustBadges Component
+ * Sección de garantías y confianza para generar credibilidad
+ */
+
+const garantias = [
+  {
+    emoji: '✅',
+    titulo: 'Calidad Garantizada',
+    descripcion: 'Materiales premium revisados. Todos nuestros productos pasan control de calidad antes de entrega.',
+  },
+  {
+    emoji: '🔄',
+    titulo: 'Cambios sin Costo',
+    descripcion: 'Si no estás satisfecho con el resultado, hacemos cambios sin costo adicional hasta tu satisfacción total.',
+  },
+  {
+    emoji: '🔒',
+    titulo: 'Pago Seguro',
+    descripcion: 'Transferencia bancaria o efectivo. 50% para comenzar, 50% al entregar. Proceso transparente y seguro.',
+  },
+  {
+    emoji: '🇧🇴',
+    titulo: '100% Local Santa Cruz',
+    descripcion: 'Empresa boliviana de Santa Cruz de la Sierra. Atención personalizada, entrega rápida y compromiso local.',
+  },
+];
+---
+
+<section class="section-padding bg-neutral-light/40" aria-label="Garantías y confianza">
+  <div class="container-main">
+    <div class="text-center mb-12">
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-primary mb-4">
+        Tu Confianza es Nuestra Prioridad
+      </h2>
+      <p class="text-gray-600 text-base leading-relaxed max-w-2xl mx-auto">
+        En <strong>Recuerdos Compartidos</strong>, entendemos que adquirir un regalo personalizado es confiar en nosotros 
+        para un momento importante. Por eso ofrecemos garantías claras y un proceso transparente que te protege.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children mb-12">
+      {
+        garantias.map(({ emoji, titulo, descripcion }) => (
+          <div class="card p-6 flex flex-col items-center text-center group hover:-translate-y-1 transition-all duration-300 hover:shadow-card-hover">
+            <div class="text-4xl mb-3" aria-hidden="true">
+              {emoji}
+            </div>
+            <h3 class="font-display font-semibold text-primary text-lg mb-2">
+              {titulo}
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed flex-grow">
+              {descripcion}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Contenido SEO adicional - Políticas de confianza -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl p-8 shadow-card">
+        <h3 class="font-display font-bold text-primary text-xl mb-6 flex items-center gap-2">
+          <span class="text-accent text-2xl">📋</span>
+          Política de Cambios y Devoluciones
+        </h3>
+        <ul class="space-y-4 text-sm text-gray-600 leading-relaxed">
+          <li class="flex gap-3">
+            <span class="text-accent font-bold text-lg shrink-0">✓</span>
+            <span>
+              <strong>Vista previa sin costo:</strong> Antes de producir, enviamos un diseño visual para que apruebes. 
+              Cambios limitados se hacen sin cargo.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-accent font-bold text-lg shrink-0">✓</span>
+            <span>
+              <strong>Insatisfacción:</strong> Si el producto no cumple con tus expectativas, ofrece cambios sin costo 
+              o revvisión del diseño.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-accent font-bold text-lg shrink-0">✓</span>
+            <span>
+              <strong>Daño en transporte:</strong> Si el producto llega dañado, nos hacemos cargo del reemplazo sin costo.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-accent font-bold text-lg shrink-0">✓</span>
+            <span>
+              <strong>Transparencia total:</strong> Tu satisfacción es nuestro objetivo. Cada paso es comunicado claramente.
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 shadow-card">
+        <h3 class="font-display font-bold text-primary text-xl mb-6 flex items-center gap-2">
+          <span class="text-accent text-2xl">💳</span>
+          Proceso de Pagos Seguro
+        </h3>
+        <ul class="space-y-4 text-sm text-gray-600 leading-relaxed">
+          <li class="flex gap-3">
+            <span class="text-accent font-bold text-lg shrink-0">✓</span>
+            <span>
+              <strong>Plan de pagos:</strong> 50% al confirmar el pedido, 50% al momento de la entrega. Sin sorpresas.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-accent font-bold text-lg shrink-0">✓</span>
+            <span>
+              <strong>Múltiples formas de pago:</strong> Transferencia bancaria, depósito a cuenta o efectivo. Elige la que más cómoda.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-accent font-bold text-lg shrink-0">✓</span>
+            <span>
+              <strong>Comprobantes:</strong> Recibís comprobantes de cada transacción. Registro completo de tu pedido en todo moment.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-accent font-bold text-lg shrink-0">✓</span>
+            <span>
+              <strong>No hay cargos ocultos:</strong> El presupuesto inicial es final. Sin sorpresas ni cargos adicionales.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CTA final -->
+    <div class="text-center mt-12">
+      <p class="text-gray-600 text-base mb-6">
+        ¿Más preguntas sobre nuestras garantías? Nuestro equipo está disponible por WhatsApp para resolver todas tus dudas.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="https://wa.me/59162699702"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-accent py-3 px-8 flex items-center gap-2"
+          aria-label="Preguntar sobre garantías por WhatsApp"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          Más Información
+        </a>
+        <a href="/catalogo" class="btn-outline py-3 px-8">
+          Explorar Catálogo
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

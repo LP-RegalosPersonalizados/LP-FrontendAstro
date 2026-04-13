@@ -1,0 +1,132 @@
+---
+/**
+ * ProductCategories Component
+ * Grid de categorías de productos con contenido descriptivo SEO
+ */
+import SectionTitle from '../ui/SectionTitle.astro';
+
+const categorias = [
+  {
+    nombre: 'Tazas Mágicas',
+    descripcion: 'Tazas térmicas que revelan imágenes al calentarse. Personalizadas 100% con tus fotos. Perfectas para café, té o bebidas frías. Regalo ideal para oficina, hogar o empresa.',
+    imagen: '/images/categorias/tazas-magicas.jpg',
+    slug: 'tazas-magicas',
+  },
+  {
+    nombre: 'Tazas Metálicas',
+    descripcion: 'Tazas de acero inoxidable con impresión personalizada. Ideales para mantener bebidas calientes. Resistentes y duraderas. Excelentes para regalos corporativos y promocionales.',
+    imagen: '/images/categorias/tazas-metalicas.jpg',
+    slug: 'tazas-metalicas',
+  },
+  {
+    nombre: 'Álbumes de Fotos',
+    descripcion: 'Álbumes artesanales con tus fotos impresas. Desde diseños clásicos hasta modernos. Perfectos para guardar recuerdos de bodas, cumpleaños, viajes y momentos especiales en familia.',
+    imagen: '/images/categorias/albumes.jpg',
+    slug: 'albumes',
+  },
+  {
+    nombre: 'Cuadros Canvas',
+    descripcion: 'Cuadros de lona personalizados con tus imágenes preferidas. Ideal para decoración del hogar, oficina o como regalo especial. Múltiples tamaños y opciones de acabado.',
+    imagen: '/images/categorias/canvas.jpg',
+    slug: 'canvas',
+  },
+  {
+    nombre: 'Llaveros Personalizados',
+    descripcion: 'Llaveros únicos con foto e impresión personalizada. Compactos y portátiles. Regalo perfecto para amigos, colegas o como souvenirs para eventos especiales.',
+    imagen: '/images/categorias/llaveros.jpg',
+    slug: 'llaveros',
+  },
+  {
+    nombre: 'Alcancias Personalizadas',
+    descripcion: 'Alcancias decorativas con diseño personalizado. Combinan funcionalidad y estética. Perfectas como regalo para niños, adultos o como elemento decorativo único en el hogar.',
+    imagen: '/images/categorias/alcancias.jpg',
+    slug: 'alcancias',
+  },
+  {
+    nombre: 'Packs Especiales',
+    descripcion: 'Combina múltiples productos en packs temáticos. Regalos completos y coordinados para ocasiones especiales como cumpleaños, aniversarios o sorpresas corporativas.',
+    imagen: '/images/categorias/packs.jpg',
+    slug: 'packs',
+  },
+  {
+    nombre: 'Regalos Corporativos',
+    descripcion: 'Soluciones personalizadas para empresas. Merchandise con tu logo, regalos para clientes y empleados. Descuentos por volumen y diseños estratégicos para tu marca.',
+    imagen: '/images/categorias/corporativos.jpg',
+    slug: 'empresas',
+  },
+];
+---
+
+<section class="section-padding" aria-labelledby="categorias-id">
+  <div class="container-main">
+    <SectionTitle
+      id="categorias-id"
+      title="Nuestras Categorías"
+      subtitle="Encontrá el regalo perfecto entre nuestra variada selección"
+    />
+
+    <div class="mb-12">
+      <p class="text-center max-w-3xl mx-auto text-gray-600 text-base leading-relaxed">
+        En <strong>Recuerdos Compartidos</strong>, ofrecemos una amplia variedad de productos personalizables para todas las ocasiones. 
+        Cada categoría ha sido cuidadosamente seleccionada para garantizar calidad y opciones creativas sin límites. 
+        Desde <strong>regalos personalizados para particulares</strong> hasta <strong>soluciones empresariales y merchandise</strong>, tenemos todo lo que necesitas.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
+      {
+        categorias.map(({ nombre, descripcion, imagen, slug }) => (
+          <a
+            href={`/catalogo#${slug}`}
+            class="group relative overflow-hidden rounded-xl aspect-square shadow-card hover:shadow-card-hover transition-all duration-300"
+            aria-label={`Ver categoría: ${nombre}. ${descripcion}`}
+          >
+            <img
+              src={imagen}
+              alt={nombre}
+              class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-primary/60 group-hover:bg-primary/75 transition-colors flex items-center justify-center">
+              <div class="text-center px-4">
+                <h3 class="text-white font-display font-semibold text-sm md:text-base leading-snug">
+                  {nombre}
+                </h3>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Contenido SEO adicional -->
+    <div class="mt-16 bg-secondary/10 rounded-2xl p-8">
+      <h3 class="font-display font-bold text-primary text-2xl mb-6 text-center">
+        ¿Por Qué Nuestras Categorías?
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h4 class="font-display font-semibold text-primary text-lg mb-3">Variedad Premium</h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Nuestras 8 categorías principales cubren todas las necesidades de regalos personalizados. Cada producto 
+            es seleccionado por calidad, durabilidad y potencial creativo de personalización.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold text-primary text-lg mb-3">Opciones Ilimitadas</h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Dentro de cada categoría, tienes acceso a personalizaciones ilimitadas. Colores, tamaños, diseños, 
+            textos: tú eres quien decide cómo será tu regalo perfecto.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold text-primary text-lg mb-3">Para Cada Ocasión</h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Ya sea para cumpleaños, bodas, aniversarios, eventos corporativos o cualquier moment especial, 
+            en nuestras categorías encontrarás la solución ideal para celebrar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
