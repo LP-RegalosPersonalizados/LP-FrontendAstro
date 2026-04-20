@@ -1,0 +1,55 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import HeroEmpresarial from '../components/servicios-empresariales/HeroEmpresarial.astro';
+import BeneficiosEmpresa from '../components/servicios-empresariales/BeneficiosEmpresa.astro';
+import CasosExito from '../components/servicios-empresariales/CasosExito.astro';
+import ProductosB2B from '../components/servicios-empresariales/ProductosB2B.astro';
+import PlanesYPrecios from '../components/servicios-empresariales/PlanesYPrecios.astro';
+import ProcesoEmpresarial from '../components/servicios-empresariales/ProcesoEmpresarial.astro';
+import CronogramaProduccion from '../components/servicios-empresariales/CronogramaProduccion.astro';
+import PoliticasEmpresa from '../components/servicios-empresariales/PoliticasEmpresa.astro';
+import FAQEmpresarial from '../components/servicios-empresariales/FAQEmpresarial.astro';
+import CTAEmpresarial from '../components/servicios-empresariales/CTAEmpresarial.astro';
+---
+
+<MainLayout
+  title="Servicios Empresariales y Regalos Corporativos | Recuerdos Compartidos"
+  description="Soluciones de regalos corporativos personalizados. Desde 10 unidades hasta 1000+. Presupuestos sin costo, diseño ilimitado, entrega rápida."
+  keywords="regalos corporativos, regalos empresariales, obsequios personalizados, tazas personalizadas, llaveros, regalos por mayor"
+>
+  <!-- Hero Section -->
+  <HeroEmpresarial />
+
+  <!-- Benefits Section -->
+  <BeneficiosEmpresa />
+
+  <!-- Success Cases -->
+  <CasosExito maxItems={6} />
+
+  <!-- B2B Products -->
+  <ProductosB2B />
+
+  <!-- Pricing Plans -->
+  <PlanesYPrecios />
+
+  <!-- Business Process -->
+  <ProcesoEmpresarial />
+
+  <!-- Production Timeline -->
+  <CronogramaProduccion />
+
+  <!-- Policies -->
+  <PoliticasEmpresa />
+
+  <!-- FAQ -->
+  <FAQEmpresarial />
+
+  <!-- Final CTA -->
+  <CTAEmpresarial
+    title="¿Listo para Sorprender a tu Equipo?"
+    primaryCTA="Iniciar Consulta"
+    primaryURL="https://wa.me/59162699702"
+    secondaryCTA="Explorar Catálogo"
+    secondaryURL="/catalogo"
+  />
+</MainLayout>

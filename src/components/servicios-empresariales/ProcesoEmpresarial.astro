@@ -1,0 +1,173 @@
+---
+interface Step {
+  number: number;
+  title: string;
+  description: string;
+  icon: string;
+  color: 'accent' | 'energy';
+}
+
+interface Props {
+  steps?: Step[];
+}
+
+const defaultSteps: Step[] = [
+  {
+    number: 1,
+    title: 'Elección de Producto y Personalización',
+    description:
+      'Selecciona un producto del catálogo y personalízalo con una o varias imágenes según lo requiera.',
+    icon: '📦',
+    color: 'accent',
+  },
+  {
+    number: 2,
+    title: 'Confirmación de Diseño',
+    description:
+      'Revisamos el diseño juntos. Cambios ilimitados hasta tu conformidad.',
+    icon: '✏️',
+    color: 'energy',
+  },
+  {
+    number: 3,
+    title: 'Cotización',
+    description: 'Confirmamos el precio final y los detalles acordados.',
+    icon: '💰',
+    color: 'accent',
+  },
+  {
+    number: 4,
+    title: 'Realización del Pedido',
+    description:
+      'Posterior al depósito del 50%, iniciamos la producción con control de calidad.',
+    icon: '🏭',
+    color: 'energy',
+  },
+  {
+    number: 5,
+    title: 'Coordinación de Entrega',
+    description:
+      'Al terminar, coordinamos entrega (retiro en punto de entrega o envío externo).',
+    icon: '🚚',
+    color: 'accent',
+  },
+];
+
+const { steps = defaultSteps } = Astro.props;
+---
+
+<section
+  class="section-padding bg-gradient-to-br from-white to-business/3"
+  aria-labelledby="process-title"
+>
+  <div class="container-main">
+    <div class="text-center mb-16">
+      <h2 id="process-title" class="font-display text-4xl font-bold text-primary mb-3">
+        Nuestro Proceso Empresarial
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        5 pasos claros desde tu idea hasta la entrega final de tus regalos corporativos.
+      </p>
+    </div>
+
+    <!-- Desktop: Timeline Horizontal -->
+    <div class="hidden md:block">
+      <div class="relative">
+        <!-- Línea conectora -->
+        <div class="absolute top-8 left-0 right-0 h-1 bg-neutral-light/50 z-0"></div>
+
+        <!-- Steps -->
+        <div class="grid grid-cols-5 gap-4 relative z-10">
+          {steps.map((step, idx) => (
+            <div class="flex flex-col items-center">
+              <!-- Círculo con número -->
+              <div
+                class={`w-16 h-16 rounded-full flex items-center justify-center font-mono text-2xl font-bold text-white mb-4 ${
+                  step.color === 'accent' ? 'bg-accent' : 'bg-energy'
+                }`}
+              >
+                {step.number}
+              </div>
+
+              <!-- Ícono -->
+              <div class="text-4xl mb-3">{step.icon}</div>
+
+              <!-- Título -->
+              <h3 class="font-display text-lg font-semibold text-primary text-center mb-2">
+                {step.title}
+              </h3>
+
+              <!-- Descripción -->
+              <p class="text-sm text-gray-600 text-center leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile: Timeline Vertical -->
+    <div class="md:hidden space-y-6">
+      {steps.map((step, idx) => (
+        <div class="flex gap-4">
+          <!-- Línea vertical -->
+          <div class="flex flex-col items-center">
+            <div
+              class={`w-12 h-12 rounded-full flex items-center justify-center font-mono font-bold text-white mb-2 ${
+                step.color === 'accent' ? 'bg-accent' : 'bg-energy'
+              }`}
+            >
+              {step.number}
+            </div>
+            {idx < steps.length - 1 && <div class="w-1 h-12 bg-neutral-light/50"></div>}
+          </div>
+
+          <!-- Contenido -->
+          <div class="pb-4">
+            <div class="text-3xl mb-2">{step.icon}</div>
+            <h3 class="font-display text-lg font-semibold text-primary mb-1">
+              {step.title}
+            </h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes slideInStep {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  div[class*='grid-cols-5'] > div {
+    animation: slideInStep 0.6s ease-out forwards;
+  }
+
+  div[class*='grid-cols-5'] > div:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  div[class*='grid-cols-5'] > div:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  div[class*='grid-cols-5'] > div:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  div[class*='grid-cols-5'] > div:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  div[class*='grid-cols-5'] > div:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+</style>

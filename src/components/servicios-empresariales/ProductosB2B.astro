@@ -1,0 +1,136 @@
+---
+interface Product {
+  name: string;
+  icon: string;
+  description: string;
+  minOrder: string;
+  customizable: boolean;
+}
+
+interface Props {
+  products?: Product[];
+}
+
+const defaultProducts: Product[] = [
+  {
+    name: 'Tazas Cerámicas',
+    icon: '☕',
+    description: 'Tazas de cerámica de alta calidad, perfectas para café o té personalizados con tu logo.',
+    minOrder: '10 unidades',
+    customizable: true,
+  },
+  {
+    name: 'Tazas Metálicas',
+    icon: '🥤',
+    description: 'Tazas de acero inoxidable, aislantes térmica, ideales para bebidas calientes o frías.',
+    minOrder: '20 unidades',
+    customizable: true,
+  },
+  {
+    name: 'Llaveros Personalizados',
+    icon: '🔑',
+    description: 'Llaveros con foto o texto. Accesorios prácticos que crean recordación.',
+    minOrder: '50 unidades',
+    customizable: true,
+  },
+  {
+    name: 'Packs Especiales',
+    icon: '🎁',
+    description: 'Combinaciones personalizadas de múltiples productos en cajas temáticas.',
+    minOrder: '10 cajas',
+    customizable: true,
+  },
+];
+
+const { products = defaultProducts } = Astro.props;
+---
+
+<section class="section-padding bg-white">
+  <div class="container-main">
+    <div class="text-center mb-16">
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
+        Productos Disponibles para Empresas
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Amplia variedad de productos 100% personalizables. Todos con soporte de cambios ilimitados.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {products.map((product, idx) => (
+        <div
+          class="p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl border border-neutral-light hover:border-accent hover:shadow-lg transition-all duration-300"
+          style={{
+            animationDelay: `${idx * 0.1}s`,
+          }}
+        >
+          {/* Icon */}
+          <div class="text-5xl mb-4">{product.icon}</div>
+
+          {/* Name */}
+          <h3 class="font-display text-lg font-bold text-primary mb-2">
+            {product.name}
+          </h3>
+
+          {/* Description */}
+          <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+            {product.description}
+          </p>
+
+          {/* Min Order */}
+          <div class="py-3 border-t border-neutral-light mb-3">
+            <p class="text-xs text-gray-500 mb-1">Pedido Mínimo</p>
+            <p class="font-mono text-sm font-bold text-accent">
+              {product.minOrder}
+            </p>
+          </div>
+
+          {/* Customizable badge */}
+          {product.customizable && (
+            <div class="inline-block px-3 py-1 bg-success/10 text-success text-xs font-semibold rounded-full">
+              ✓ Personalizable
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    {/* Additional info */}
+    <div class="mt-16 pt-12 border-t border-neutral-light">
+      <div class="bg-gradient-to-r from-business/10 to-energy/10 p-8 rounded-xl">
+        <h3 class="font-display text-2xl font-bold text-primary mb-3">
+          ¿No encontraste lo que buscas?
+        </h3>
+        <p class="text-gray-600 mb-4">
+          Podemos personalizar otros productos según tus necesidades específicas. Consulta sin compromiso.
+        </p>
+        <a
+          href="https://wa.me/59162699702"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block px-6 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300"
+        >
+          Consultar Producto Personalizado
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  div[style] {
+    animation: slideInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

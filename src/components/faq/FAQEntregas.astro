@@ -1,0 +1,83 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items?: FAQItem[];
+}
+
+const defaultItems: FAQItem[] = [
+  {
+    question: '¿Cuánto tarda en llegar mi pedido?',
+    answer: 'Depende del volumen: 10-50 unidades (2-3 días), 50-100 unidades (7 días), 100+ unidades (cronograma personalizado).',
+  },
+  {
+    question: '¿Hacen entregas a todo el país?',
+    answer: 'Sí, realizamos entregas a todo Bolivia. El costo varía según destino. También puedes retirar en nuestro punto en Santa Cruz.',
+  },
+  {
+    question: '¿Cuál es el costo de envío?',
+    answer: 'Depende del destino y peso. Cotizamos sin compromiso. Retiro en Santa Cruz no tiene costo adicional.',
+  },
+  {
+    question: '¿Cómo se envasan los productos?',
+    answer: 'En embalaje de calidad que protege el contenido. Productos frágiles reciben protección especial.',
+  },
+  {
+    question: '¿Puedo elegir fecha de entrega?',
+    answer: 'Coordinamos según tu disponibilidad. Nos comunicamos 48 horas antes para confirmar detalles finales.',
+  },
+  {
+    question: '¿Qué hago si me llega dañado?',
+    answer: 'Reporta dentro de 24 horas. Defectos de fabricación serán reemplazados sin costo. Guarda fotos como evidencia.',
+  },
+];
+
+const { items = defaultItems } = Astro.props;
+---
+
+<div class="space-y-4">
+  {items.map((item, idx) => (
+    <details
+      class="group p-6 bg-white rounded-lg border border-neutral-light hover:border-accent cursor-pointer transition-all duration-300"
+      style={{
+        animationDelay: `${idx * 0.05}s`,
+      }}
+    >
+      <summary class="flex items-center justify-between font-semibold text-primary hover:text-accent transition-colors">
+        <span class="text-lg">{item.question}</span>
+        <span class="text-2xl group-open:rotate-180 transition-transform duration-300">+</span>
+      </summary>
+      <p class="mt-4 text-gray-600 leading-relaxed border-t border-neutral-light pt-4">
+        {item.answer}
+      </p>
+    </details>
+  ))}
+</div>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] summary {
+    color: theme('colors.accent.DEFAULT');
+  }
+
+  details[open] p {
+    animation: slideInUp 0.3s ease-out;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

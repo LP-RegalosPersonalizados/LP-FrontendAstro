@@ -21,6 +21,27 @@ export default {
           dark: '#b87e18',
         },
         'neutral-light': '#DAD9D7',
+        business: {
+          DEFAULT: '#0d3f2a',
+          light: '#1a5c40',
+        },
+        energy: {
+          DEFAULT: '#99D98E',
+          light: '#a8e599',
+          dark: '#6ab563',
+        },
+        information: {
+          DEFAULT: '#4B7BA7',
+          light: '#6496c0',
+        },
+        trust: {
+          DEFAULT: '#6B7280',
+          light: '#9CA3AF',
+        },
+        success: {
+          DEFAULT: '#10B981',
+          light: '#34D399',
+        },
       },
       fontFamily: {
         display: ['"Playfair Display"', 'Georgia', 'serif'],

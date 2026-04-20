@@ -4,7 +4,7 @@ const year = new Date().getFullYear();
 
 <footer class="bg-primary text-white" role="contentinfo">
   <div class="container-main py-14">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
       <!-- Brand -->
       <div>
         <a href="/" class="flex items-center gap-2 mb-4 group" aria-label="Inicio">
@@ -43,8 +43,8 @@ const year = new Date().getFullYear();
           <ul class="space-y-2.5">
             {[
               { href: '/catalogo', label: 'Catálogo General' },
-              { href: '/empresas', label: 'Para Empresas' },
-              { href: '/trabajos-previos', label: 'Trabajos Previos' },
+              { href: '/servicios-empresariales', label: 'Para Empresas' },
+              { href: '/faq', label: 'Preguntas Frecuentes' },
               { href: 'https://wa.me/59162699702', label: 'Contacto por WhatsApp', external: true },
             ].map(({ href, label, external }) => (
               <li>
@@ -52,6 +52,29 @@ const year = new Date().getFullYear();
                   href={href}
                   target={external ? '_blank' : undefined}
                   rel={external ? 'noopener noreferrer' : undefined}
+                  class="text-white/70 hover:text-secondary text-sm transition-colors duration-200"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="font-display font-semibold text-lg mb-4">Legal</h3>
+        <nav aria-label="Links legales del footer">
+          <ul class="space-y-2.5">
+            {[
+              { href: '/legal#privacidad', label: 'Privacidad' },
+              { href: '/legal#terminos', label: 'Términos' },
+              { href: '/legal#entregas', label: 'Entregas' },
+            ].map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
                   class="text-white/70 hover:text-secondary text-sm transition-colors duration-200"
                 >
                   {label}

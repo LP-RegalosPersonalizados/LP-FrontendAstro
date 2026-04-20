@@ -1,0 +1,83 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items?: FAQItem[];
+}
+
+const defaultItems: FAQItem[] = [
+  {
+    question: '¿Cómo funciona el pago?',
+    answer: '50% al confirmar el pedido (anticipo), 50% restante antes de la entrega. Así aseguramos el compromiso mutuo.',
+  },
+  {
+    question: '¿Qué formas de pago aceptan?',
+    answer: 'Transferencia bancaria y depósito en efectivo. Puedes consultar por otros métodos según disponibilidad.',
+  },
+  {
+    question: '¿Puedo pagar todo de una vez?',
+    answer: 'Claro, si prefieres pagar el 100% al confirmar también lo aceptamos. Consulta sin compromiso.',
+  },
+  {
+    question: '¿Cuánto tiempo es válido un presupuesto?',
+    answer: 'Los presupuestos son válidos por 7 días calendario. Después de ese tiempo se requiere actualización.',
+  },
+  {
+    question: '¿Hay recargo por volúmenes muy grandes?',
+    answer: 'No, para volúmenes grandes ofrecemos descuentos. A mayor cantidad, mejor precio unitario.',
+  },
+  {
+    question: '¿Puedo solicitar factura?',
+    answer: 'Claro. Emitimos factura formal para todos los pedidos corporativos. Consulta los requisitos.',
+  },
+];
+
+const { items = defaultItems } = Astro.props;
+---
+
+<div class="space-y-4">
+  {items.map((item, idx) => (
+    <details
+      class="group p-6 bg-white rounded-lg border border-neutral-light hover:border-accent cursor-pointer transition-all duration-300"
+      style={{
+        animationDelay: `${idx * 0.05}s`,
+      }}
+    >
+      <summary class="flex items-center justify-between font-semibold text-primary hover:text-accent transition-colors">
+        <span class="text-lg">{item.question}</span>
+        <span class="text-2xl group-open:rotate-180 transition-transform duration-300">+</span>
+      </summary>
+      <p class="mt-4 text-gray-600 leading-relaxed border-t border-neutral-light pt-4">
+        {item.answer}
+      </p>
+    </details>
+  ))}
+</div>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] summary {
+    color: theme('colors.accent.DEFAULT');
+  }
+
+  details[open] p {
+    animation: slideInUp 0.3s ease-out;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
