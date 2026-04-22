@@ -5,26 +5,6 @@
  */
 import SectionTitle from '../ui/SectionTitle.astro';
 
-const beneficios = [
-  {
-    icon: '✨',
-    title: '100% Personalizable',
-    description:
-      'Cada regalo es 100% personalizable. Tu diseño, tu mensaje, tu estilo único. Desde el color hasta el tamaño, tú decides. Ofrecemos infinitas posibilidades de personalización sin límites de creatividad para que el regalo sea exactamente como lo imaginaste.',
-  },
-  {
-    icon: '🏆',
-    title: 'Calidad Premium Garantizada',
-    description:
-      'Cada producto que sale de nuestro taller es resultado de nuestra pasión por la excelencia. Creemos que los detalles importan, por eso en Recuerdos Compartidos, cada regalo es único, especial y hecho con amor.',
-  },
-  {
-    icon: '🏢',
-    title: 'Soluciones Empresariales',
-    description:
-      'Somos tu mejor opción para regalos corporativos y merchandise personalizado. Ofrecemos descuentos especiales en pedidos al por mayor, diseños ajustados a tu marca y entregas estratégicas para eventos y campañas empresariales.',
-  },
-];
 ---
 
 <section
@@ -44,24 +24,6 @@ const beneficios = [
         de alta calidad en Santa Cruz, Bolivia. Nuestro compromiso es transformar tus ideas en realidad con 
         <strong>profesionalismo, creatividad y atención al detalle</strong>.
       </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
-      {
-        beneficios.map(({ icon, title, description }) => (
-          <div class="card p-6 text-center group hover:-translate-y-1 transition-all duration-300">
-            <div class="text-5xl mb-4" aria-hidden="true">
-              {icon}
-            </div>
-            <h3 class="font-display font-semibold text-primary text-lg mb-3">
-              {title}
-            </h3>
-            <p class="text-gray-500 text-sm leading-relaxed">
-              {description}
-            </p>
-          </div>
-        ))
-      }
     </div>
 
     <!-- Contenido adicional SEO -->
@@ -91,15 +53,15 @@ const beneficios = [
           </p>
         </div>
         <div>
-          <h4 class="font-display font-semibold text-primary text-lg mb-3 flex items-center gap-2">
-            <span class="text-accent text-xl">✓</span>
-            Garantía de Calidad: A ANALIZAR
-          </h4>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Si el producto no cumple con tus expectativas, ofrecemos cambios sin costo. Queremos que estés 100% satisfecho 
-            con tu compra. La calidad es nuestro compromiso garantizado.
-          </p>
-        </div>
+  <h4 class="font-display font-semibold text-primary text-lg mb-3 flex items-center gap-2">
+    <span class="text-accent text-xl">✓</span>
+    Experiencia Personalizada
+  </h4>
+  <p class="text-gray-600 text-sm leading-relaxed">
+    Nos enfocamos en brindarte una atención cercana y adaptada a tus necesidades, para que disfrutes de una experiencia de compra 
+    cómoda, agradable y hecha a tu medida. Cada detalle está pensado para que te sientas bien en todo momento.
+  </p>
+</div>
         <div>
           <h4 class="font-display font-semibold text-primary text-lg mb-3 flex items-center gap-2">
             <span class="text-accent text-xl">✓</span>

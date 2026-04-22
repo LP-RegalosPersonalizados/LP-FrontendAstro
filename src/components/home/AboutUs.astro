@@ -10,32 +10,19 @@ import SectionTitle from '../ui/SectionTitle.astro';
 
 <section class="section-padding bg-white" aria-labelledby="about-title">
   <div class="container-main">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <!-- Imagen del taller -->
-      <div class="relative animate-fade-in-up">
-        <img
-          src="/images/taller.jpg"
-          alt="Nuestro taller de Recuerdos Compartidos en Santa Cruz de la Sierra"
-          class="rounded-2xl max-w-[600px] object-cover aspect-[4/3] shadow-card"
-        />
-        <!-- Decoración flotante -->
-        <div
-          class="absolute -bottom-4 -right-4 bg-accent text-white p-4 rounded-xl shadow-lg flex items-center justify-center w-16 h-16"
-          aria-hidden="true"
-        >
-          <span class="text-3xl">🎨</span>
-        </div>
-      </div>
-
-      <!-- Texto - Contenido SEO -->
+    <div class="max-w-3xl mx-auto">
+      <!-- Texto - Contenido SEO Centrado -->
       <div class="animate-fade-in-up">
-        <SectionTitle
-          title="Sobre Recuerdos Compartidos"
-          subtitle="Creando momentos que perduran en el tiempo"
-          accentColor="primary"
-        />
+        <div class="text-center mb-12">
+          <SectionTitle
+            title="Sobre Recuerdos Compartidos"
+            subtitle="Creando momentos que perduran en el tiempo"
+            accentColor="primary"
+            align="center"
+          />
+        </div>
 
-        <div class="space-y-6 text-gray-600 leading-relaxed">
+        <div class="space-y-6 text-gray-600 leading-relaxed text-center">
           <p>
             Somos <strong>Recuerdos Compartidos</strong>, una empresa local de <strong>Santa Cruz de la Sierra, Bolivia</strong> dedicada a crear <strong>regalos personalizados únicos y memorables</strong>. Nos especializamos en transformar tus momentos especiales en objetos tangibles que perduran en el tiempo.
           </p>
@@ -53,12 +40,12 @@ import SectionTitle from '../ui/SectionTitle.astro';
           </p>
         </div>
 
-        <div class="flex flex-wrap gap-4 mt-10">
-          <a href="/catalogo" class="btn-primary py-3 px-6 text-base">
-            Explorar Catálogo
+        <div class="flex flex-wrap justify-center gap-4 mt-12">
+          <a href="/faq" class="btn-primary py-3 px-6 text-base">
+            Preguntas Frecuentes
           </a>
-          <a href="https://wa.me/59162699702" target="_blank" rel="noopener noreferrer" class="btn-outline py-3 px-6 text-base">
-            Contáctanos por WhatsApp
+          <a href="/legal" class="btn-outline py-3 px-6 text-base">
+            Términos y Políticas
           </a>
         </div>
       </div>

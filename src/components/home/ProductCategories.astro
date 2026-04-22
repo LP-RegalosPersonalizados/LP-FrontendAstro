@@ -4,54 +4,60 @@
  * Grid de categorías de productos con contenido descriptivo SEO
  */
 import SectionTitle from '../ui/SectionTitle.astro';
+import { products } from '../../data/products';
+
+// Obtener primera imagen de cada categoría
+const getFirstImageByCategory = (category: string) => {
+  const product = products.find(p => {
+    if (category === 'tazas-magicas') return p.category === 'tazas' && p.name.includes('Cerámica');
+    if (category === 'tazas-metalicas') return p.category === 'tazas' && p.name.includes('Metálica');
+    if (category === 'albumes') return p.category === 'albumes';
+    if (category === 'canvas') return p.category === 'cuadros';
+    if (category === 'packs') return p.category === 'festivos';
+    return false;
+  });
+  return product?.image || `/images/categorias/${category}.jpg`;
+};
 
 const categorias = [
   {
     nombre: 'Tazas Mágicas',
     descripcion: 'Tazas térmicas que revelan imágenes al calentarse. Personalizadas 100% con tus fotos. Perfectas para café, té o bebidas frías. Regalo ideal para oficina, hogar o empresa.',
-    imagen: '/images/categorias/tazas-magicas.jpg',
     slug: 'tazas-magicas',
   },
   {
     nombre: 'Tazas Metálicas',
     descripcion: 'Tazas de acero inoxidable con impresión personalizada. Ideales para mantener bebidas calientes. Resistentes y duraderas. Excelentes para regalos corporativos y promocionales.',
-    imagen: '/images/categorias/tazas-metalicas.jpg',
     slug: 'tazas-metalicas',
   },
   {
     nombre: 'Álbumes de Fotos',
     descripcion: 'Álbumes artesanales con tus fotos impresas. Desde diseños clásicos hasta modernos. Perfectos para guardar recuerdos de bodas, cumpleaños, viajes y momentos especiales en familia.',
-    imagen: '/images/categorias/albumes.jpg',
     slug: 'albumes',
   },
   {
     nombre: 'Cuadros Canvas',
     descripcion: 'Cuadros de lona personalizados con tus imágenes preferidas. Ideal para decoración del hogar, oficina o como regalo especial. Múltiples tamaños y opciones de acabado.',
-    imagen: '/images/categorias/canvas.jpg',
     slug: 'canvas',
   },
   {
     nombre: 'Llaveros Personalizados',
     descripcion: 'Llaveros únicos con foto e impresión personalizada. Compactos y portátiles. Regalo perfecto para amigos, colegas o como souvenirs para eventos especiales.',
-    imagen: '/images/categorias/llaveros.jpg',
     slug: 'llaveros',
   },
   {
     nombre: 'Alcancias Personalizadas',
     descripcion: 'Alcancias decorativas con diseño personalizado. Combinan funcionalidad y estética. Perfectas como regalo para niños, adultos o como elemento decorativo único en el hogar.',
-    imagen: '/images/categorias/alcancias.jpg',
     slug: 'alcancias',
   },
   {
     nombre: 'Packs Especiales',
     descripcion: 'Combina múltiples productos en packs temáticos. Regalos completos y coordinados para ocasiones especiales como cumpleaños, aniversarios o sorpresas corporativas.',
-    imagen: '/images/categorias/packs.jpg',
     slug: 'packs',
   },
   {
     nombre: 'Regalos Corporativos',
     descripcion: 'Soluciones personalizadas para empresas. Merchandise con tu logo, regalos para clientes y empleados. Descuentos por volumen y diseños estratégicos para tu marca.',
-    imagen: '/images/categorias/corporativos.jpg',
     slug: 'empresas',
   },
 ];
@@ -75,14 +81,14 @@ const categorias = [
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
       {
-        categorias.map(({ nombre, descripcion, imagen, slug }) => (
+        categorias.map(({ nombre, descripcion, slug }) => (
           <a
             href={`/catalogo#${slug}`}
             class="group relative overflow-hidden rounded-xl aspect-square shadow-card hover:shadow-card-hover transition-all duration-300"
             aria-label={`Ver categoría: ${nombre}. ${descripcion}`}
           >
             <img
-              src={imagen}
+              src={getFirstImageByCategory(slug)}
               alt={nombre}
               class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
               loading="lazy"
