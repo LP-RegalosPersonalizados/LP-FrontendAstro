@@ -9,25 +9,25 @@ const stats = [
     numero: '5+',
     label: 'Años en el Mercado',
     descripcion: 'Más de 5 años de experiencia creando regalos personalizados en Santa Cruz de la Sierra',
-    emoji: '📅',
+    icon: 'calendar',
   },
   {
     numero: '8',
     label: 'Categorías de Productos',
     descripcion: 'Ofrecemos un portafolio completo de regalos personalizados para todas las ocasiones',
-    emoji: '📦',
+    icon: 'cube',
   },
   {
     numero: '2000+',
     label: 'Productos Entregados',
     descripcion: 'Miles de regalos personalizados satisfaciendo clientes en todo Santa Cruz y Bolivia',
-    emoji: '🎁',
+    icon: 'gift',
   },
   {
     numero: '24h',
     label: 'Respuesta Rápida',
     descripcion: 'Atención personalizada disponible por WhatsApp en menos de 24 horas',
-    emoji: '⚡',
+    icon: 'bolt',
   },
 ];
 ---
@@ -46,10 +46,29 @@ const stats = [
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 stagger-children">
       {
-        stats.map(({ numero, label, descripcion, emoji }) => (
+        stats.map(({ numero, label, descripcion, icon }) => (
           <div class="text-center group hover:-translate-y-1 transition-all duration-300">
-            <div class="text-5xl md:text-6xl mb-3" aria-hidden="true">
-              {emoji}
+            <div class="flex justify-center mb-3">
+              {icon === 'calendar' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary" aria-hidden="true">
+                  <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12zM12 15h.008v.008H12zm0 2.25h.008v.008H12zM9.75 15h.008v.008H9.75zm0 2.25h.008v.008H9.75zM7.5 15h.008v.008H7.5zm0 2.25h.008v.008H7.5zm6.75-4.5h.008v.008h-.008zm0 2.25h.008v.008h-.008zm0 2.25h.008v.008h-.008zm2.25-4.5h.008v.008H16.5zm0 2.25h.008v.008H16.5z" />
+                </svg>
+              )}
+              {icon === 'cube' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary" aria-hidden="true">
+                  <path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 3h6m-3-3v6" />
+                </svg>
+              )}
+              {icon === 'gift' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="currentColor" class="text-secondary" aria-hidden="true">
+                  <path d="M7 20q-1.25 0-2.125-.875T4 17H1.5l.45-2h2.825q.425-.475 1-.737T7 14t1.225.263t1 .737H13.4l2.1-9H4.55l.1-.425q.15-.7.687-1.137T6.6 4H18l-.925 4H20l3 4l-1 5h-2q0 1.25-.875 2.125T17 20t-2.125-.875T14 17h-4q0 1.25-.875 2.125T7 20m8.925-7h4.825l.1-.525L19 10h-2.375zm-.475-6.825L15.5 6l-2.1 9l.05-.175l.85-3.65zM.5 13.325l.5-2h5.5l-.5 2zm2-3.65l.5-2h6.5l-.5 2zM7 18q.425 0 .713-.288T8 17t-.288-.712T7 16t-.712.288T6 17t.288.713T7 18m10 0q.425 0 .713-.288T18 17t-.288-.712T17 16t-.712.288T16 17t.288.713T17 18" />
+                </svg>
+              )}
+              {icon === 'bolt' && (
+                <svg class="w-12 h-12 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              )}
             </div>
             <div class="font-display font-bold text-4xl md:text-5xl text-secondary mb-2">
               {numero}
