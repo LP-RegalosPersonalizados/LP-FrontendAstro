@@ -1,0 +1,31 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import ProductCard from '../productos/ProductCard';
+
+interface Props {
+  products: any[];
+}
+
+const { products } = Astro.props;
+---
+
+<!-- ============ FEATURED PRODUCTS ============ -->
+<section class="section-padding" aria-labelledby="destacados-title">
+  <div class="container-main">
+    <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
+      <SectionTitle
+        title="Productos Destacados"
+        subtitle="Los más elegidos por nuestros clientes"
+        align="left"
+      />
+      <a href="/catalogo" class="btn-outline text-sm py-2.5 shrink-0">
+        Ver catálogo completo →
+      </a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
+      {products.map((product) => (
+        <ProductCard product={product} client:visible />
+      ))}
+    </div>
+  </div>
+</section>

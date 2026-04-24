@@ -1,8 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import SectionTitle from '../components/ui/SectionTitle.astro';
-import ProductCard from '../components/productos/ProductCard';
-import ProductCarousel from '../components/home/ProductCarousel';
+import Hero from '../components/home/Hero.astro';
+import FeaturedProducts from '../components/home/FeaturedProducts.astro';
 import AboutUs from '../components/home/AboutUs.astro';
 import WhyChooseUs from '../components/home/WhyChooseUs.astro';
 import ProductCategories from '../components/home/ProductCategories.astro';
@@ -25,74 +24,10 @@ const featuredProducts = getFeaturedProducts();
   ogImage="/og-image.png"
 >
   <!-- ============ HERO ============ -->
-  <section
-    class="relative min-h-[90vh] bg-primary overflow-hidden flex items-center"
-    aria-label="Sección principal"
-  >
-    <!-- Background decoration -->
-    <div class="absolute inset-0 bg-texture opacity-30" aria-hidden="true"></div>
-    <div class="absolute -top-24 -right-24 w-96 h-96 bg-accent/20 rounded-full blur-3xl" aria-hidden="true"></div>
-    <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" aria-hidden="true"></div>
+  <Hero products={featuredProducts} />
 
-    <div class="container-main relative z-10 py-10">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-        <!-- Copy -->
-        <div class="animate-fade-in-up">
-          <span class="inline-flex items-center gap-1.5 bg-accent/20 text-accent text-sm font-medium px-4 py-1.5 rounded-full mb-6 border border-accent/30">
-            <span class="w-2 h-2 bg-accent rounded-full inline-block"></span>
-            Regalos que se recuerdan
-          </span>
-          <h1 class="font-display font-bold text-white text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
-            Regalos Personalizados para
-            <span class="text-secondary"> Momentos Especiales</span>
-          </h1>
-          <p class="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
-            Tazas mágicas, álbumes de fotos, cuadros canvas y más. Cada regalo es único, creado especialmente para vos o para tu empresa.
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <a
-              href="/catalogo"
-              class="btn-accent text-base px-8 py-4"
-              aria-label="Ver catálogo de regalos personalizados"
-            >
-              Quiero un Regalo Único
-            </a>
-            <a
-              href="/empresas"
-              class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-8 py-4 rounded-full transition-all duration-300 text-base border border-white/20"
-              aria-label="Ver catálogo para empresas"
-            >
-              Para mi Empresa →
-            </a>
-          </div>
-        </div>
-
-        <!-- Hero Carousel -->
-        <ProductCarousel client:load products={featuredProducts} />
-      </div>
-    </div>
-  </section>
-
-    <!-- ============ FEATURED PRODUCTS ============ -->
-  <section class="section-padding" aria-labelledby="destacados-title">
-    <div class="container-main">
-      <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
-        <SectionTitle
-          title="Productos Destacados"
-          subtitle="Los más elegidos por nuestros clientes"
-          align="left"
-        />
-        <a href="/catalogo" class="btn-outline text-sm py-2.5 shrink-0">
-          Ver catálogo completo →
-        </a>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
-        {featuredProducts.map((product) => (
-          <ProductCard product={product} client:visible />
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- ============ FEATURED PRODUCTS ============ -->
+  <FeaturedProducts products={featuredProducts} />
 
     <!-- ============ WHY CHOOSE US ============ -->
   <WhyChooseUs />
