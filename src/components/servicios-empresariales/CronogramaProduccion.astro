@@ -12,19 +12,19 @@ interface Props {
 
 const defaultItems: Timeline[] = [
   {
-    range: '10-50 unidades',
-    days: '2-3 días',
+    range: '4-24 unidades',
+    days: '1-2 días',
     description: 'Perfecta para pequeños regalos corporativos o muestras de producto.',
     color: 'energy',
   },
   {
-    range: '50-100 unidades',
-    days: '7 días',
+    range: '25-50 unidades',
+    days: '3-4 días',
     description: 'Ideal para regalos a colaboradores o clientes medianos.',
     color: 'accent',
   },
   {
-    range: '100+ unidades',
+    range: '50+ unidades',
     days: 'A consultar',
     description: 'Proyectos grandes con cronogramas personalizados según tu necesidad.',
     color: 'information',
@@ -44,7 +44,7 @@ const colorMap = {
   <div class="container-main">
     <div class="text-center mb-16">
       <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
-        Cronograma de Producción
+        Tiempos de Producción
       </h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
         Entrega rápida según el volumen de tu pedido. Nunca más de 7 días.
@@ -124,7 +124,7 @@ const colorMap = {
     <div class="mt-12 pt-8 border-t border-neutral-light">
       <div class="bg-information/10 border-l-4 border-information p-6 rounded-lg">
         <p class="text-information font-semibold mb-2">
-          ⏰ Nota importante:
+           Nota importante:
         </p>
         <p class="text-gray-700">
           Los tiempos mencionados comienzan tras la confirmación y depósito del 50% del monto total. Proyectos muy complejos podrían requerir cronogramas personalizados.

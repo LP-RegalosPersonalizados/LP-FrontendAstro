@@ -11,7 +11,7 @@ const { maxItems = 6, items = trabajos.slice(0, maxItems) } = Astro.props;
 const worksByCategory = trabajos.filter(t => t.category === 'Corporativo').slice(0, maxItems);
 ---
 
-<section class="section-padding bg-gradient-to-br from-gray-50 to-white">
+<section class="section-padding bg-gradient-to-br from-gray-50 to-white" id="casos-exito">
   <div class="container-main">
     <div class="text-center mb-16">
       <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
@@ -73,17 +73,26 @@ const worksByCategory = trabajos.filter(t => t.category === 'Corporativo').slice
 
     <!-- Bottom CTA -->
     <div class="mt-16 pt-12 border-t border-neutral-light text-center">
-      <p class="text-gray-600 mb-4 text-lg">
+      <p class="text-gray-600 mb-6 text-lg">
         ¿Listo para ser parte de nuestros casos de éxito?
       </p>
-      <a
-        href="https://wa.me/59162699702"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-block px-8 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300"
-      >
-        Solicitar Información
-      </a>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/trabajos-previos"
+          class="inline-block px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+          aria-label="Ver galería completa de casos de éxito"
+        >
+          Ver Casos de Éxito Completo →
+        </a>
+        <a
+          href="https://wa.me/59162699702"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block px-8 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300"
+        >
+          Solicitar Información
+        </a>
+      </div>
     </div>
   </div>
 </section>
