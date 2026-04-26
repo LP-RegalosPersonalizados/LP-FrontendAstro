@@ -14,20 +14,20 @@ interface Props {
 
 const defaultPlans: Plan[] = [
   {
-    name: 'Small',
-    range: '10-50 unidades',
+    name: 'Minimo',
+    range: '1-5 unidades',
     pricePerUnit: '$X-XX',
     features: [
       { label: 'Diseño personalizado', included: true },
       { label: 'Revisiones ilimitadas', included: true },
-      { label: 'Soporte prioritario', included: false },
+      { label: 'Soporte prioritario', included: true },
       { label: 'Descuento por volumen', included: false },
     ],
     cta: 'Solicitar Presupuesto',
   },
   {
-    name: 'Medium',
-    range: '50-200 unidades',
+    name: 'Medio',
+    range: '6-24 unidades',
     pricePerUnit: '$X-XX',
     features: [
       { label: 'Diseño personalizado', included: true },
@@ -59,10 +59,10 @@ const { plans = defaultPlans } = Astro.props;
   <div class="container-main">
     <div class="text-center mb-16">
       <h2 id="pricing-title" class="font-display text-4xl font-bold text-primary mb-3">
-        Planes de Precios por Volumen
+        Descuentos por Volumen
       </h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
-        Precios especiales según la cantidad de unidades. Mayor volumen, mejor precio.
+        Descuentos especiales según la cantidad de unidades. Mayor volumen, mejor precio.
       </p>
     </div>
 
