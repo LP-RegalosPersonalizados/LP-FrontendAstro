@@ -1,0 +1,54 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import GaleriaTrabajos from '../components/trabajos/GaleriaTrabajos.astro';
+import { trabajos } from '../data/trabajos';
+---
+
+<MainLayout
+  title="Casos de Éxito y Trabajos Previos | Recuerdos Compartidos"
+  description="Galería completa de nuestros casos de éxito. Proyectos corporativos, educativos y personalizados realizados con éxito."
+  keywords="casos de éxito, trabajos previos, galerías de proyectos, regalos corporativos realizados, portafolio de trabajos"
+>
+  <!-- Header Section -->
+  <section class="bg-gradient-to-b from-primary/5 to-transparent pt-24 pb-12">
+    <div class="container-main">
+      <div class="text-center mb-4">
+        <a
+          href="/servicios-empresariales#casos-exito"
+          class="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors text-sm font-medium mb-6"
+          aria-label="Volver a servicios empresariales"
+        >
+          ← Volver a Servicios Empresariales
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section-padding">
+    <div class="container-main">
+      <GaleriaTrabajos items={trabajos} showTitle={true} />
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bg-gradient-to-br from-primary to-primary/80 text-white py-16">
+    <div class="container-main text-center">
+      <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">
+        ¿Tu empresa es el siguiente caso de éxito?
+      </h2>
+      <p class="text-white/80 mb-8 text-lg max-w-2xl mx-auto">
+        Contáctanos para conocer más sobre nuestros servicios personalizados y presupuestos sin costo.
+      </p>
+      <a
+        href="https://wa.me/59162699702"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-8 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300 hover:scale-105"
+      >
+        Solicitar Información
+      </a>
+    </div>
+  </section>
+
+</MainLayout>
