@@ -1,0 +1,89 @@
+---
+import type { Trabajo } from '../../data/trabajos';
+import { trabajos } from '../../data/trabajos';
+
+interface Props {
+  items?: Trabajo[];
+  showTitle?: boolean;
+}
+
+const { items = trabajos, showTitle = true } = Astro.props;
+---
+
+{showTitle && (
+  <div class="text-center mb-16">
+    <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
+      Galería de Casos de Éxito
+    </h2>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+      Descubre todos los proyectos que hemos realizado. Empresas y clientes que confiaron en nosotros. Resultados que hablan por sí solos.
+    </p>
+  </div>
+)}
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {items.map((caso, idx) => (
+    <div
+      class="group bg-white rounded-xl overflow-hidden border border-neutral-light hover:border-accent hover:shadow-xl transition-all duration-300"
+      style={{
+        animationDelay: `${idx * 0.1}s`,
+      }}
+    >
+      <!-- Image -->
+      {caso.image && (
+        <div class="relative h-56 overflow-hidden bg-gray-200">
+          <img
+            src={caso.image}
+            alt={caso.title}
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+        </div>
+      )}
+
+      <!-- Content -->
+      <div class="p-6">
+        {caso.category && (
+          <p class="text-sm font-semibold text-accent mb-2">
+            {caso.category}
+          </p>
+        )}
+
+        <h3 class="font-display text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+          {caso.title}
+        </h3>
+
+        {caso.description && (
+          <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+            {caso.description}
+          </p>
+        )}
+
+        <!-- Quantity badge -->
+        {caso.quantity && (
+          <div class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-semibold rounded-full">
+            {caso.quantity}
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  div[style] {
+    animation: slideInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
