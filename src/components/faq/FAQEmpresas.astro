@@ -1,0 +1,108 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items?: FAQItem[];
+}
+
+const defaultItems: FAQItem[] = [
+  {
+    question: '¿Cuál es el pedido mínimo para empresas?',
+    answer: 'El pedido mínimo es de 4 unidades. Trabajamos desde pequeños detalles corporativos hasta proyectos de 100+ unidades. Para volúmenes especiales, consultamos caso por caso.',
+  },
+  {
+    question: '¿Qué opciones de personalización corporativa ofrecen?',
+    answer: 'Puedes personalizar con logos, nombres, colores corporativos, textos personalizados, fotos y diseños exclusivos. Nuestro equipo de diseño trabaja contigo para crear algo único que represente tu marca.',
+  },
+  {
+    question: '¿Ofrecen descuentos por volumen?',
+    answer: 'Sí, tenemos descuentos progresivos según la cantidad, pero varían según el producto y la personalización requerida. Para obtener una cotización personalizada, por favor contáctanos directamente con tu pedido específico.',
+  },
+
+  {
+    question: '¿Cómo es el proceso de diseño y aprobación?',
+    answer: 'Primero consultamos tus necesidades. Luego enviamos diseños digitales para tu revisión. Puedes solicitar cambios ilimitados hasta tu conformidad total. Una vez aprobado y depositado el anticipo, iniciamos la producción. Todo el proceso se coordina vía WhatsApp.',
+  },
+  {
+    question: '¿Puedo hacer cambios después de confirmar el pedido?',
+    answer: 'Sí, cambios menores en diseño son permitidos hasta 24 horas antes del inicio de producción. Cambios después de ese plazo o cambios mayores podrían afectar tiempos y presupuesto. Consultamos primero para viabilidad.',
+  },
+  {
+    question: '¿Cómo es el proceso de pago para empresas?',
+    answer: '50% de anticipo al confirmar el pedido | 50% restante antes de la entrega. Aceptamos transferencia bancaria, depósito en efectivo.',
+  },
+  {
+    question: '¿Ofrecen muestras antes de confirmar grandes volúmenes?',
+    answer: 'Sí, podemos preparar muestras de los productos personalizados para que valides calidad y diseño. El costo de muestras puede descontarse del pedido final. Consultanos sobre disponibilidad y tiempos.',
+  },
+  {
+    question: '¿Qué opciones de envío tienen?',
+    answer: 'Coordinamos la entrega mediante transporte privado externo, servicio de mensajería o retiro en tienda. Para pedidos grandes o entregas especiales, ofrecemos opciones de logística adaptadas a tus necesidades.',
+  },
+  {
+    question: '¿Qué garantía ofrecen en productos corporativos?',
+    answer: 'Revisamos el producto previamente a la entrega. Defectos de fabricación comprobados serán reemplazados sin costo. No aceptamos devoluciones por cambio de idea posterior a la entrega.',
+  },
+  {
+    question: '¿Pueden personalizar productos que no están en catálogo?',
+    answer: 'Absolutamente. Si tienes un producto corporativo específico en mente, podemos investigar viabilidad, costos y tiempos. Nuestro equipo propone soluciones creativas para necesidades únicas. Primera consulta sin compromiso.',
+  },
+  {
+    question: '¿Cómo me comunico para hacer un pedido corporativo?',
+    answer: 'Puedes escribirnos por WhatsApp al +591 6269-9702, enviar email a "Recuerdoscompartidoscznl@gmail.com". Tu asesor dedicado te guiará en todo el proceso: presupuesto, diseño, producción y entrega.',
+  },
+  {
+    question: '¿Cuentan con experiencia en regalos de fin de año?',
+    answer: 'Sí, es uno de nuestros servicios estrella. Hemos preparado campañas de fin de año para decenas de empresas. Ofrecemos desde selección de productos hasta diseño personalizado, entrega coordinada y logística completa.',
+  },
+];
+
+const { items = defaultItems } = Astro.props;
+---
+
+<div class="space-y-4">
+  {items.map((item, idx) => (
+    <details
+      class="group p-6 bg-white rounded-lg border border-neutral-light hover:border-accent cursor-pointer transition-all duration-300"
+      style={{
+        animationDelay: `${idx * 0.05}s`,
+      }}
+    >
+      <summary class="flex items-center justify-between font-semibold text-primary hover:text-accent transition-colors">
+        <span class="text-lg">{item.question}</span>
+        <span class="text-2xl group-open:rotate-180 transition-transform duration-300">+</span>
+      </summary>
+      <p class="mt-4 text-gray-600 leading-relaxed border-t border-neutral-light pt-4">
+        {item.answer}
+      </p>
+    </details>
+  ))}
+</div>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] summary {
+    color: theme('colors.accent.DEFAULT');
+  }
+
+  details[open] p {
+    animation: slideInUp 0.3s ease-out;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+
+/**
+ * AboutUs Component
+ * Sección "Sobre Nosotros" para explicar la historia y valores de la empresa
+ * Mejora SEO con contenido textual extenso
+ */
+---
+
+<section class="section-padding bg-white" aria-labelledby="about-title">
+  <div class="container-main">
+    <div class="max-w-3xl mx-auto">
+      <!-- Texto - Contenido SEO Centrado -->
+      <div class="animate-fade-in-up">
+        <div class="text-center mb-12">
+          <SectionTitle
+            title="Sobre Recuerdos Compartidos"
+            subtitle="Creando momentos que perduran en el tiempo"
+            accentColor="primary"
+            align="center"
+          />
+        </div>
+
+        <div class="space-y-6 text-gray-600 leading-relaxed text-center">
+          <p>
+            Somos <strong>Recuerdos Compartidos</strong>, un emprendimiento <strong>Santa Cruz de la Sierra, Bolivia</strong> dedicada a crear <strong>regalos personalizados únicos y memorables</strong>. Nos especializamos en transformar tus momentos especiales en objetos tangibles que perduran en el tiempo.
+          </p>
+
+          <p>
+            Nuestro enfoque va más allá de simplemente vender productos. Cada <strong>regalo personalizado</strong> que creamos lleva consigo la <strong>magia de un momento especial</strong>, diseñado con cariño y dedicación para ti, tu familia o tu empresa. Creemos que los mejores regalos son aquellos que cuentan una historia.
+          </p>
+
+          <p>
+            Nuestra misión es ser tu aliado en momentos importantes: cumpleaños, aniversarios, compromisos, despedidas, regalos corporativos y cualquier ocasión especial que merezca un toque personalizado. Entendemos que cada cliente es único, por eso ofrecemos <strong>soluciones completamente personalizables</strong> adaptadas a tus necesidades específicas.
+          </p>
+
+          <p>
+            Ya seas una persona buscando un regalo memorable para alguien especial, una empresa que necesita <strong>regalos corporativos y merchandise personalizado</strong>, o alguien que quiere crear algo verdaderamente único, estamos aquí para hacerlo realidad. Tu satisfacción es nuestro éxito.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 mt-12">
+          <a href="/faq" class="btn-primary py-3 px-6 text-base">
+            Preguntas Frecuentes
+          </a>
+          <a href="/legal" class="btn-outline py-3 px-6 text-base">
+            Términos y Políticas
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

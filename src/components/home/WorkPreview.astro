@@ -1,0 +1,60 @@
+---
+/**
+ * WorkPreview Component
+ * Galería de trabajos realizados para demostrar calidad y creatividad
+ */
+import SectionTitle from '../ui/SectionTitle.astro';
+
+---
+<section class="section-padding" aria-labelledby="trabajos-id">
+  <div class="container-main">
+    <div class="flex justify-center mb-10">
+      <div>
+        <SectionTitle
+          id="trabajos-id"
+          title="Trabajos Realizados"
+          subtitle="Trabajos  ya realizados para particulares y empresas"
+          align="center"
+        />
+      </div>
+    </div>
+    <!-- Contenido SEO adicional -->
+    <div class="bg-primary text-white rounded-2xl p-8 mt-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-display font-bold text-secondary text-2xl mb-4">
+            Diversidad de Proyectos Realizados
+          </h3>
+          <p class="text-white/80 text-sm leading-relaxed mb-6">
+            Desde tazas mágicas personalizadas para regales familiares, hasta álbumes de fotos artesanales, 
+            cuadros canvas para decoración especial y merchandise corporativo: nuestro portafolio demuestra 
+            nuestra capacidad de adaptarnos a cualquier necesidad de personalización.
+          </p>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li>✓ Regalos para particulares en Santa Cruz</li>
+            <li>✓ Packages corporativos para empresas</li>
+            <li>✓ Compromisos, bodas y eventos especiales</li>
+            <li>✓ Personalizaciones creativas y únicas</li>
+          </ul>
+        </div>
+        <div class="flex flex-col justify-between">
+          <div>
+            <h3 class="font-display font-bold text-secondary text-2xl mb-4">
+              Historias de Clientes Satisfechos
+            </h3>
+            <p class="text-white/80 text-sm leading-relaxed mb-6">
+              Cada trabajo es una historia. Clientes que nos confiaron sus momentos más especiales y recibieron 
+              un regalo que superó sus expectativas. Son historias de familias sorprendidas, empleados valorados, 
+              y momentos que quedaron grabados gracias a nuestro compromiso con la calidad.
+            </p>
+          </div>
+          <div class="flex justify-end">
+            <a href="/servicios-empresariales#casos-exito" class="btn-outline text-sm py-2 px-6 shrink-0 bg-white text-primary hover:bg-secondary hover:text-black" aria-label="Ver casos de éxito y trabajos realizados">
+              Ver Detalles →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

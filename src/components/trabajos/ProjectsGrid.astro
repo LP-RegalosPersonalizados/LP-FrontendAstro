@@ -1,0 +1,36 @@
+---
+import { type Trabajo, categoryColors, getTrabajos } from '../../data/trabajos';
+
+interface Props {
+  trabajos?: Trabajo[];
+}
+
+const { trabajos = getTrabajos() } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
+  {trabajos.map(({ title, description, image, category, quantity }) => (
+    <article class="card overflow-hidden group">
+      <div class="aspect-video overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          loading="lazy"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+      <div class="p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class={`text-xs font-medium px-3 py-1 rounded-full ${categoryColors[category]}`}>
+            {category}
+          </span>
+          <span class="text-xs text-gray-400 font-mono">{quantity}</span>
+        </div>
+        <h3 class="font-display font-semibold text-primary text-lg leading-snug mb-2">
+          {title}
+        </h3>
+        <p class="text-gray-500 text-sm leading-relaxed">{description}</p>
+      </div>
+    </article>
+  ))}
+</div>

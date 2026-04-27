@@ -30,7 +30,7 @@
   <line x1="350" y1="405" x2="850" y2="405" stroke="#DA9928" stroke-width="3" stroke-linecap="round"/>
   
   <!-- Productos/Servicios -->
-  <text x="600" y="460" text-anchor="middle" fill="#DEE2B1" font-family="Arial, Helvetica, sans-serif" font-size="26">Regalos Personalizados • Tazas • Álbumes • Cuadros</text>
+  <text x="600" y="460" text-anchor="middle" fill="#DEE2B1" font-family="Arial, Helvetica, sans-serif" font-size="26">Regalos Personalizados • Tazas Metalicas </text>
   
   <!-- Call to action - WhatsApp -->
   <text x="600" y="520" text-anchor="middle" fill="#DA9928" font-family="Arial, Helvetica, sans-serif" font-size="20" opacity="0.9">Cotizá por WhatsApp: +591 62699702</text>

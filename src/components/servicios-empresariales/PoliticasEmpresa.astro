@@ -1,0 +1,130 @@
+---
+interface Policy {
+  title: string;
+  items: string[];
+}
+
+interface Props {
+  policies?: Policy[];
+}
+
+const defaultPolicies: Policy[] = [
+  {
+    title: 'Forma de Pago',
+    items: [
+      '50% de anticipo al confirmar el pedido',
+      '50% restante antes de la entrega',
+      'Aceptamos transferencia bancaria y depósito en efectivo',
+      'Presupuestos válidos por 7 días',
+    ],
+  },
+  {
+    title: 'Cambios en Diseño',
+    items: [
+      'Revisiones ilimitadas en la fase de diseño',
+      'Cambios permitidos hasta 24 horas antes de inicio de producción',
+      'Cambios menores después de iniciada la producción: costo adicional',
+      'Cambios mayores: requieren nuevo presupuesto',
+    ],
+  },
+  {
+    title: 'Entregas',
+    items: [
+      'Retiro en nuestro punto de entrega en Santa Cruz',
+      'Envío externo coordinado con transportista (costo adicional)',
+      'Entrega con embalaje de calidad',
+      'Coordinación flexible según tu disponibilidad',
+    ],
+  },
+];
+
+const { policies = defaultPolicies } = Astro.props;
+---
+
+<section class="section-padding bg-white">
+  <div class="container-main">
+    <div class="text-center mb-16">
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
+        Políticas Empresariales
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Transparencia total. Conoce nuestras condiciones y políticas.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {policies.map((policy, idx) => (
+        <div
+          class="p-8 bg-gradient-to-br from-white to-gray-50 rounded-xl border border-neutral-light hover:border-accent hover:shadow-lg transition-all duration-300"
+          style={{
+            animationDelay: `${idx * 0.1}s`,
+          }}
+        >
+          <h3 class="font-display text-2xl font-bold text-primary mb-6 pb-4 border-b-2 border-accent">
+            {policy.title}
+          </h3>
+
+          <ul class="space-y-4">
+            {policy.items.map((item) => (
+              <li class="flex gap-3 items-start">
+                <span class="text-accent text-2xl leading-none mt-1">→</span>
+                <span class="text-gray-700 text-sm leading-relaxed">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    {/* Important disclaimer */}
+    <div class="mt-16 pt-12 border-t border-neutral-light">
+      <div class="bg-gradient-to-r from-business/10 to-energy/10 p-8 rounded-xl">
+        <h3 class="font-display text-2xl font-bold text-primary mb-3">
+          Garantía de Satisfacción
+        </h3>
+        <p class="text-gray-700 mb-4">
+          Tu satisfacción es nuestra prioridad. Cada producto pasa por control de calidad riguroso. 
+          <strong>No aceptamos devoluciones post-entrega, excepto por defectos de fabricación comprobados.</strong>
+        </p>
+        <p class="text-gray-600 text-sm">
+          Recomendamos revisar los productos dentro de las 24 horas de recibidos para reportar cualquier inconveniente.
+        </p>
+      </div>
+    </div>
+
+    {/* CTA */}
+    <div class="mt-12 text-center">
+      <p class="text-gray-600 mb-4 text-lg">
+        ¿Dudas sobre nuestras políticas?
+      </p>
+      <a
+        href="https://wa.me/59162699702"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-8 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300"
+      >
+        Contactar Soporte
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  div[style] {
+    animation: slideInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

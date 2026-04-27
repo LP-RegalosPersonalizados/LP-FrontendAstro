@@ -1,0 +1,79 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items?: FAQItem[];
+}
+
+const defaultItems: FAQItem[] = [
+  {
+    question: '¿Cuál es el proceso de personalización?',
+    answer: 'Selecciona un producto, envíanos tus fotos o diseño, lo revisamos juntos, y una vez aprobado comenzamos la producción.',
+  },
+  {
+    question: '¿Puedo enviar mis propias imágenes?',
+    answer: 'Claro. Aceptamos fotos, logos, textos y diseños. Preferimos archivos de alta resolución (300 dpi) para mejor resultado.',
+  },
+  {
+    question: '¿Qué formatos de imagen aceptan?',
+    answer: 'Aceptamos JPG, PNG, PDF y PSD. Formatos vectoriales como AI y EPS también son bienvenidos.',
+  },
+  {
+    question: '¿Cuántas revisiones de diseño puedo pedir?',
+    answer: 'Revisiones ilimitadas. No hay límite mientras estés en fase de diseño, antes de iniciar la producción.',
+  },
+  {
+    question: '¿Veo el producto antes de que se produzca?',
+    answer: 'Sí, te enviamos un mockup digital para tu aprobación. Cambios adicionales son permitidos en esta fase.',
+  },
+];
+
+const { items = defaultItems } = Astro.props;
+---
+
+<div class="space-y-4">
+  {items.map((item, idx) => (
+    <details
+      class="group p-6 bg-white rounded-lg border border-neutral-light hover:border-accent cursor-pointer transition-all duration-300"
+      style={{
+        animationDelay: `${idx * 0.05}s`,
+      }}
+    >
+      <summary class="flex items-center justify-between font-semibold text-primary hover:text-accent transition-colors">
+        <span class="text-lg">{item.question}</span>
+        <span class="text-2xl group-open:rotate-180 transition-transform duration-300">+</span>
+      </summary>
+      <p class="mt-4 text-gray-600 leading-relaxed border-t border-neutral-light pt-4">
+        {item.answer}
+      </p>
+    </details>
+  ))}
+</div>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] summary {
+    color: theme('colors.accent.DEFAULT');
+  }
+
+  details[open] p {
+    animation: slideInUp 0.3s ease-out;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
