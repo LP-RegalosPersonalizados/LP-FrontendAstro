@@ -59,12 +59,8 @@ export const products: Product[] = [
     price: 35,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/a_auto,q_auto,w_475/v1777274106/IMG-20260117-WA0015_wpl5kg.jpg',
     gallery: [
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499257/IMG-20260117-WA0009_rkpedn.jpg',
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777274107/IMG-20260117-WA0019_jgja7u.jpg',
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499275/TAZAS_SAN_VALENTIN_soe5xy.png',
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499273/IMG-20260108-WA0057_kc9uaf.jpg',
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1777274104/IMG-20260108-WA0051_xvwplt.jpg',
-
     ],
     description:
       'Tazas de cerámica personalizadas con fotos, diseños o logos. Ideales para regalos, eventos o empresas. Disponibles por unidad o pedidos por cantidad.',
