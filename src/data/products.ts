@@ -161,8 +161,8 @@ export const products: Product[] = [
   },
   {
     id: '8',
-    name : 'Vaso Chopero Personalizados',
-    slug: 'vaso-chopero-personalizados',
+    name : 'Vaso Chopero Personalizado',
+    slug: 'vaso-chopero-personalizado',
     category: 'tazas',
     price: 45,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777272887/IMG-20260317-WA0307_gsvduu.jpg',
