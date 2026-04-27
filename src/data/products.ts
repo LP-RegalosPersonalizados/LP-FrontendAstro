@@ -59,12 +59,8 @@ export const products: Product[] = [
     price: 35,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/a_auto,q_auto,w_475/v1777274106/IMG-20260117-WA0015_wpl5kg.jpg',
     gallery: [
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499257/IMG-20260117-WA0009_rkpedn.jpg',
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777274107/IMG-20260117-WA0019_jgja7u.jpg',
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499275/TAZAS_SAN_VALENTIN_soe5xy.png',
-      'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1772499273/IMG-20260108-WA0057_kc9uaf.jpg',
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/v1777274104/IMG-20260108-WA0051_xvwplt.jpg',
-
     ],
     description:
       'Tazas de cerámica personalizadas con fotos, diseños o logos. Ideales para regalos, eventos o empresas. Disponibles por unidad o pedidos por cantidad.',
@@ -143,7 +139,7 @@ export const products: Product[] = [
     name: 'Alcancías Personalizadas',
     slug: 'alcancias-personalizadas',
     category: 'alcancia',
-    price: 35,
+    price: 65,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777272479/IMG_20260227_213613_907_bz93if.jpg',
     gallery: [
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777272498/IMG_20260407_144407_861_wy0k0o.jpg',
@@ -151,7 +147,7 @@ export const products: Product[] = [
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777272495/IMG_20260407_144402_491_jdwtdn.jpg'
     ],
     description:
-      'Alcancías personalizadas de madera con diseños únicos y materiales de calidad. Perfectas para regalos o uso personal. Disponibles en diferentes tamaños y colores.',
+      'Alcancías personalizadas de madera con diseños únicos y materiales de calidad. Perfectas para regalos o uso personal. Disponibles en diferentes tamaños y colores. Contamos con dos dimensiones de 15*15 cm y 18*18 cm. El precio puede variar según el tamaño y la cantidad de alcancías. Escribenos para cotizar tu pedido personalizado.',
     audience: {
       general: { available: true, customizable: true },
       business: { available: false, customizable: false },
@@ -171,7 +167,7 @@ export const products: Product[] = [
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777269293/IMG-20260312-WA0026_rwjktk.jpg',
     ],
     description:
-      'Vasos choperos personalizados con diseños únicos y materiales de calidad. Perfectos para regalos o uso personal.',
+      'Vasos choperos personalizados de 16 oz con diseños únicos y materiales de calidad. Perfectos para regalos o uso personal.',
     audience: {
       general: { available: true, customizable: true },
       business: { available: false, customizable: false },
