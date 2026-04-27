@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Recuerdos Compartidos",
+  "short_name": "Recuerdos Compartidos",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
