@@ -139,7 +139,7 @@ export const products: Product[] = [
     name: 'Alcancías Personalizadas',
     slug: 'alcancias-personalizadas',
     category: 'alcancia',
-    price: 35,
+    price: 65,
     image: 'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777272479/IMG_20260227_213613_907_bz93if.jpg',
     gallery: [
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777272498/IMG_20260407_144407_861_wy0k0o.jpg',
@@ -147,7 +147,7 @@ export const products: Product[] = [
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777272495/IMG_20260407_144402_491_jdwtdn.jpg'
     ],
     description:
-      'Alcancías personalizadas de madera con diseños únicos y materiales de calidad. Perfectas para regalos o uso personal. Disponibles en diferentes tamaños y colores.',
+      'Alcancías personalizadas de madera con diseños únicos y materiales de calidad. Perfectas para regalos o uso personal. Disponibles en diferentes tamaños y colores. Contamos con dos dimensiones de 15*15 cm y 18*18 cm. El precio puede variar según el tamaño y la cantidad de alcancías. Escribenos para cotizar tu pedido personalizado.',
     audience: {
       general: { available: true, customizable: true },
       business: { available: false, customizable: false },
@@ -167,7 +167,7 @@ export const products: Product[] = [
       'https://res.cloudinary.com/dzbp7mkvj/image/upload/f_auto,q_auto,c_limit,w_475/v1777269293/IMG-20260312-WA0026_rwjktk.jpg',
     ],
     description:
-      'Vasos choperos personalizados con diseños únicos y materiales de calidad. Perfectos para regalos o uso personal.',
+      'Vasos choperos personalizados de 16 oz con diseños únicos y materiales de calidad. Perfectos para regalos o uso personal.',
     audience: {
       general: { available: true, customizable: true },
       business: { available: false, customizable: false },
