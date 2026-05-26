@@ -18,8 +18,13 @@
 - Carrito de compras interactivo con persistencia
 - Modo Dual: Compras personales y para empresas
 - Galería de productos con imágenes de Cloudinary
-- SEO avanzado con JSON-LD
-- Integración con WhatsApp
+- Página de servicios empresariales B2B con planes por volumen
+- Sección de preguntas frecuentes organizada por temas
+- Documentos legales (privacidad, términos, entregas)
+- Portafolio de trabajos realizados
+- Productos destacados en la página principal
+- SEO avanzado con JSON-LD y datos estructurados
+- Integración con WhatsApp para cotizaciones
 - Diseño responsivo y accesible
 
 ## Tecnologías Utilizadas
@@ -78,24 +83,29 @@ El sitio estará disponible en `http://localhost:4321`
 src/
 ├── components/              # Componentes reutilizables
 │   ├── carrito/            # Sistema de carrito
+│   ├── empresas/           # Componente introductorio B2B
+│   ├── faq/                # Preguntas frecuentes (5 componentes)
 │   ├── home/               # Componentes de inicio
 │   ├── layout/             # Header y Footer
+│   ├── legal/              # Documentos legales (3 componentes)
 │   ├── productos/          # Grid, Card, Detail
 │   ├── seo/               # SEO y datos estructurados
-│   └── ui/                # Componentes genéricos
+│   ├── servicios-empresariales/  # Página B2B completa (8 componentes)
+│   ├── trabajos/           # Portafolio de trabajos (4 componentes)
+│   └── ui/                # Componentes genéricos (SectionTitle, etc.)
 ├── pages/                  # Rutas (Astro SSG)
+│   ├── index.astro        # Página principal
+│   ├── catalogo.astro     # Catálogo general
+│   ├── faq.astro          # Preguntas frecuentes
+│   ├── legal.astro        # Documentos legales
+│   ├── servicios-empresariales.astro  # Servicios B2B
+│   ├── trabajos-previos.astro         # Portafolio
+│   ├── 404.astro          # Página no encontrada
+│   └── producto/[slug].astro  # Detalle de producto
 ├── store/                  # Zustand store (carrito)
-├── data/                   # Datos estáticos
+├── data/                   # Datos estáticos (products, trabajos)
 ├── styles/                 # Estilos globales
-└── utils/                  # Funciones helpers
-```
-
-### Directorios Clave
-
-- **pages/**: Define rutas automáticamente. Cada archivo .astro = ruta
-- **components/**: Componentes reutilizables (Astro y React)
-- **store/**: Gestión de estado con Zustand
-- **data/**: Catálogo de productos en TypeScript
+└── utils/                  # Funciones helpers (formatters, whatsapp)
 
 ## Desarrollo
 
@@ -169,7 +179,8 @@ El proyecto incluye:
 Facilita contacto directo desde:
 - Página de detalles de productos
 - Carrito de compras
-- Página de contacto
+- Página de servicios empresariales
+- Catálogo general
 
 ## Testing y Validación
 
