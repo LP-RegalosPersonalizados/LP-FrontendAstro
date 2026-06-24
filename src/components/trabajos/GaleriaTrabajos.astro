@@ -1,14 +1,13 @@
 ---
 import type { Trabajo } from '../../data/trabajos';
-import { trabajos } from '../../data/trabajos';
 import CasoExitoCard from './CasoExitoCard';
 
 interface Props {
-  items?: Trabajo[];
+  items: Trabajo[];
   showTitle?: boolean;
 }
 
-const { items = trabajos, showTitle = true } = Astro.props;
+const { items, showTitle = true } = Astro.props;
 ---
 
 {showTitle && (

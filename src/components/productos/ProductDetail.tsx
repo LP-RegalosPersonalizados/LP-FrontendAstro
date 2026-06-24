@@ -3,7 +3,7 @@ import type { Product } from '../../data/products';
 import { useCart } from '../../store/useCart';
 import { formatPrice } from '../../utils/formatters';
 import { buildProductWhatsAppLink } from '../../utils/whatsapp';
-import { categoryLabels } from '../../data/products';
+import { categoryLabels } from '../../data/constants';
 
 interface Props {
   product: Product;

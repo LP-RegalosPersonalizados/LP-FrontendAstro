@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Product, ProductCategory } from '../../data/products';
-import { categoryLabels } from '../../data/products';
+import { categoryLabels } from '../../data/constants';
 import ProductCard from './ProductCard';
 
 interface Props {
