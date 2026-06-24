@@ -7,7 +7,9 @@ import vercel from '@astrojs/vercel/serverless';
 export default defineConfig({
   site: 'https://www.recuerdoscompartidos.sarl',
   output: 'hybrid',
-  adapter: vercel(),
+  adapter: vercel({
+    runtime: 'nodejs20.x'
+  }),
   integrations: [
     react(),
     tailwind({
