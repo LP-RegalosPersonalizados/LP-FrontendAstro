@@ -11,8 +11,12 @@ export interface Trabajo {
   quantity: string;
 }
 
+let cachedTrabajos: Trabajo[] | null = null;
+
 async function fetchTrabajos(): Promise<Trabajo[]> {
-  return safeFetch<Trabajo>('/api/trabajos');
+  if (cachedTrabajos) return cachedTrabajos;
+  cachedTrabajos = await safeFetch<Trabajo>('/api/trabajos');
+  return cachedTrabajos;
 }
 
 export async function getTrabajos(): Promise<Trabajo[]> {

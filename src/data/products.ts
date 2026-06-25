@@ -41,9 +41,13 @@ function normalizeProduct(p: any): Product {
   };
 }
 
-async function fetchProducts(): Promise<Product[]> {
+let cachedProducts: Product[] | null = null;
+
+export async function fetchProducts(): Promise<Product[]> {
+  if (cachedProducts) return cachedProducts;
   const data = await safeFetch<Product>('/api/productos');
-  return data.map(normalizeProduct);
+  cachedProducts = data.map(normalizeProduct);
+  return cachedProducts;
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {

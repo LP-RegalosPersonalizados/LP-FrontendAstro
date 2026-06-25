@@ -2,9 +2,16 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProductDetail from '../../components/productos/ProductDetail';
 import ProductCard from '../../components/productos/ProductCard';
-export const prerender = false;
+export const prerender = true;
 
-import { getProductBySlug, getRelatedProducts } from '../../data/products';
+import { fetchProducts, getProductBySlug, getRelatedProducts } from '../../data/products';
+
+export async function getStaticPaths() {
+  const products = await fetchProducts();
+  return products.map((p) => ({
+    params: { slug: p.slug },
+  }));
+}
 
 const { slug } = Astro.params;
 
