@@ -1,45 +1,82 @@
-﻿# Recuerdos Compartidos - Tienda de Regalos Personalizados
+﻿# Recuerdos Compartidos - Catálogo de Regalos Personalizados
 
-> Tienda en línea moderna de regalos personalizados ubicada en Santa Cruz de la Sierra, Bolivia.
+> Catálogo web moderno de regalos personalizados con lista de interés vía WhatsApp. Ubicado en Santa Cruz de la Sierra, Bolivia.
 
 **Sitio Web**: https://www.recuerdoscompartidos.sarl
 
 ## Tabla de Contenidos
 
 - [Características Principales](#características-principales)
+- [Arquitectura de Datos](#arquitectura-de-datos)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Instalación y Configuración](#instalación-y-configuración)
 - [Comandos Disponibles](#comandos-disponibles)
 - [Estructura del Proyecto](#estructura-del-proyecto)
+- [Lista de Interés por WhatsApp](#lista-de-interés-por-whatsapp)
+- [WhatsApp como Canal de Venta](#whatsapp-como-canal-de-venta)
+- [SEO y Datos Estructurados](#seo-y-datos-estructurados)
+- [Despliegue](#despliegue)
+- [Testing y Validación](#testing-y-validación)
+- [Contribución](#contribución)
+- [Roadmap Futuro](#roadmap-futuro)
 
 ## Características Principales
 
 - Catálogo dinámico con filtrado por categorías
-- Carrito de compras interactivo con persistencia
-- Modo Dual: Compras personales y para empresas
-- Galería de productos con imágenes de Cloudinary
+- Lista de interés con envío por WhatsApp (sin carrito de compras ni checkout)
+- Modo Dual: compras personales y para empresas
+- Datos obtenidos desde API remota en tiempo de build
 - Página de servicios empresariales B2B con planes por volumen
 - Sección de preguntas frecuentes organizada por temas
 - Documentos legales (privacidad, términos, entregas)
 - Portafolio de trabajos realizados
 - Productos destacados en la página principal
 - SEO avanzado con JSON-LD y datos estructurados
-- Integración con WhatsApp para cotizaciones
+- WhatsApp como canal principal de venta y cotización
+- Arquitectura híbrida SSG + SSR desplegada en Vercel
 - Diseño responsivo y accesible
+
+## Arquitectura de Datos
+
+El proyecto obtiene todos sus datos dinámicos desde una API REST externa en tiempo de build:
+
+```
+[API Remota]                [Frontend (Astro)]
+api-recuerdos.onrender.com  ─build-time─►  src/data/api.ts
+  GET /api/productos           ──safeFetch──►  products.ts
+  GET /api/trabajos            ──safeFetch──►  trabajos.ts
+                                                │
+                                  ┌─────────────┘
+                                  ▼
+                              Páginas .astro
+                              (pasan datos como props)
+                                  │
+                                  ▼
+                          Componentes React/Astro
+```
+
+- **Capa API** (`src/data/api.ts`): wrapper genérico `fetchApi<T>()` y `safeFetch<T>()` que tolera fallos y retorna arrays vacíos.
+- **Productos** (`src/data/products.ts`): funciones `fetchProducts()`, `getProductBySlug()`, `getFeaturedProducts()`, `getBusinessProducts()`, `getGeneralProducts()`, `getRelatedProducts()`.
+- **Trabajos** (`src/data/trabajos.ts`): funciones `fetchTrabajos()`, `getTrabajos()`, `getTrabajosByCategory()`, `getTrabajosById()`.
+- **Cache en memoria**: las funciones fetch cachean el resultado para evitar llamadas repetidas durante el build.
+- **Normalización**: `normalizeProduct()` convierte campos booleanos (acepta `true`, `'true'`, `'TRUE'`, `1`).
+
+> **Nota:** No hay escritura hacia el backend desde el frontend. El sitio es 100% catálogo + consulta por WhatsApp.
 
 ## Tecnologías Utilizadas
 
 ### Frameworks y Librerías
-- **Astro 4.16.0** - Meta-framework para sitios estáticos
-- **React 18.3.1** - Componentes interactivos
+- **Astro 4.16.0** - Meta-framework híbrido (SSG + SSR con Vercel)
+- **React 18.3.1** - Componentes interactivos (islas)
 - **Tailwind CSS 3.4.14** - Framework de estilos
 - **TypeScript 5.6.3** - Lenguaje tipado
-- **Zustand 5.0.0** - Gestión de estado
+- **Zustand 5.0.0** - Gestión de estado (lista de interés)
 
 ### Integraciones
 - @astrojs/react - Soporte de componentes React
 - @astrojs/tailwind - Integración de Tailwind
 - @astrojs/sitemap - Generación de sitemap
+- @astrojs/vercel - Adaptador para despliegue en Vercel (Node.js 20.x)
 
 ## Instalación y Configuración
 
@@ -61,7 +98,13 @@
    npm install
    ```
 
-3. Iniciar servidor de desarrollo:
+3. Configurar variable de entorno (opcional, por defecto apunta a producción):
+   ```bash
+   # .env
+   PUBLIC_API_URL=http://localhost:3001
+   ```
+
+4. Iniciar servidor de desarrollo:
    ```bash
    npm run dev
    ```
@@ -76,24 +119,25 @@ El sitio estará disponible en `http://localhost:4321`
 | `npm run build` | Compila para producción en ./dist/ |
 | `npm run preview` | Visualiza la build de producción |
 | `npm start` | Alias de npm run dev |
+| `npm run astro` | Ejecuta CLI de Astro (ej: `npm run astro -- check`) |
 
 ## Estructura del Proyecto
 
 ```
 src/
 ├── components/              # Componentes reutilizables
-│   ├── carrito/            # Sistema de carrito
+│   ├── carrito/            # Lista de interés (CartPanel, CartButton, CartItemRow, CartModeSync)
 │   ├── empresas/           # Componente introductorio B2B
-│   ├── faq/                # Preguntas frecuentes (5 componentes)
-│   ├── home/               # Componentes de inicio
+│   ├── faq/                # Preguntas frecuentes
+│   ├── home/               # Componentes de inicio (Hero, FeaturedProducts)
 │   ├── layout/             # Header y Footer
-│   ├── legal/              # Documentos legales (3 componentes)
-│   ├── productos/          # Grid, Card, Detail
-│   ├── seo/               # SEO y datos estructurados
-│   ├── servicios-empresariales/  # Página B2B completa (8 componentes)
-│   ├── trabajos/           # Portafolio de trabajos (4 componentes)
-│   └── ui/                # Componentes genéricos (SectionTitle, etc.)
-├── pages/                  # Rutas (Astro SSG)
+│   ├── legal/              # Documentos legales
+│   ├── productos/          # Grid, Card, Detail (ProductCard, ProductGrid, ProductDetail)
+│   ├── seo/               # SEO y datos estructurados (JSON-LD)
+│   ├── servicios-empresariales/  # Página B2B completa
+│   ├── trabajos/           # Portafolio de trabajos (ProjectsGrid, CasoExitoCard)
+│   └── ui/                # Componentes genéricos (SectionTitle, WhatsAppButton, etc.)
+├── pages/                  # Rutas (SSG con prerender)
 │   ├── index.astro        # Página principal
 │   ├── catalogo.astro     # Catálogo general
 │   ├── faq.astro          # Preguntas frecuentes
@@ -101,11 +145,18 @@ src/
 │   ├── servicios-empresariales.astro  # Servicios B2B
 │   ├── trabajos-previos.astro         # Portafolio
 │   ├── 404.astro          # Página no encontrada
-│   └── producto/[slug].astro  # Detalle de producto
-├── store/                  # Zustand store (carrito)
-├── data/                   # Datos estáticos (products, trabajos)
-├── styles/                 # Estilos globales
-└── utils/                  # Funciones helpers (formatters, whatsapp)
+│   └── producto/[slug].astro  # Detalle de producto (ruta dinámica)
+├── store/                  # Zustand store (lista de interés persistida en localStorage)
+├── data/                   # Capa de datos
+│   ├── api.ts             # Cliente HTTP genérico (fetchApi, safeFetch)
+│   ├── products.ts        # Funciones de obtención/consulta de productos
+│   ├── trabajos.ts        # Funciones de obtención/consulta de trabajos
+│   └── constants.ts       # Labels y colores de categorías
+├── styles/                 # Estilos globales (globals.css)
+├── utils/                  # Funciones helper
+│   ├── whatsapp.ts        # Generación de mensajes y enlaces WhatsApp
+│   └── formatters.ts      # Formateo de precios, truncado, capitalización
+└── env.d.ts               # Tipos de entorno (Astro)
 
 ## Desarrollo
 
@@ -143,13 +194,14 @@ La página estará disponible en `/nueva-pagina`
 
 ### Agregar un Nuevo Producto
 
-1. Abre `src/data/products.ts`
-2. Agrega un nuevo objeto al array `products`
-3. El producto aparecerá automáticamente en el catálogo
+Los productos no se definen en el frontend. Se obtienen desde la API remota en tiempo de build:
 
-## Gestión de Estado (Carrito)
+1. Agrega el producto en el backend (`https://api-recuerdos.onrender.com/api/productos`)
+2. El producto aparecerá automáticamente en el catálogo al re-buildear
 
-El estado del carrito se gestiona con Zustand y persiste automáticamente:
+## Lista de Interés por WhatsApp
+
+El proyecto no implementa un carrito de compras ni checkout. En su lugar, usa una **lista de interés** que se envía por WhatsApp:
 
 ```typescript
 import { useCart } from '../store/useCart';
@@ -159,11 +211,14 @@ const { items, addItem, openCart } = useCart();
 ```
 
 Características:
-- Agregar/remover artículos
+- Agregar/remover artículos (solo id, nombre, cantidad y personalización — sin precios)
 - Actualizar cantidades
-- Personalización de productos
+- Personalización por producto
 - Cambio entre modos (general/business)
 - Persistencia automática en localStorage
+- Envío de la lista completa por WhatsApp (`buildCartWhatsAppLink()`)
+
+> El store usa Zustand con middleware `persist` (clave: `'regalos-cart'`). Solo persiste `items` y `mode`.
 
 ## SEO y Datos Estructurados
 
@@ -174,13 +229,41 @@ El proyecto incluye:
 - Open Graph para redes sociales
 - Robots.txt configurado
 
-## Integración WhatsApp
+## WhatsApp como Canal de Venta
 
-Facilita contacto directo desde:
-- Página de detalles de productos
-- Carrito de compras
+WhatsApp es el canal principal de venta del proyecto. No hay pasarela de pago ni checkout — toda transacción se concreta vía WhatsApp.
+
+### Número
+`+591 62699702` (definido en `src/utils/whatsapp.ts`)
+
+### Tipos de mensaje
+
+| Tipo | Función | Descripción |
+|------|---------|-------------|
+| Lista de interés | `buildCartWhatsAppLink()` | Envía todos los items de la lista con cantidades y personalización |
+| Consulta de producto | `buildProductWhatsAppLink()` | Consulta directa sobre un producto específico |
+| Empresarial | `generateWhatsAppMessage('business')` | Mensaje adaptado para clientes B2B |
+
+### Puntos de entrada
+- Detalle de producto ("Consultar por WhatsApp")
+- Panel de lista de interés ("Enviar lista por WhatsApp")
+- Catálogo general (modal/cards)
 - Página de servicios empresariales
-- Catálogo general
+
+## Despliegue
+
+El proyecto está configurado para desplegarse en **Vercel** con Node.js 20.x:
+
+### Configuración
+- **Adapter**: `@astrojs/vercel` con runtime `nodejs20.x`
+- **Output**: `hybrid` (SSG + SSR según la página)
+- **Build command**: `npm run build`
+- **Output directory**: `dist/`
+
+### Variables de entorno en producción
+| Variable | Valor |
+|----------|-------|
+| `PUBLIC_API_URL` | `https://api-recuerdos.onrender.com` (default) |
 
 ## Testing y Validación
 
@@ -231,10 +314,10 @@ Este proyecto está bajo licencia MIT. Ver archivo LICENSE para detalles.
 
 ## Roadmap Futuro
 
-- Sistema de pagos (Stripe/PayPal)
+- Integración de pasarela de pagos (Stripe/PayPal)
 - Panel de administración
-- Sistema de autenticación
-- Historial de órdenes
+- Autenticación de usuarios
+- Historial de pedidos
 - Blog y tutoriales
 - Multi-idioma (ES/EN)
 - Dark mode
@@ -243,4 +326,4 @@ Este proyecto está bajo licencia MIT. Ver archivo LICENSE para detalles.
 
 Hecho con amor en Santa Cruz de la Sierra, Bolivia
 
-Última actualización: Abril 2026
+Última actualización: Julio 2026
