@@ -30,12 +30,12 @@ function normalizeProduct(p: any): Product {
     featured: p.featured === true || p.featured === 'true' || p.featured === 'TRUE' || p.featured === 1,
     audience: {
       general: {
-        available: p.audience?.general?.available === true || p.audience?.general?.available === 'TRUE',
-        customizable: p.audience?.general?.customizable === true || p.audience?.general?.customizable === 'TRUE',
+        available: p.audience?.general?.available === true || p.audience?.general?.available === 'true' || p.audience?.general?.available === 'TRUE',
+        customizable: p.audience?.general?.customizable === true || p.audience?.general?.customizable === 'true' || p.audience?.general?.customizable === 'TRUE',
       },
       business: {
-        available: p.audience?.business?.available === true || p.audience?.business?.available === 'TRUE',
-        customizable: p.audience?.business?.customizable === true || p.audience?.business?.customizable === 'TRUE',
+        available: p.audience?.business?.available === true || p.audience?.business?.available === 'true' || p.audience?.business?.available === 'TRUE',
+        customizable: p.audience?.business?.customizable === true || p.audience?.business?.customizable === 'true' || p.audience?.business?.customizable === 'TRUE',
       },
     },
   };

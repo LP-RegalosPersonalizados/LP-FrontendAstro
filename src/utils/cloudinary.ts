@@ -1,6 +1,4 @@
 const CLOUDINARY_DOMAIN = 'res.cloudinary.com';
-const CLOUDINARY_REGEX = /^(https?:)?\/\/res\.cloudinary\.com\/(?<cloud>[^/]+)\/image\/upload\/(?<transforms>[^/]+)\/v?(?<version>[^/]+)\/(?<publicId>.+)$/;
-const CLOUDINARY_SIMPLE_UPLOAD = /^(https?:)?\/\/res\.cloudinary\.com\/(?<cloud>[^/]+)\/image\/upload\/(?<rest>v?\d+\/.+)$/;
 
 export interface CloudinaryOptions {
   width?: number;
@@ -38,18 +36,12 @@ export function optimizeImage(url: string, options?: CloudinaryOptions): string 
 
   const transforms = parts.join(',');
 
-  const match = url.match(CLOUDINARY_SIMPLE_UPLOAD);
-  if (!match?.groups) return url;
-
-  const { cloud, rest } = match.groups;
-
-  const existingPath = `/image/upload/`;
-  const idx = url.indexOf(existingPath) + existingPath.length;
-
-  const before = url.slice(0, idx);
+  const idx = url.indexOf('/image/upload/') + '/image/upload/'.length;
   const after = url.slice(idx);
 
-  if (/^(f_|q_|w_|h_|c_)/.test(after)) return url;
+  const slashIdx = after.indexOf('/');
+  if (slashIdx === -1) return url;
+  if (/^[a-z]+_/.test(after.slice(0, slashIdx))) return url;
 
-  return `${before}${transforms}/${after}`;
+  return `${url.slice(0, idx)}${transforms}/${after}`;
 }
