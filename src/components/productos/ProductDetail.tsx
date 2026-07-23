@@ -3,6 +3,7 @@ import type { Product } from '../../data/products';
 import { useCart } from '../../store/useCart';
 import { formatPrice } from '../../utils/formatters';
 import { buildProductWhatsAppLink } from '../../utils/whatsapp';
+import { optimizeImage } from '../../utils/cloudinary';
 import { categoryLabels } from '../../data/constants';
 
 interface Props {
@@ -39,7 +40,7 @@ export default function ProductDetail({ product }: Props) {
         {/* Main Image with transition */}
         <div className="rounded-2xl overflow-hidden bg-neutral-light/30 aspect-square">
           <img
-            src={activeImage}
+            src={optimizeImage(activeImage, { width: 700 })}
             alt={product.name}
             className="w-full h-full object-cover transition-opacity duration-300"
           />
@@ -60,7 +61,7 @@ export default function ProductDetail({ product }: Props) {
                 }
                 aria-label={`Ver imagen ${index + 1}`}
               >
-                <img src={img} className="w-full h-full object-cover" alt={`${product.name} - Vista ${index + 1}`} />
+                <img src={optimizeImage(img, { width: 200 })} className="w-full h-full object-cover" alt={`${product.name} - Vista ${index + 1}`} />
               </button>
             ))}
           </div>

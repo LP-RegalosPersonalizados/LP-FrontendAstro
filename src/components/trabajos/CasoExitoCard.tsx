@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { Trabajo } from '../../data/trabajos';
+import { optimizeImage } from '../../utils/cloudinary';
 
 interface Props {
   caso: Trabajo;
@@ -25,7 +26,7 @@ export default function CasoExitoCard({ caso, index = 0 }: Props) {
           {caso.image && (
             <div className="relative h-56 overflow-hidden bg-gray-200">
               <img
-                src={caso.image}
+                src={optimizeImage(caso.image, { width: 700 })}
                 alt={caso.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
@@ -78,7 +79,7 @@ export default function CasoExitoCard({ caso, index = 0 }: Props) {
           {caso.image && (
             <div className="relative h-64 overflow-hidden bg-gray-200">
               <img
-                src={caso.image}
+                src={optimizeImage(caso.image, { width: 700 })}
                 alt={caso.title}
                 className="w-full h-full object-cover"
               />

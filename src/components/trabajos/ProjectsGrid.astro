@@ -1,6 +1,7 @@
 ---
 import { categoryColors } from '../../data/constants';
 import type { Trabajo } from '../../data/trabajos';
+import { optimizeImage } from '../../utils/cloudinary';
 
 interface Props {
   trabajos: Trabajo[];
@@ -14,7 +15,7 @@ const { trabajos } = Astro.props;
     <article class="card overflow-hidden group">
       <div class="aspect-video overflow-hidden">
         <img
-          src={image}
+          src={optimizeImage(image, { width: 700 })}
           alt={title}
           loading="lazy"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

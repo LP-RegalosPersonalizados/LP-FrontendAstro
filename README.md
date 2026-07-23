@@ -14,6 +14,7 @@
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Lista de Interés por WhatsApp](#lista-de-interés-por-whatsapp)
 - [WhatsApp como Canal de Venta](#whatsapp-como-canal-de-venta)
+- [Optimización de Imágenes](#optimización-de-imágenes)
 - [SEO y Datos Estructurados](#seo-y-datos-estructurados)
 - [Despliegue](#despliegue)
 - [Testing y Validación](#testing-y-validación)
@@ -34,6 +35,7 @@
 - SEO avanzado con JSON-LD y datos estructurados
 - WhatsApp como canal principal de venta y cotización
 - Arquitectura híbrida SSG + SSR desplegada en Vercel
+- Optimización de imágenes vía Cloudinary (formato automático, calidad y tamaño responsivo)
 - Diseño responsivo y accesible
 
 ## Arquitectura de Datos
@@ -154,6 +156,7 @@ src/
 │   └── constants.ts       # Labels y colores de categorías
 ├── styles/                 # Estilos globales (globals.css)
 ├── utils/                  # Funciones helper
+│   ├── cloudinary.ts      # Optimización de imágenes Cloudinary
 │   ├── whatsapp.ts        # Generación de mensajes y enlaces WhatsApp
 │   └── formatters.ts      # Formateo de precios, truncado, capitalización
 └── env.d.ts               # Tipos de entorno (Astro)
@@ -249,6 +252,49 @@ WhatsApp es el canal principal de venta del proyecto. No hay pasarela de pago ni
 - Panel de lista de interés ("Enviar lista por WhatsApp")
 - Catálogo general (modal/cards)
 - Página de servicios empresariales
+
+## Optimización de Imágenes
+
+Las imágenes del catálogo se optimizan automáticamente mediante la función `optimizeImage()` en `src/utils/cloudinary.ts`. Si la URL proviene de Cloudinary, se le inyectan parámetros de transformación; si no, se devuelve intacta.
+
+```typescript
+import { optimizeImage } from '../utils/cloudinary';
+
+optimizeImage('https://res.cloudinary.com/.../image/upload/v12345/imagen.png', {
+  width: 400,
+  quality: 'auto',
+  format: 'auto',
+});
+// → https://res.cloudinary.com/.../image/upload/f_auto,q_auto,w_400,c_limit/v12345/imagen.png
+```
+
+### Parámetros de la URL resultante
+
+| Parámetro | Valor | Efecto |
+|-----------|-------|--------|
+| `f_auto` | auto | Cloudinary sirve el mejor formato según el navegador (WebP, AVIF, etc.) |
+| `q_auto` | auto | Compresión inteligente sin pérdida visible de calidad |
+| `w_NNN` | según componente | Ancho máximo en píxeles (400, 600, 700, etc.) |
+| `c_limit` | — | Escala manteniendo proporción sin recortar |
+| `c_fill` | — | Recorta para llenar el tamaño exacto (si se especifican ancho y alto) |
+
+### Tamaños por componente
+
+| Componente | Ancho | Contexto |
+|-----------|-------|----------|
+| `ProductCard` | 400px | Grid de catálogo |
+| `ProductDetail` (principal) | 700px | Vista detalle |
+| `ProductDetail` (thumbnail) | 200px | Miniaturas de galería |
+| `ProductCarousel` | 600px | Carrusel de inicio |
+| `ProductCategories` | 400px | Cards de categoría |
+| `CasoExitoCard` | 700px | Casos de éxito |
+| `ProjectsGrid` | 700px | Grid de trabajos |
+
+### Comportamiento
+
+- **URL de Cloudinary** → se inyectan `f_auto,q_auto,w_NNN[,h_NNN,c_fill\|c_limit]`
+- **URL con transformaciones existentes** → se devuelve sin cambios
+- **URL externa (no Cloudinary)** → se devuelve sin cambios
 
 ## Despliegue
 

@@ -1,6 +1,7 @@
 ---
 import SectionTitle from '../ui/SectionTitle.astro';
 import type { Product } from '../../data/products';
+import { optimizeImage } from '../../utils/cloudinary';
 
 interface Props {
   products: Product[];
@@ -91,7 +92,7 @@ const categorias = [
             >
               {media.type === 'image' ? (
                 <img
-                  src={media.src}
+                  src={optimizeImage(media.src, { width: 400 })}
                   alt={nombre}
                   class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
