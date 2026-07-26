@@ -2,7 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /*.json$
-Disallow: /admin/
 
 # Especificar tiempos de rastreo
 Crawl-delay: 1

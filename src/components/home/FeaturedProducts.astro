@@ -1,9 +1,10 @@
 ---
 import SectionTitle from '../ui/SectionTitle.astro';
 import ProductCard from '../productos/ProductCard';
+import type { Product } from '../../data/products';
 
 interface Props {
-  products: any[];
+  products: Product[];
 }
 
 const { products } = Astro.props;
