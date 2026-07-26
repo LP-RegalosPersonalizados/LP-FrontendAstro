@@ -44,7 +44,7 @@ El proyecto obtiene todos sus datos dinámicos desde una API REST externa en tie
 
 ```
 [API Remota]                [Frontend (Astro)]
-api-recuerdos.onrender.com  ─build-time─►  src/data/api.ts
+api-recuerdos.vercel.app    ─build-time─►  src/data/api.ts
   GET /api/productos           ──safeFetch──►  products.ts
   GET /api/trabajos            ──safeFetch──►  trabajos.ts
                                                 │
@@ -199,7 +199,7 @@ La página estará disponible en `/nueva-pagina`
 
 Los productos no se definen en el frontend. Se obtienen desde la API remota en tiempo de build:
 
-1. Agrega el producto en el backend (`https://api-recuerdos.onrender.com/api/productos`)
+1. Agrega el producto en el backend (`https://api-recuerdos.vercel.app/api/productos`)
 2. El producto aparecerá automáticamente en el catálogo al re-buildear
 
 ## Lista de Interés por WhatsApp
@@ -309,7 +309,7 @@ El proyecto está configurado para desplegarse en **Vercel** con Node.js 20.x:
 ### Variables de entorno en producción
 | Variable | Valor |
 |----------|-------|
-| `PUBLIC_API_URL` | `https://api-recuerdos.onrender.com` (default) |
+| `PUBLIC_API_URL` | `https://api-recuerdos.vercel.app` (default) |
 
 ## Testing y Validación
 
