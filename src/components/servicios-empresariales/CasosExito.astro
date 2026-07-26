@@ -1,14 +1,13 @@
 ---
 import type { Trabajo } from '../../data/trabajos';
-import { trabajos } from '../../data/trabajos';
 import CasoExitoCard from '../trabajos/CasoExitoCard';
 
 interface Props {
   maxItems?: number;
-  items?: Trabajo[];
+  trabajos: Trabajo[];
 }
 
-const { maxItems = 6, items = trabajos.slice(0, maxItems) } = Astro.props;
+const { maxItems = 6, trabajos } = Astro.props;
 const worksByCategory = trabajos.filter(t => t.category === 'Corporativo').slice(0, maxItems);
 ---
 

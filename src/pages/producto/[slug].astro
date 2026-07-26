@@ -2,24 +2,20 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProductDetail from '../../components/productos/ProductDetail';
 import ProductCard from '../../components/productos/ProductCard';
-import { products, getProductBySlug, getRelatedProducts } from '../../data/products';
-import type { GetStaticPaths } from 'astro';
+export const prerender = true;
 
-/**
- * Generar solo rutas estáticas para productos que existen
- * Previene que slugs inválidos sean capturados por esta ruta dinámica
- */
-export const getStaticPaths: GetStaticPaths = () => {
-  return products.map((product) => ({
-    params: { slug: product.slug },
+import { fetchProducts, getProductBySlug, getRelatedProducts } from '../../data/products';
+
+export async function getStaticPaths() {
+  const products = await fetchProducts();
+  return products.map((p) => ({
+    params: { slug: p.slug },
   }));
-};
+}
 
 const { slug } = Astro.params;
 
-// En sitios estáticos, Astro solo genera las rutas definidas en getStaticPaths
-// Si llegas aquí, la ruta existe y el producto debe existir
-const product = getProductBySlug(slug as string);
+const product = await getProductBySlug(slug as string);
 
 if (!product) {
   // Si por alguna razón el producto no existe en la base de datos
@@ -27,7 +23,7 @@ if (!product) {
   return new Response('Not Found', { status: 404 });
 }
 
-const related = getRelatedProducts(product, 3);
+const related = await getRelatedProducts(product, 3);
 
 // Schema Product para SEO
 const productSchema = {

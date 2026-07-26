@@ -1,7 +1,11 @@
 ---
+export const prerender = true;
+
 import MainLayout from '../layouts/MainLayout.astro';
 import GaleriaTrabajos from '../components/trabajos/GaleriaTrabajos.astro';
-import { trabajos } from '../data/trabajos';
+import { getTrabajos } from '../data/trabajos';
+
+const trabajos = await getTrabajos();
 ---
 
 <MainLayout

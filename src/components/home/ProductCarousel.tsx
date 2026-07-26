@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Product } from '../../data/products';
+import { optimizeImage } from '../../utils/cloudinary';
 
 interface ProductCarouselProps {
   products: Product[];
@@ -65,7 +66,7 @@ export default function ProductCarousel({
                 className="block w-full h-full"
               >
                 <img
-                  src={product.image}
+                  src={optimizeImage(product.image, { width: 600 })}
                   alt={product.name}
                   className="w-full h-full object-cover"
                   loading="eager"

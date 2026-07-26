@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import MainLayout from '../layouts/MainLayout.astro';
 import HeroEmpresarial from '../components/servicios-empresariales/HeroEmpresarial.astro';
 import BeneficiosEmpresa from '../components/servicios-empresariales/BeneficiosEmpresa.astro';
@@ -8,6 +10,9 @@ import ProcesoEmpresarial from '../components/servicios-empresariales/ProcesoEmp
 import CronogramaProduccion from '../components/servicios-empresariales/CronogramaProduccion.astro';
 import PoliticasEmpresa from '../components/servicios-empresariales/PoliticasEmpresa.astro';
 import FAQEmpresarial from '../components/servicios-empresariales/FAQEmpresarial.astro';
+import { getTrabajos } from '../data/trabajos';
+
+const trabajos = await getTrabajos();
 ---
 
 <MainLayout
@@ -22,7 +27,7 @@ import FAQEmpresarial from '../components/servicios-empresariales/FAQEmpresarial
   <BeneficiosEmpresa />
 
   <!-- Success Cases -->
-  <CasosExito maxItems={3} />
+  <CasosExito maxItems={3} trabajos={trabajos} />
 
   <!-- B2B Products -->
   <ProductosB2B />

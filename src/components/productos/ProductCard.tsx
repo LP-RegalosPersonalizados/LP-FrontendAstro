@@ -3,6 +3,7 @@ import { useCart } from '../../store/useCart';
 import type { Product } from '../../data/products';
 import { formatPrice } from '../../utils/formatters';
 import { buildProductWhatsAppLink } from '../../utils/whatsapp';
+import { optimizeImage } from '../../utils/cloudinary';
 
 interface Props {
   product: Product;
@@ -36,7 +37,7 @@ export default function ProductCard({ product, showBusinessBadge, businessMode }
         aria-label={`Ver detalle de ${product.name}`}
       >
         <img
-          src={product.image}
+          src={optimizeImage(product.image, { width: 400 })}
           alt={product.name}
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

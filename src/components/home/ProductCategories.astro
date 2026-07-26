@@ -1,13 +1,15 @@
 ---
-/**
- * ProductCategories Component
- * Grid de categorías de productos con contenido descriptivo SEO
- */
 import SectionTitle from '../ui/SectionTitle.astro';
-import { products } from '../../data/products';
+import type { Product } from '../../data/products';
+import { optimizeImage } from '../../utils/cloudinary';
 
-// Obtener primera imagen de cada categoría
-const getFirstImageByCategory = (slug: string) => {
+interface Props {
+  products: Product[];
+}
+
+const { products } = Astro.props;
+
+const getImageOrPlaceholder = (slug: string): { type: 'image' | 'placeholder', src?: string, name: string } => {
   const categoryMap: Record<string, {category?: string; filter?: (name: string) => boolean}> = {
     'tazas-magicas': { category: 'tazas', filter: (name) => name.includes('Cerámica') },
     'tazas-metalicas': { category: 'tazas', filter: (name) => name.includes('Metálica') },
@@ -18,15 +20,19 @@ const getFirstImageByCategory = (slug: string) => {
     'empresas': { category: 'festivos' },
   };
 
+  const cat = categorias.find(c => c.slug === slug);
+  const name = cat?.nombre || slug;
+
   const config = categoryMap[slug];
-  if (!config) return `/images/categorias/${slug}.jpg`;
+  if (!config) return { type: 'placeholder', name };
 
   const product = products.find(p => {
     if (p.category !== config.category) return false;
     return config.filter ? config.filter(p.name) : true;
   });
 
-  return product?.image || `/images/categorias/${slug}.jpg`;
+  if (product?.image) return { type: 'image', src: product.image, name };
+  return { type: 'placeholder', name };
 };
 
 const categorias = [
@@ -76,27 +82,38 @@ const categorias = [
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
       {
-        categorias.map(({ nombre, descripcion, slug }) => (
-          <a
-            href={`/catalogo#${slug}`}
-            class="group relative overflow-hidden rounded-xl aspect-square shadow-card hover:shadow-card-hover transition-all duration-300"
-            aria-label={`Ver categoría: ${nombre}. ${descripcion}`}
-          >
-            <img
-              src={getFirstImageByCategory(slug)}
-              alt={nombre}
-              class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-primary/60 group-hover:bg-primary/75 transition-colors flex items-center justify-center">
-              <div class="text-center px-4">
-                <h3 class="text-white font-display font-semibold text-sm md:text-base leading-snug">
-                  {nombre}
-                </h3>
+        categorias.map(({ nombre, descripcion, slug }) => {
+          const media = getImageOrPlaceholder(slug);
+          return (
+            <a
+              href={`/catalogo#${slug}`}
+              class="group relative overflow-hidden rounded-xl aspect-square shadow-card hover:shadow-card-hover transition-all duration-300"
+              aria-label={`Ver categoría: ${nombre}. ${descripcion}`}
+            >
+              {media.type === 'image' ? (
+                <img
+                  src={optimizeImage(media.src, { width: 400 })}
+                  alt={nombre}
+                  class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-full bg-gradient-to-br from-primary/80 to-accent/80 flex items-center justify-center">
+                  <span class="text-white font-display font-bold text-lg md:text-xl px-4 text-center leading-snug">
+                    {nombre}
+                  </span>
+                </div>
+              )}
+              <div class="absolute inset-0 bg-primary/60 group-hover:bg-primary/75 transition-colors flex items-center justify-center">
+                <div class="text-center px-4">
+                  <h3 class="text-white font-display font-semibold text-sm md:text-base leading-snug">
+                    {nombre}
+                  </h3>
+                </div>
               </div>
-            </div>
-          </a>
-        ))
+            </a>
+          );
+        })
       }
     </div>
 
