@@ -1,35 +1,12 @@
 ---
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+import type { FAQItem } from '../../data/faq';
+import { faqGroups } from '../../data/faq';
 
 interface Props {
   items?: FAQItem[];
 }
 
-const defaultItems: FAQItem[] = [
-  {
-    question: '¿Cuál es el proceso de personalización?',
-    answer: 'Selecciona un producto, envíanos tus fotos o diseño, lo revisamos juntos, y una vez aprobado comenzamos la producción.',
-  },
-  {
-    question: '¿Puedo enviar mis propias imágenes?',
-    answer: 'Claro. Aceptamos fotos, logos, textos y diseños. Preferimos archivos de alta resolución (300 dpi) para mejor resultado.',
-  },
-  {
-    question: '¿Qué formatos de imagen aceptan?',
-    answer: 'Aceptamos JPG, PNG, PDF y PSD. Formatos vectoriales como AI y EPS también son bienvenidos.',
-  },
-  {
-    question: '¿Cuántas revisiones de diseño puedo pedir?',
-    answer: 'Revisiones ilimitadas. No hay límite mientras estés en fase de diseño, antes de iniciar la producción.',
-  },
-  {
-    question: '¿Veo el producto antes de que se produzca?',
-    answer: 'Sí, te enviamos un mockup digital para tu aprobación. Cambios adicionales son permitidos en esta fase.',
-  },
-];
+const defaultItems = faqGroups.find((g) => g.id === 'personalizacion')?.items ?? [];
 
 const { items = defaultItems } = Astro.props;
 ---

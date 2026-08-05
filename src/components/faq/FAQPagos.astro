@@ -1,35 +1,12 @@
 ---
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+import type { FAQItem } from '../../data/faq';
+import { faqGroups } from '../../data/faq';
 
 interface Props {
   items?: FAQItem[];
 }
 
-const defaultItems: FAQItem[] = [
-  {
-    question: '¿Cómo funciona el pago?',
-    answer: 'Al confirmar el diseño se solicita un anticipo del 50%. El 50% restante se paga antes de la entrega. ',
-  },
-  {
-    question: '¿Qué formas de pago aceptan?',
-    answer: 'Se aceptan transferencias bancarias, depósitos en efectivo, pagos por QR y otras opciones. Para mas información, contáctanos directamente.',
-  },
-  {
-    question: '¿Puedo pagar todo de una vez?',
-    answer: 'Claro, si prefieres pagar el 100% al confirmar también lo aceptamos. Consulta sin compromiso.',
-  },
-  {
-    question: '¿Cuánto tiempo es válido un presupuesto?',
-    answer: 'Los presupuestos son válidos por 7 días. Después de ese período, los precios pueden estar sujetos a cambios debido a variaciones en costos de materiales o personalización. Si necesitas una extensión del presupuesto, contáctanos para evaluar la situación. Siempre buscamos ser flexibles y adaptarnos a tus necesidades.',
-  },
-  {
-    question: '¿Hay recargo por volúmenes muy grandes?',
-    answer: 'No, al contrario, para volúmenes grandes ofrecemos descuentos. A mayor cantidad, mejor precio unitario. Para particularidades y empresas, consultamos caso por caso para ofrecer la mejor propuesta.',
-  }
-];
+const defaultItems = faqGroups.find((g) => g.id === 'pagos')?.items ?? [];
 
 const { items = defaultItems } = Astro.props;
 ---

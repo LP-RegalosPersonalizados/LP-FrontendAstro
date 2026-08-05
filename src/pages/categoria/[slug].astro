@@ -1,0 +1,136 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ProductCard from '../../components/productos/ProductCard';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import { fetchProducts } from '../../data/products';
+import type { ProductCategory } from '../../data/products';
+import { categoryLabels, categorySEO } from '../../data/constants';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const products = await fetchProducts();
+  const generalProducts = products.filter((p) => p.audience?.general?.available === true);
+  const categories = [...new Set(generalProducts.map((p) => p.category))] as ProductCategory[];
+  return categories.map((category) => ({ params: { slug: category } }));
+}
+
+const { slug } = Astro.params;
+const category = slug as ProductCategory;
+
+const allProducts = await fetchProducts();
+const products = allProducts.filter(
+  (p) => p.category === category && p.audience?.general?.available === true
+);
+
+if (products.length === 0) {
+  return new Response('Not Found', { status: 404 });
+}
+
+const label = categoryLabels[category];
+const seo = categorySEO[category];
+
+const siteUrl = 'https://www.recuerdoscompartidos.sarl';
+const categoryUrl = `${siteUrl}/categoria/${category}`;
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${label} personalizados`,
+  description: seo.description,
+  numberOfItems: products.length,
+  itemListElement: products.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    url: `${siteUrl}/producto/${product.slug}`,
+    name: product.name,
+    image: product.image,
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: `${siteUrl}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Catálogo',
+      item: `${siteUrl}/catalogo`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: label,
+      item: categoryUrl,
+    },
+  ],
+};
+---
+
+<MainLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={`${label.toLowerCase()} personalizadas Santa Cruz, ${label.toLowerCase()} Bolivia, recuerdos compartidos ${label.toLowerCase()}, regalos personalizados Santa Cruz de la Sierra`}
+  author="Recuerdos Compartidos"
+  robots="index, follow"
+  canonical={categoryUrl}
+  ogImage="/og-image.png"
+>
+  <section class="section-padding">
+    <div class="container-main">
+      <SectionTitle
+        title={label}
+        subtitle="Productos personalizados y hechos a tu medida en Santa Cruz de la Sierra"
+        align="left"
+        tag="h1"
+      />
+
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <p class="text-sm text-gray-500">
+          {products.length} {products.length === 1 ? 'producto disponible' : 'productos disponibles'}
+        </p>
+        <a href="/catalogo" class="btn-outline text-sm py-2.5 shrink-0">
+          Ver todo el catálogo →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {products.map((product) => (
+          <ProductCard product={product} client:visible />
+        ))}
+      </div>
+
+      <!-- Texto SEO de la categoría -->
+      <div class="mt-16 bg-secondary/10 rounded-2xl p-8">
+        <h2 class="font-display font-bold text-primary text-2xl mb-4">
+          {label} personalizados en Santa Cruz de la Sierra
+        </h2>
+        <p class="text-gray-600 leading-relaxed">
+          {seo.intro}
+        </p>
+        <p class="text-gray-600 leading-relaxed mt-4">
+          ¿Buscás algo a medida para tu empresa o evento? Contamos con soluciones corporativas
+          con descuentos por cantidad. Contactanos por WhatsApp y cotizá tu pedido sin compromiso.
+        </p>
+        <a
+          href={`https://wa.me/59162699702?text=${encodeURIComponent(`Hola, quiero cotizar ${label.toLowerCase()} personalizados`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block mt-6 px-8 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300"
+        >
+          Cotizar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+</MainLayout>

@@ -1,35 +1,12 @@
 ---
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+import type { FAQItem } from '../../data/faq';
+import { faqGroups } from '../../data/faq';
 
 interface Props {
   items?: FAQItem[];
 }
 
-const defaultItems: FAQItem[] = [
-  {
-    question: '¿Cuánto tarda en llegar mi pedido?',
-    answer: 'Depende del volumen: 1-24 unidades (1-2 días) | 25-50 unidades (3-4 días) | 50+ unidades (A consultar). Para pedidos grandes o personalizados, ofrecemos cronogramas adaptados a tus necesidades.',
-  },
-  {
-    question: '¿Hacen entregas a todo el país?',
-    answer: 'Si coordinamos envíos a mediante transporte privado externo, servicio de mensajería o retiro en tienda. Para pedidos grandes o entregas especiales, ofrecemos opciones de logística adaptadas a tus necesidades.',
-  },
-  {
-    question: '¿Cómo se envasan los productos?',
-    answer: 'Los productos se envasan cuidadosamente para garantizar su protección durante el transporte. Utilizamos materiales de embalaje resistentes y adecuados para cada tipo de producto, asegurando que lleguen en perfectas condiciones a su destino.',
-  },
-  {
-    question: '¿Puedo elegir fecha de entrega?',
-    answer: 'Coordinamos la entrega según tus necesidades. Para pedidos grandes o entregas especiales, ofrecemos opciones de logística adaptadas a tus necesidades. Para fechas específicas, por favor contáctanos con anticipación para verificar disponibilidad.',
-  },
-  {
-    question: '¿Qué hago si me llega dañado?',
-    answer: 'Reporta cualquier daño dentro de las 24 horas posteriores a la recepción. Proporciona fotos del daño y detalles del pedido. Revisaremos el caso y, si se confirma un defecto de fabricación o daño durante el transporte, ofreceremos un reemplazo sin costo.',
-  },
-];
+const defaultItems = faqGroups.find((g) => g.id === 'entregas')?.items ?? [];
 
 const { items = defaultItems } = Astro.props;
 ---
