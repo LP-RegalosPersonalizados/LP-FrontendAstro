@@ -6,6 +6,8 @@ export interface CloudinaryOptions {
   quality?: 'auto' | number;
   format?: 'auto' | 'webp' | 'avif' | 'png' | 'jpg';
   fetchFormat?: boolean;
+  /** Reemplaza los transforms existentes de la URL (p. ej. para og:image con medidas exactas) */
+  force?: boolean;
 }
 
 function isCloudinaryUrl(url: string): boolean {
@@ -20,7 +22,7 @@ function isCloudinaryUrl(url: string): boolean {
 export function optimizeImage(url: string, options?: CloudinaryOptions): string {
   if (!url || !isCloudinaryUrl(url)) return url;
 
-  const { width, height, quality = 'auto', format = 'auto' } = options ?? {};
+  const { width, height, quality = 'auto', format = 'auto', force = false } = options ?? {};
 
   const parts: string[] = [];
   parts.push(`f_${format}`);
@@ -41,7 +43,7 @@ export function optimizeImage(url: string, options?: CloudinaryOptions): string 
 
   const slashIdx = after.indexOf('/');
   if (slashIdx === -1) return url;
-  if (/^[a-z]+_/.test(after.slice(0, slashIdx))) return url;
+  if (/^[a-z]+_/.test(after.slice(0, slashIdx)) && !force) return url;
 
-  return `${url.slice(0, idx)}${transforms}/${after}`;
+  return `${url.slice(0, idx)}${transforms}/${after.slice(slashIdx + 1)}`;
 }
