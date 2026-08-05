@@ -5,6 +5,22 @@ import FAQEntregas from '../components/faq/FAQEntregas.astro';
 import FAQPagos from '../components/faq/FAQPagos.astro';
 import FAQGarantia from '../components/faq/FAQGarantia.astro';
 import FAQEmpresas from '../components/faq/FAQEmpresas.astro';
+import { faqGroups } from '../data/faq';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqGroups.flatMap((group) =>
+    group.items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    }))
+  ),
+};
 ---
 
 <MainLayout
@@ -115,4 +131,6 @@ import FAQEmpresas from '../components/faq/FAQEmpresas.astro';
       </a>
     </div>
   </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
 </MainLayout>

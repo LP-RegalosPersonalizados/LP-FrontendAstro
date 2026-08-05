@@ -7,6 +7,7 @@ import vercel from '@astrojs/vercel/serverless';
 export default defineConfig({
   site: 'https://www.recuerdoscompartidos.sarl',
   output: 'hybrid',
+  trailingSlash: 'never',
   adapter: vercel({
     runtime: 'nodejs20.x'
   }),
@@ -18,6 +19,7 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
+      lastmod: new Date(),
       serialize(item) {
         // Página principal → máxima prioridad
         if (item.url === 'https://www.recuerdoscompartidos.sarl/') {
@@ -26,6 +28,10 @@ export default defineConfig({
         // Páginas de producto → prioridad alta
         if (item.url.includes('/producto/')) {
           return { ...item, priority: 0.8, changefreq: 'monthly' };
+        }
+        // Páginas de categoría → prioridad media-alta
+        if (item.url.includes('/categoria/')) {
+          return { ...item, priority: 0.7, changefreq: 'weekly' };
         }
         // Páginas de catálogo / empresas / trabajos → prioridad media
         return { ...item, priority: 0.6, changefreq: 'weekly' };

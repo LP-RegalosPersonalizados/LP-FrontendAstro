@@ -9,15 +9,16 @@ interface Props {
 
 const { products } = Astro.props;
 
-const getImageOrPlaceholder = (slug: string): { type: 'image' | 'placeholder', src?: string, name: string } => {
-  const categoryMap: Record<string, {category?: string; filter?: (name: string) => boolean}> = {
-    'tazas-magicas': { category: 'tazas', filter: (name) => name.includes('Cerámica') },
-    'tazas-metalicas': { category: 'tazas', filter: (name) => name.includes('Metálica') },
-    'tazas-ceramicas-personalizadas': { category: 'tazas', filter: (name) => name.includes('Cerámica') },
+type CategoryMedia =
+  | { type: 'image'; src: string; name: string }
+  | { type: 'placeholder'; name: string };
+
+const getImageOrPlaceholder = (slug: string): CategoryMedia => {  const categoryMap: Record<string, {category?: string; filter?: (name: string) => boolean}> = {
+    'tazas': { category: 'tazas' },
     'fotos': { category: 'fotos' },
     'alcancias': { category: 'alcancia' },
     'packs': { category: 'festivos' },
-    'empresas': { category: 'festivos' },
+    'llaveros': { category: 'llaveros' },
   };
 
   const cat = categorias.find(c => c.slug === slug);
@@ -37,29 +38,34 @@ const getImageOrPlaceholder = (slug: string): { type: 'image' | 'placeholder', s
 
 const categorias = [
   {
-    nombre: 'Tazas Metálicas',
-    descripcion: 'Tazas de acero inoxidable con impresión personalizada. Ideales para mantener bebidas calientes. Resistentes y duraderas. Excelentes para regalos corporativos y promocionales.',
-    slug: 'tazas-metalicas',
-  },
-  {
     nombre: 'Fotos Polaroid',
     descripcion: 'Fotos estilo Polaroid personalizadas con acabado mate y excelente calidad. Distintos tamaños y formatos para adaptarse a tus necesidades. Imágenes duraderas y de alta definición.',
     slug: 'fotos',
+    categoria: 'fotos',
   },
   {
-    nombre: 'Tazas Cerámicas',
-    descripcion: 'Tazas de cerámica con impresión personalizada. Perfectas para café, té o bebidas frías. Regalo ideal para oficina, hogar o empresa.',
-    slug: 'tazas-ceramicas-personalizadas',
+    nombre: 'Tazas',
+    descripcion: 'Tazas cerámicas y metálicas personalizadas con fotos, nombres o logos. Perfectas para café, té o bebidas frías. Regalo ideal para oficina, hogar o empresa.',
+    slug: 'tazas',
+    categoria: 'tazas',
   },
   {
-    nombre: 'Alcancias Personalizadas',
-    descripcion: 'Alcancias decorativas con diseño personalizado. Combinan funcionalidad y estética. Perfectas como regalo para niños, adultos o como elemento decorativo único en el hogar.',
-    slug: 'alcancias',
-  },
-  {
-    nombre: 'Packs Especiales',
-    descripcion: 'Combina múltiples productos en packs temáticos. Regalos completos y coordinados para ocasiones especiales como cumpleaños, aniversarios o sorpresas corporativas.',
+    nombre: 'Regalos Festivos',
+    descripcion: 'Packs temáticos y regalos festivos coordinados para cada celebración: Día del Padre, de la Madre, San Valentín, Navidad y más. Regalos completos y listos para sorprender.',
     slug: 'packs',
+    categoria: 'festivos',
+  },
+  {
+    nombre: 'Alcancias',
+    descripcion: 'Alcancias decorativas personalizadas con diseños únicos. Combinan funcionalidad y estética. Perfectas como regalo para niños, adultos o decoración del hogar.',
+    slug: 'alcancias',
+    categoria: 'alcancia',
+  },
+  {
+    nombre: 'Llaveros',
+    descripcion: 'Llaveros personalizados a pedido con fotos, logos, nombres y más. El detalle perfecto para regalar o para tu empresa, con impresión de alta calidad.',
+    slug: 'llaveros',
+    categoria: 'llaveros',
   },
 ];
 ---
@@ -82,11 +88,11 @@ const categorias = [
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
       {
-        categorias.map(({ nombre, descripcion, slug }) => {
+        categorias.map(({ nombre, descripcion, slug, categoria }) => {
           const media = getImageOrPlaceholder(slug);
           return (
             <a
-              href={`/catalogo#${slug}`}
+              href={`/categoria/${categoria}`}
               class="group relative overflow-hidden rounded-xl aspect-square shadow-card hover:shadow-card-hover transition-all duration-300"
               aria-label={`Ver categoría: ${nombre}. ${descripcion}`}
             >

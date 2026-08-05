@@ -5,6 +5,8 @@ interface Props {
   align?: 'left' | 'center' | 'right';
   accentColor?: 'primary' | 'accent';
   id?: string;
+  /** Nivel de encabezado semántico (por defecto h2, usar h1 una sola vez por página) */
+  tag?: 'h1' | 'h2' | 'h3' | 'h4';
 }
 
 const {
@@ -13,6 +15,7 @@ const {
   align = 'center',
   accentColor = 'primary',
   id,
+  tag = 'h2',
 } = Astro.props;
 
 const alignClass = {
@@ -25,12 +28,14 @@ const accentClass = {
   primary: 'text-primary',
   accent: 'text-accent',
 }[accentColor];
+
+const Tag = tag;
 ---
 
 <div class={`max-w-2xl ${alignClass} mb-12`}>
-  <h2 id={id} class={`font-display font-bold text-3xl md:text-4xl ${accentClass} leading-tight`}>
+  <Tag id={id} class={`font-display font-bold text-3xl md:text-4xl ${accentClass} leading-tight`}>
     {title}
-  </h2>
+  </Tag>
   {subtitle && (
     <p class="mt-4 text-gray-500 text-lg leading-relaxed">
       {subtitle}

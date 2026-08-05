@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { Trabajo } from '../../data/trabajos';
 import { optimizeImage } from '../../utils/cloudinary';
 

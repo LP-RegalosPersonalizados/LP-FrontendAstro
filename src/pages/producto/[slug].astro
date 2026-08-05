@@ -2,9 +2,11 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProductDetail from '../../components/productos/ProductDetail';
 import ProductCard from '../../components/productos/ProductCard';
+import { optimizeImage } from '../../utils/cloudinary';
 export const prerender = true;
 
 import { fetchProducts, getProductBySlug, getRelatedProducts } from '../../data/products';
+import { categoryLabels } from '../../data/constants';
 
 export async function getStaticPaths() {
   const products = await fetchProducts();
@@ -25,73 +27,99 @@ if (!product) {
 
 const related = await getRelatedProducts(product, 3);
 
+const siteUrl = 'https://www.recuerdoscompartidos.sarl';
+const productUrl = `${siteUrl}/producto/${slug}`;
+
+// Imagen principal optimizada + galería para schema
+const productImages = [
+  optimizeImage(product.image, { width: 800 }),
+  ...(product.gallery ?? []).map((img) => optimizeImage(img, { width: 800 })),
+];
+
+// Fecha de validez de la oferta: +12 meses desde la fecha de build
+const priceValidUntil = new Date(
+  new Date().setFullYear(new Date().getFullYear() + 1)
+).toISOString().slice(0, 10);
+
 // Schema Product para SEO
 const productSchema = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": product.name,
-  "description": product.description,
-  "image": product.image,
-  "url": `https://www.recuerdoscompartidos.sarl/producto/${slug}`,
-  "brand": {
-    "@type": "Brand",
-    "name": "Recuerdos Compartidos"
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': `${productUrl}#product`,
+  'name': product.name,
+  'description': product.description,
+  'image': productImages,
+  'url': productUrl,
+  'sku': product.id,
+  'brand': {
+    '@type': 'Brand',
+    'name': 'Recuerdos Compartidos'
   },
-  "offers": {
-    "@type": "Offer",
-    "url": `https://wa.me/59162699702?text=${encodeURIComponent(`Hola, me interesa el producto ${product.name}`)}`,
-    "priceCurrency": "BOB",
-    "price": product.price ? product.price.toString() : "0",
-    "priceValidUntil": "2026-12-31",
-    "itemCondition": "https://schema.org/NewCondition",
-    "availability": "https://schema.org/InStock",
-    "seller": {
-      "@type": "LocalBusiness",
-      "name": "Recuerdos Compartidos"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "Bolivia"
-    }
-  },
-  "category": product.category
+  'category': product.category,
+  ...(product.price
+    ? {
+        'offers': {
+          '@type': 'Offer',
+          'url': productUrl,
+          'priceCurrency': 'BOB',
+          'price': product.price.toString(),
+          'priceValidUntil': priceValidUntil,
+          'itemCondition': 'https://schema.org/NewCondition',
+          'availability': 'https://schema.org/InStock',
+          'seller': {
+            '@type': 'LocalBusiness',
+            'name': 'Recuerdos Compartidos'
+          },
+          'areaServed': {
+            '@type': 'Country',
+            'name': 'Bolivia'
+          }
+        }
+      }
+    : {}),
 };
 
 // Schema BreadcrumbList
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
     {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Inicio",
-      "item": "https://www.recuerdoscompartidos.sarl/"
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Inicio',
+      'item': `${siteUrl}/`
     },
     {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Catálogo",
-      "item": "https://www.recuerdoscompartidos.sarl/catalogo"
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Catálogo',
+      'item': `${siteUrl}/catalogo`
     },
     {
-      "@type": "ListItem",
-      "position": 3,
-      "name": product.name,
-      "item": `https://www.recuerdoscompartidos.sarl/producto/${slug}`
+      '@type': 'ListItem',
+      'position': 3,
+      'name': categoryLabels[product.category],
+      'item': `${siteUrl}/categoria/${product.category}`
+    },
+    {
+      '@type': 'ListItem',
+      'position': 4,
+      'name': product.name,
+      'item': productUrl
     }
   ]
 };
 ---
 
 <MainLayout
-  title={`${product.name} | Recuerdos Compartidos`}
+  title={product.name}
   description={`${product.description} Personalizado y hecho a tu medida en Santa Cruz de la Sierra. Cotizá por WhatsApp.`}
   keywords={`${product.name}, recuerdos compartidos Santa Cruz, ${product.category}, regalo personalizado Bolivia`}
   author="Recuerdos Compartidos"
   robots="index, follow"
   canonical={`https://www.recuerdoscompartidos.sarl/producto/${slug}`}
-  ogImage={product.image}
+  ogImage={optimizeImage(product.image, { width: 1200, height: 630, format: 'jpg', force: true })}
 >
   <section class="section-padding">
     <div class="container-main">
@@ -100,6 +128,10 @@ const breadcrumbSchema = {
         <a href="/" class="hover:text-primary transition-colors duration-200">Inicio</a>
         <span aria-hidden="true">/</span>
         <a href="/catalogo" class="hover:text-primary transition-colors duration-200">Catálogo</a>
+        <span aria-hidden="true">/</span>
+        <a href={`/categoria/${product.category}`} class="hover:text-primary transition-colors duration-200">
+          {categoryLabels[product.category]}
+        </a>
         <span aria-hidden="true">/</span>
         <span class="text-gray-700 font-medium" aria-current="page">{product.name}</span>
       </nav>
@@ -124,8 +156,8 @@ const breadcrumbSchema = {
   </section>
 
   <!-- Schema Product -->
-  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} is:inline />
 
   <!-- Schema Breadcrumb -->
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
 </MainLayout>

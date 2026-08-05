@@ -34,16 +34,6 @@ export default function ProductCarousel({
     return () => clearTimeout(timeout);
   };
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % products.length);
-    setIsAutoplay(false);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
-    setIsAutoplay(false);
-  };
-
   if (products.length === 0) return null;
 
   const currentProduct = products[currentIndex];
