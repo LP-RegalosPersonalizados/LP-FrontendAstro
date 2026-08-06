@@ -3,32 +3,39 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import ProductCard from '../../components/productos/ProductCard';
 import SectionTitle from '../../components/ui/SectionTitle.astro';
 import { fetchProducts } from '../../data/products';
-import type { ProductCategory } from '../../data/products';
-import { categoryLabels, categorySEO } from '../../data/constants';
+import { fetchCategories, getCategoryLabel, getCategorySEO } from '../../data/categories';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
   const products = await fetchProducts();
-  const generalProducts = products.filter((p) => p.audience?.general?.available === true);
-  const categories = [...new Set(generalProducts.map((p) => p.category))] as ProductCategory[];
-  return categories.map((category) => ({ params: { slug: category } }));
+  const categories = await fetchCategories();
+  const generalCategories = new Set(
+    products.filter((p) => p.audience?.general?.available === true).map((p) => p.category)
+  );
+  const knownSlugs = new Set<string>([
+    ...generalCategories,
+    ...categories.map((c) => c.slug),
+  ]);
+  return [...knownSlugs]
+    .filter((slug) => generalCategories.has(slug))
+    .map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
-const category = slug as ProductCategory;
+const category = slug as string;
 
-const allProducts = await fetchProducts();
+const [allProducts, categories] = await Promise.all([
+  fetchProducts(),
+  fetchCategories(),
+]);
+
 const products = allProducts.filter(
   (p) => p.category === category && p.audience?.general?.available === true
 );
 
-if (products.length === 0) {
-  return new Response('Not Found', { status: 404 });
-}
-
-const label = categoryLabels[category];
-const seo = categorySEO[category];
+const label = getCategoryLabel(categories, category);
+const seo = getCategorySEO(categories, category);
 
 const siteUrl = 'https://www.recuerdoscompartidos.sarl';
 const categoryUrl = `${siteUrl}/categoria/${category}`;

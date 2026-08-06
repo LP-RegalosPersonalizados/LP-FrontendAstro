@@ -5,8 +5,14 @@ import MainLayout from '../layouts/MainLayout.astro';
 import SectionTitle from '../components/ui/SectionTitle.astro';
 import ProductGrid from '../components/productos/ProductGrid';
 import { getGeneralProducts } from '../data/products';
+import { fetchCategories } from '../data/categories';
 
-const generalProducts = await getGeneralProducts();
+const [generalProducts, categories] = await Promise.all([
+  getGeneralProducts(),
+  fetchCategories(),
+]);
+
+const categoryLabels = Object.fromEntries(categories.map((c) => [c.slug, c.name]));
 
 const siteUrl = 'https://www.recuerdoscompartidos.sarl';
 
@@ -73,6 +79,7 @@ const itemListSchema = {
 
       <ProductGrid
         products={generalProducts}
+        categoryLabels={categoryLabels}
         client:load
       />
     </div>
