@@ -474,11 +474,6 @@ Este proyecto está bajo licencia MIT. Ver archivo LICENSE para detalles.
 - [TypeScript](https://www.typescriptlang.org)
 - [Zustand](https://github.com/pmndrs/zustand)
 
-## Documentación Relacionada
-
-- **`readme-api.md`** — Documentación completa de la API backend (endpoints, autenticación, caché, modelo de categorías dinámicas).
-- **`RIESGOS-DEPLOY.md`** — Análisis de riesgos de deploy (R1-R12) y sus mitigaciones aplicadas.
-
 ## Roadmap Futuro
 
 - Integración de pasarela de pagos (Stripe/PayPal)
