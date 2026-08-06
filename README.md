@@ -292,7 +292,7 @@ La página estará disponible en `/nueva-pagina`
 
 Los productos no se definen en el frontend. Se obtienen desde la API remota en tiempo de build:
 
-1. Agrega el producto en el backend (`https://api-recuerdos.vercel.app/api/productos`)
+1. Agrega el producto en el backend (`https://api-recuerdos-seven.vercel.app/api/productos`)
 2. El producto aparecerá automáticamente en el catálogo al re-buildear
 
 > Si el producto trae una **categoría nueva**, se crea implícitamente y aparecerá en `/categoria/:slug` al redesplegar. Ver [Categorías Dinámicas](#categorías-dinámicas).
@@ -404,7 +404,7 @@ El proyecto está configurado para desplegarse en **Vercel** con Node.js 20.x:
 ### Variables de entorno en producción
 | Variable | Valor |
 |----------|-------|
-| `PUBLIC_API_URL` | `https://api-recuerdos.vercel.app` (default) |
+| `PUBLIC_API_URL` | `https://api-recuerdos-seven.vercel.app` (default) |
 
 ### Dependencia de la API en tiempo de build
 
