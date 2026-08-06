@@ -6,7 +6,7 @@ import { optimizeImage } from '../../utils/cloudinary';
 export const prerender = true;
 
 import { fetchProducts, getProductBySlug, getRelatedProducts } from '../../data/products';
-import { categoryLabels } from '../../data/constants';
+import { fetchCategories, getCategoryLabel } from '../../data/categories';
 
 export async function getStaticPaths() {
   const products = await fetchProducts();
@@ -20,10 +20,10 @@ const { slug } = Astro.params;
 const product = await getProductBySlug(slug as string);
 
 if (!product) {
-  // Si por alguna razón el producto no existe en la base de datos
-  // pero la ruta fue generada, retorna 404 silenciosamente
-  return new Response('Not Found', { status: 404 });
+  return Astro.redirect('/404');
 }
+
+const categories = await fetchCategories();
 
 const related = await getRelatedProducts(product, 3);
 
@@ -99,7 +99,7 @@ const breadcrumbSchema = {
     {
       '@type': 'ListItem',
       'position': 3,
-      'name': categoryLabels[product.category],
+      'name': getCategoryLabel(categories, product.category),
       'item': `${siteUrl}/categoria/${product.category}`
     },
     {
@@ -130,7 +130,7 @@ const breadcrumbSchema = {
         <a href="/catalogo" class="hover:text-primary transition-colors duration-200">Catálogo</a>
         <span aria-hidden="true">/</span>
         <a href={`/categoria/${product.category}`} class="hover:text-primary transition-colors duration-200">
-          {categoryLabels[product.category]}
+          {getCategoryLabel(categories, product.category)}
         </a>
         <span aria-hidden="true">/</span>
         <span class="text-gray-700 font-medium" aria-current="page">{product.name}</span>

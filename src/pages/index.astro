@@ -12,9 +12,13 @@ import PersonalizationProcess from '../components/home/PersonalizationProcess.as
 import WorkPreview from '../components/home/WorkPreview.astro';
 import TrustBadges from '../components/home/TrustBadges.astro';
 import { getFeaturedProducts, getGeneralProducts } from '../data/products';
+import { fetchCategories } from '../data/categories';
 
-const featuredProducts = await getFeaturedProducts();
-const allProducts = await getGeneralProducts();
+const [featuredProducts, allProducts, categories] = await Promise.all([
+  getFeaturedProducts(),
+  getGeneralProducts(),
+  fetchCategories(),
+]);
 ---
 
 <MainLayout
@@ -39,7 +43,7 @@ const allProducts = await getGeneralProducts();
   <PersonalizationProcess />
 
   <!-- ============ PRODUCT CATEGORIES ============ -->
-  <ProductCategories products={allProducts} />
+  <ProductCategories categories={categories} products={allProducts} />
 
   <!-- ============ STATS ============ -->
   <Stats />

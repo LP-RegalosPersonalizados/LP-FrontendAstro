@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import type { Product, ProductCategory } from '../../data/products';
-import { categoryLabels } from '../../data/constants';
+import type { Product } from '../../data/products';
+import { humanizeCategorySlug } from '../../data/categories';
 import ProductCard from './ProductCard';
 
 interface Props {
   products: Product[];
   showBusinessBadge?: boolean;
   businessMode?: boolean;
-  initialCategory?: ProductCategory | 'todos';
+  initialCategory?: string;
+  categoryLabels?: Record<string, string>;
 }
 
 export default function ProductGrid({
@@ -15,13 +16,14 @@ export default function ProductGrid({
   showBusinessBadge,
   businessMode,
   initialCategory = 'todos',
+  categoryLabels,
 }: Props) {
-  const [activeCategory, setActiveCategory] = useState<ProductCategory | 'todos'>(initialCategory);
+  const [activeCategory, setActiveCategory] = useState<string>(initialCategory);
 
-  const categories: Array<ProductCategory | 'todos'> = [
-    'todos',
-    ...([...new Set(products.map((p) => p.category))] as ProductCategory[]),
-  ];
+  const categories: string[] = ['todos', ...new Set(products.map((p) => p.category))];
+
+  const getCategoryName = (cat: string) =>
+    cat === 'todos' ? 'Todos' : categoryLabels?.[cat] ?? humanizeCategorySlug(cat);
 
   const filtered =
     activeCategory === 'todos'
@@ -49,7 +51,7 @@ export default function ProductGrid({
                   : 'bg-secondary/50 text-primary hover:bg-secondary'
                 }`}
             >
-              {cat === 'todos' ? 'Todos' : categoryLabels[cat]}
+              {getCategoryName(cat)}
             </button>
           ))}
         </div>

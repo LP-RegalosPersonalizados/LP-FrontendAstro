@@ -1,7 +1,5 @@
 import { safeFetch } from './api';
 
-export type ProductCategory = 'tazas' | 'fotos' | 'cuadros' | 'festivos' | 'alcancia'| 'llaveros' | 'otros';
-
 export interface ProductAudience {
   available: boolean;
   customizable: boolean;
@@ -11,7 +9,7 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
-  category: ProductCategory;
+  category: string;
   price?: number;
   image: string;
   gallery?: string[];
@@ -55,7 +53,7 @@ export async function getProductBySlug(slug: string): Promise<Product | undefine
   return products.find((p) => p.slug === slug);
 }
 
-export async function getProductsByCategory(category: ProductCategory): Promise<Product[]> {
+export async function getProductsByCategory(category: string): Promise<Product[]> {
   const products = await fetchProducts();
   return products.filter((p) => p.category === category);
 }

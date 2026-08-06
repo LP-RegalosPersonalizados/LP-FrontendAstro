@@ -4,13 +4,14 @@ import { useCart } from '../../store/useCart';
 import { formatPrice } from '../../utils/formatters';
 import { buildProductWhatsAppLink } from '../../utils/whatsapp';
 import { optimizeImage } from '../../utils/cloudinary';
-import { categoryLabels } from '../../data/constants';
+import { humanizeCategorySlug } from '../../data/categories';
 
 interface Props {
   product: Product;
+  categoryName?: string;
 }
 
-export default function ProductDetail({ product }: Props) {
+export default function ProductDetail({ product, categoryName }: Props) {
   const { addItem, hasItem, openCart } = useCart();
   const [personalization, setPersonalization] = useState('');
   const [added, setAdded] = useState(false);
@@ -73,7 +74,7 @@ export default function ProductDetail({ product }: Props) {
         {/* Category + badges */}
         <div className="flex flex-wrap gap-2">
           <span className="text-xs bg-secondary text-primary px-3 py-1 rounded-full font-medium">
-            {categoryLabels[product.category]}
+            {categoryName ?? humanizeCategorySlug(product.category)}
           </span>
           {product.audience.general.customizable && (
             <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium border border-accent/20">
