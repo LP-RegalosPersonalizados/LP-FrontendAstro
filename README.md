@@ -8,6 +8,7 @@
 
 - [Características Principales](#características-principales)
 - [Arquitectura de Datos](#arquitectura-de-datos)
+- [Categorías Dinámicas](#categorías-dinámicas)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Instalación y Configuración](#instalación-y-configuración)
 - [Comandos Disponibles](#comandos-disponibles)
@@ -24,6 +25,7 @@
 ## Características Principales
 
 - Catálogo dinámico con filtrado por categorías
+- **Categorías 100% dinámicas servidas por la API** (`GET /api/categorias`) — sin constantes estáticas que rompan el build
 - Lista de interés con envío por WhatsApp (sin carrito de compras ni checkout)
 - Modo Dual: compras personales y para empresas
 - Datos obtenidos desde API remota en tiempo de build
@@ -46,33 +48,122 @@ El proyecto obtiene todos sus datos dinámicos desde una API REST externa en tie
 [API Remota]                [Frontend (Astro)]
 api-recuerdos.vercel.app    ─build-time─►  src/data/api.ts
   GET /api/productos           ──safeFetch──►  products.ts
+  GET /api/categorias          ──safeFetch──►  categories.ts
   GET /api/trabajos            ──safeFetch──►  trabajos.ts
-                                                │
-                                  ┌─────────────┘
-                                  ▼
-                              Páginas .astro
-                              (pasan datos como props)
-                                  │
-                                  ▼
-                          Componentes React/Astro
+                                                 │
+                                   ┌─────────────┘
+                                   ▼
+                               Páginas .astro
+                               (pasan datos como props)
+                                   │
+                                   ▼
+                           Componentes React/Astro
 ```
 
 - **Capa API** (`src/data/api.ts`): wrapper genérico `fetchApi<T>()` y `safeFetch<T>()` que tolera fallos y retorna arrays vacíos.
-- **Productos** (`src/data/products.ts`): funciones `fetchProducts()`, `getProductBySlug()`, `getFeaturedProducts()`, `getBusinessProducts()`, `getGeneralProducts()`, `getRelatedProducts()`.
+- **Productos** (`src/data/products.ts`): funciones `fetchProducts()`, `getProductBySlug()`, `getFeaturedProducts()`, `getBusinessProducts()`, `getGeneralProducts()`, `getRelatedProducts()`. El campo `Product.category` es `string` libre (sin union type cerrado).
+- **Categorías** (`src/data/categories.ts`): `fetchCategories()`, `getCategoryBySlug()`, `getCategoryLabel()`, `getCategorySEO()`, `humanizeCategorySlug()`, `defaultCategorySEO()`. Ver [Categorías Dinámicas](#categorías-dinámicas).
 - **Trabajos** (`src/data/trabajos.ts`): funciones `fetchTrabajos()`, `getTrabajos()`, `getTrabajosByCategory()`, `getTrabajosById()`.
 - **Cache en memoria**: las funciones fetch cachean el resultado para evitar llamadas repetidas durante el build.
 - **Normalización**: `normalizeProduct()` convierte campos booleanos (acepta `true`, `'true'`, `'TRUE'`, `1`).
 
 > **Nota:** No hay escritura hacia el backend desde el frontend. El sitio es 100% catálogo + consulta por WhatsApp.
 
+## Categorías Dinámicas
+
+Las categorías **no viven en el frontend**: la API las deriva en tiempo real agrupando los productos por su columna `category` (normalizada a slug) y las sirve en `GET /api/categorias` con `name`, `count`, `image` y metadata SEO (`seo.title`, `seo.description`, `seo.intro`). Este proyecto consume ese endpoint de forma 100% dinámica, eliminando la dependencia de constantes estáticas que podía romper el deploy ante una categoría desconocida.
+
+### Flujo de datos
+
+```
+GET /api/categorias ──►  src/data/categories.ts (fetchCategories, caché en módulo)
+                              │
+            ┌─────────────────┼──────────────────┐
+            ▼                 ▼                  ▼
+   /categoria/[slug].astro   catalogo.astro    index.astro
+   (getStaticPaths + SEO)    (mapa de labels)  (sección home)
+            │                                    │
+            ▼                                    ▼
+   producto/[slug].astro            ProductCategories.astro
+   (breadcrumb + schema)            (tarjetas dinámicas)
+            │
+            ▼
+   ProductGrid.tsx / ProductDetail.tsx  (labels vía props)
+```
+
+### Capa de datos (`src/data/categories.ts`)
+
+| Función | Descripción |
+|---------|-------------|
+| `fetchCategories()` | Obtiene `Category[]` desde `/api/categorias` con caché en memoria. Usa `safeFetch`, así que ante una API caída devuelve `[]` sin romper el build. |
+| `getCategoryBySlug(categories, slug)` | Busca una categoría por slug. |
+| `getCategoryLabel(categories, slug)` | Devuelve `category.name`; si no existe, genera un nombre legible del slug (`humanizeCategorySlug`). **Nunca `undefined`**. |
+| `getCategorySEO(categories, slug)` | Devuelve `category.seo`; si no existe, genera un SEO por defecto (`defaultCategorySEO`). **Nunca `undefined`**. |
+| `humanizeCategorySlug(slug)` | Convierte un slug en nombre legible: `'tazas-personalizadas'` → `'Tazas Personalizadas'`. |
+| `defaultCategorySEO(name)` | Genera `title`/`description`/`intro` siguiendo el patrón de la API ("… Personalizados en Santa Cruz de la Sierra"). |
+
+Interfaces:
+
+```typescript
+interface CategorySEO {
+  title: string;
+  description: string;
+  intro: string;
+}
+
+interface Category {
+  slug: string;
+  name: string;
+  count: number;
+  image: string;
+  seo?: CategorySEO;
+}
+```
+
+### Generación de páginas `/categoria/:slug`
+
+`src/pages/categoria/[slug].astro` genera una página estática por cada categoría:
+
+1. `getStaticPaths()` obtiene `fetchProducts()` + `fetchCategories()`.
+2. Calcula el conjunto de categorías que tienen **al menos un producto visible al público general** (`audience.general.available`).
+3. Genera solo esos slugs → nunca se crean páginas vacías ni 404 internos.
+4. En el cuerpo de la página, `label` y `seo` salen de `getCategoryLabel()` / `getCategorySEO()` con fallback automático.
+
+### Resolución de riesgos de deploy
+
+| Riesgo | Resolución |
+|--------|------------|
+| **R1** — Categoría desconocida rompía el build (`TypeError` sobre `undefined`). | `Product.category` es `string` (sin union type cerrado) y todo label/SEO se resuelve con fallback. |
+| **R2** — `return new Response(...)` en páginas prerendered rompía el build. | Se eliminó ese patrón de `categoria/[slug].astro` y `producto/[slug].astro`. El guard de producto usa `Astro.redirect('/404')` (genera meta-refresh, válido en build estático). |
+| **R3** — API caída durante el build. | `safeFetch` devuelve `[]`; el build **pasa** y solo no se generan páginas dinámicas. |
+| **R7** — Links de home a categorías sin productos daban 404. | `ProductCategories.astro` solo lista categorías que tienen productos públicos, con link al slug real de la API. |
+
+### Labels y SEO en componentes
+
+- **Páginas prerendered** (`categoria/[slug].astro`, `producto/[slug].astro`, `catalogo.astro`, `index.astro`): consumen `fetchCategories()` y pasan los datos como props.
+- **Componentes React** (client-side, no pueden hacer fetch en build):
+  - `ProductGrid` recibe `categoryLabels?: Record<string, string>` (mapa `slug → name`). Sin prop, usa `humanizeCategorySlug`.
+  - `ProductDetail` recibe `categoryName?: string`. Sin prop, usa `humanizeCategorySlug`.
+- **Sección home** (`ProductCategories.astro`): recibe `categories` + `products` y muestra tarjetas con `name`, imagen (`category.image` o placeholder) y descripción. Los textos cortos de tarjeta están **curados por slug** (mapa `CURATED_COPY`) con fallback a `seo.intro` / `seo.description`. Máximo 8 tarjetas.
+
+### Agregar una categoría nueva
+
+No hace falta tocar el frontend:
+
+1. Crea un producto con esa categoría en el admin (o directo en Google Sheets / `POST /api/productos`).
+2. La categoría aparece en `GET /api/categorias` con nombre y SEO generados por defecto.
+3. **Redesplegá el sitio** para que las páginas estáticas `/categoria/:slug` se regeneren.
+
+> **Importante:** por ser un sitio prerendered, las categorías nuevas necesitan un **redeploy** para aparecer en producción (la API las sirve en runtime, pero Astro genera los HTML en build). Detalle en `readme-api.md` §Categorías.
+
 ## Tecnologías Utilizadas
 
 ### Frameworks y Librerías
-- **Astro 4.16.0** - Meta-framework híbrido (SSG + SSR con Vercel)
-- **React 18.3.1** - Componentes interactivos (islas)
-- **Tailwind CSS 3.4.14** - Framework de estilos
-- **TypeScript 5.6.3** - Lenguaje tipado
-- **Zustand 5.0.0** - Gestión de estado (lista de interés)
+- **Astro 4.16** - Meta-framework híbrido (SSG + SSR con Vercel)
+- **React 18.3** - Componentes interactivos (islas)
+- **Tailwind CSS 3.4** - Framework de estilos
+- **TypeScript 5.9** - Lenguaje tipado
+- **Zustand 5.0** - Gestión de estado (lista de interés)
 
 ### Integraciones
 - @astrojs/react - Soporte de componentes React
@@ -118,7 +209,7 @@ El sitio estará disponible en `http://localhost:4321`
 | Comando | Acción |
 |---------|--------|
 | `npm run dev` | Inicia servidor de desarrollo |
-| `npm run build` | Compila para producción en ./dist/ |
+| `npm run build` | Compila para producción en `.vercel/output/` |
 | `npm run preview` | Visualiza la build de producción |
 | `npm start` | Alias de npm run dev |
 | `npm run astro` | Ejecuta CLI de Astro (ej: `npm run astro -- check`) |
@@ -128,32 +219,34 @@ El sitio estará disponible en `http://localhost:4321`
 ```
 src/
 ├── components/              # Componentes reutilizables
-│   ├── carrito/            # Lista de interés (CartPanel, CartButton, CartItemRow, CartModeSync)
-│   ├── empresas/           # Componente introductorio B2B
-│   ├── faq/                # Preguntas frecuentes
-│   ├── home/               # Componentes de inicio (Hero, FeaturedProducts)
+│   ├── carrito/            # Lista de interés (CartButton, CartItemRow, CartPanel)
+│   ├── faq/                # Preguntas frecuentes (FAQEmpresas, FAQEntregas, FAQGarantia, FAQPagos, FAQPersonalizacion)
+│   ├── home/               # Componentes de inicio (Hero, FeaturedProducts, ProductCategories, Stats, AboutUs, WhyChooseUs, TrustBadges, WorkPreview, PersonalizationProcess, ProductCarousel)
 │   ├── layout/             # Header y Footer
-│   ├── legal/              # Documentos legales
+│   ├── legal/              # Documentos legales (TerminosCondiciones, PoliticaPrivacidad, PoliticaEntregas)
 │   ├── productos/          # Grid, Card, Detail (ProductCard, ProductGrid, ProductDetail)
-│   ├── seo/               # SEO y datos estructurados (JSON-LD)
 │   ├── servicios-empresariales/  # Página B2B completa
-│   ├── trabajos/           # Portafolio de trabajos (ProjectsGrid, CasoExitoCard)
-│   └── ui/                # Componentes genéricos (SectionTitle, WhatsAppButton, etc.)
+│   ├── trabajos/           # Portafolio de trabajos (GaleriaTrabajos, CasoExitoCard)
+│   └── ui/                # Componentes genéricos (SectionTitle)
 ├── pages/                  # Rutas (SSG con prerender)
 │   ├── index.astro        # Página principal
 │   ├── catalogo.astro     # Catálogo general
+│   ├── categoria/[slug].astro  # Detalle de categoría (ruta dinámica, derivada de la API)
+│   ├── producto/[slug].astro   # Detalle de producto (ruta dinámica)
 │   ├── faq.astro          # Preguntas frecuentes
 │   ├── legal.astro        # Documentos legales
 │   ├── servicios-empresariales.astro  # Servicios B2B
 │   ├── trabajos-previos.astro         # Portafolio
-│   ├── 404.astro          # Página no encontrada
-│   └── producto/[slug].astro  # Detalle de producto (ruta dinámica)
+│   └── 404.astro          # Página no encontrada
 ├── store/                  # Zustand store (lista de interés persistida en localStorage)
 ├── data/                   # Capa de datos
 │   ├── api.ts             # Cliente HTTP genérico (fetchApi, safeFetch)
 │   ├── products.ts        # Funciones de obtención/consulta de productos
+│   ├── categories.ts      # Funciones de categorías dinámicas (fetchCategories + fallbacks)
 │   ├── trabajos.ts        # Funciones de obtención/consulta de trabajos
-│   └── constants.ts       # Labels y colores de categorías
+│   ├── faq.ts             # Contenido de preguntas frecuentes
+│   └── constants.ts       # Colores de categorías de trabajos (categoryColors)
+├── layouts/                # MainLayout.astro
 ├── styles/                 # Estilos globales (globals.css)
 ├── utils/                  # Funciones helper
 │   ├── cloudinary.ts      # Optimización de imágenes Cloudinary
@@ -201,6 +294,8 @@ Los productos no se definen en el frontend. Se obtienen desde la API remota en t
 
 1. Agrega el producto en el backend (`https://api-recuerdos.vercel.app/api/productos`)
 2. El producto aparecerá automáticamente en el catálogo al re-buildear
+
+> Si el producto trae una **categoría nueva**, se crea implícitamente y aparecerá en `/categoria/:slug` al redesplegar. Ver [Categorías Dinámicas](#categorías-dinámicas).
 
 ## Lista de Interés por WhatsApp
 
@@ -288,7 +383,7 @@ optimizeImage('https://res.cloudinary.com/.../image/upload/v12345/imagen.png', {
 | `ProductCarousel` | 600px | Carrusel de inicio |
 | `ProductCategories` | 400px | Cards de categoría |
 | `CasoExitoCard` | 700px | Casos de éxito |
-| `ProjectsGrid` | 700px | Grid de trabajos |
+| `GaleriaTrabajos` | 700px | Grid de trabajos |
 
 ### Comportamiento
 
@@ -304,12 +399,19 @@ El proyecto está configurado para desplegarse en **Vercel** con Node.js 20.x:
 - **Adapter**: `@astrojs/vercel` con runtime `nodejs20.x`
 - **Output**: `hybrid` (SSG + SSR según la página)
 - **Build command**: `npm run build`
-- **Output directory**: `dist/`
+- **Output directory**: `.vercel/output/` (generado por el adapter de Vercel)
 
 ### Variables de entorno en producción
 | Variable | Valor |
 |----------|-------|
 | `PUBLIC_API_URL` | `https://api-recuerdos.vercel.app` (default) |
+
+### Dependencia de la API en tiempo de build
+
+El sitio es **prerendered**: los HTML de productos y categorías se generan en el build leyendo la API.
+
+- **API caída durante el build** → el build **no falla** (`safeFetch` devuelve `[]`), pero no se generan las páginas dinámicas.
+- **Datos nuevos (productos o categorías)** → hay que **redesplegar** el sitio para regenerar las páginas estáticas. La API los sirve en runtime, pero Astro genera los HTML en build.
 
 ## Testing y Validación
 
@@ -320,9 +422,23 @@ npm run build
 # Preview local de la build
 npm run preview
 
-# Validar TypeScript
+# Validar TypeScript/Astro
 npm run astro -- check
 ```
+
+### Prueba de resiliencia (categorías dinámicas)
+
+Para verificar que el build no rompe cuando la API está caída:
+
+```bash
+# Windows (PowerShell)
+$env:PUBLIC_API_URL = 'http://localhost:59999'; npm run build
+
+# Devolver el entorno a la normalidad
+Remove-Item Env:PUBLIC_API_URL
+```
+
+El build debe **completar sin errores** (solo warnings de `safeFetch`) y no generar páginas de categoría/producto. Este comportamiento está documentado en `RIESGOS-DEPLOY.md` (R3).
 
 ## Contribución
 
@@ -358,6 +474,11 @@ Este proyecto está bajo licencia MIT. Ver archivo LICENSE para detalles.
 - [TypeScript](https://www.typescriptlang.org)
 - [Zustand](https://github.com/pmndrs/zustand)
 
+## Documentación Relacionada
+
+- **`readme-api.md`** — Documentación completa de la API backend (endpoints, autenticación, caché, modelo de categorías dinámicas).
+- **`RIESGOS-DEPLOY.md`** — Análisis de riesgos de deploy (R1-R12) y sus mitigaciones aplicadas.
+
 ## Roadmap Futuro
 
 - Integración de pasarela de pagos (Stripe/PayPal)
@@ -372,4 +493,4 @@ Este proyecto está bajo licencia MIT. Ver archivo LICENSE para detalles.
 
 Hecho con amor en Santa Cruz de la Sierra, Bolivia
 
-Última actualización: Julio 2026
+Última actualización: Agosto 2026
