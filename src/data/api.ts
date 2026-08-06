@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.PUBLIC_API_URL || 'https://api-recuerdos.vercel.app';
+const API_BASE = import.meta.env.PUBLIC_API_URL || 'https://api-recuerdos-seven.vercel.app';
 
 export async function fetchApi<T>(endpoint: string): Promise<T> {
   const res = await fetch(`${API_BASE}${endpoint}`);
