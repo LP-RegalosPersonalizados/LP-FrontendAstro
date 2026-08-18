@@ -36,7 +36,7 @@
 - Productos destacados en la página principal
 - SEO avanzado con JSON-LD y datos estructurados
 - WhatsApp como canal principal de venta y cotización
-- Arquitectura híbrida SSG + SSR desplegada en Vercel
+- Arquitectura estática (SSG) desplegada en Vercel
 - Optimización de imágenes vía Cloudinary (formato automático, calidad y tamaño responsivo)
 - Diseño responsivo y accesible
 
@@ -45,11 +45,11 @@
 El proyecto obtiene todos sus datos dinámicos desde una API REST externa en tiempo de build:
 
 ```
-[API Remota]                [Frontend (Astro)]
-api-recuerdos.vercel.app    ─build-time─►  src/data/api.ts
-  GET /api/productos           ──safeFetch──►  products.ts
-  GET /api/categorias          ──safeFetch──►  categories.ts
-  GET /api/trabajos            ──safeFetch──►  trabajos.ts
+[API Remota]                   [Frontend (Astro)]
+api-recuerdos-seven.vercel.app  ─build-time─►  src/data/api.ts
+  GET /api/productos              ──safeFetch──►  products.ts
+  GET /api/categorias             ──safeFetch──►  categories.ts
+  GET /api/trabajos               ──safeFetch──►  trabajos.ts
                                                  │
                                    ┌─────────────┘
                                    ▼
@@ -159,7 +159,7 @@ No hace falta tocar el frontend:
 ## Tecnologías Utilizadas
 
 ### Frameworks y Librerías
-- **Astro 4.16** - Meta-framework híbrido (SSG + SSR con Vercel)
+- **Astro 5** - Generador estático con componentes React (SSG con Vercel)
 - **React 18.3** - Componentes interactivos (islas)
 - **Tailwind CSS 3.4** - Framework de estilos
 - **TypeScript 5.9** - Lenguaje tipado
@@ -169,12 +169,12 @@ No hace falta tocar el frontend:
 - @astrojs/react - Soporte de componentes React
 - @astrojs/tailwind - Integración de Tailwind
 - @astrojs/sitemap - Generación de sitemap
-- @astrojs/vercel - Adaptador para despliegue en Vercel (Node.js 20.x)
+- @astrojs/vercel - Adaptador para despliegue en Vercel (Node.js 22.x)
 
 ## Instalación y Configuración
 
 ### Requisitos Previos
-- Node.js 18.0.0 o superior
+- Node.js 22.x
 - npm o pnpm
 - Git
 
@@ -393,11 +393,11 @@ optimizeImage('https://res.cloudinary.com/.../image/upload/v12345/imagen.png', {
 
 ## Despliegue
 
-El proyecto está configurado para desplegarse en **Vercel** con Node.js 20.x:
+El proyecto está configurado para desplegarse en **Vercel** con Node.js 22.x:
 
 ### Configuración
-- **Adapter**: `@astrojs/vercel` con runtime `nodejs20.x`
-- **Output**: `hybrid` (SSG + SSR según la página)
+- **Adapter**: `@astrojs/vercel` (estático, runtime auto `nodejs22.x` según Node del build)
+- **Output**: `static` (páginas prerenderizadas durante el build)
 - **Build command**: `npm run build`
 - **Output directory**: `.vercel/output/` (generado por el adapter de Vercel)
 
