@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Product } from '../../data/products';
 import { optimizeImage } from '../../utils/cloudinary';
 
@@ -15,23 +15,27 @@ export default function ProductCarousel({
 }: ProductCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoplay, setIsAutoplay] = useState(autoplay);
+  const timeoutRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!isAutoplay || products.length === 0) return;
 
-    const interval = setInterval(() => {
+    intervalRef.current = window.setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % products.length);
     }, autoplayInterval);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current !== null) clearInterval(intervalRef.current);
+      if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
+    };
   }, [isAutoplay, products.length, autoplayInterval]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
+    if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
     setIsAutoplay(false);
-    // Reinicia el autoplay después de 10 segundos de inactividad
-    const timeout = setTimeout(() => setIsAutoplay(autoplay), 10000);
-    return () => clearTimeout(timeout);
+    timeoutRef.current = window.setTimeout(() => setIsAutoplay(autoplay), 10000);
   };
 
   if (products.length === 0) return null;
@@ -59,7 +63,11 @@ export default function ProductCarousel({
                   src={optimizeImage(product.image, { width: 600 })}
                   alt={product.name}
                   className="w-full h-full object-cover"
-                  loading="eager"
+                  width="600"
+                  height="600"
+                  decoding={index === 0 ? "sync" : "async"}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  {...({ fetchpriority: index === 0 ? "high" : "low" } as any)}
                 />
               </a>
             </div>

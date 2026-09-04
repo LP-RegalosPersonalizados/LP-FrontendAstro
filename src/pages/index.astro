@@ -13,15 +13,19 @@ import WorkPreview from '../components/home/WorkPreview.astro';
 import TrustBadges from '../components/home/TrustBadges.astro';
 import { getFeaturedProducts, getGeneralProducts } from '../data/products';
 import { fetchCategories } from '../data/categories';
+import { optimizeImage } from '../utils/cloudinary';
 
 const [featuredProducts, allProducts, categories] = await Promise.all([
   getFeaturedProducts(),
   getGeneralProducts(),
   fetchCategories(),
 ]);
+
+const heroLcp = featuredProducts[0] ? optimizeImage(featuredProducts[0].image, { width: 600 }) : undefined;
 ---
 
 <MainLayout
+  preloadImage={heroLcp}
   title="Regalos Personalizados para Momentos Especiales en Santa Cruz"
   description="Recuerdos compartidos personalizados en Santa Cruz de la Sierra, Bolivia. Tazas mágicas, álbumes de fotos y regalos únicos para momentos especiales."
   keywords="recuerdos compartidos sc, recuerdos compartidos, regalos personalizados sc, regalos personalizados, regalos bolivia, regalos santa cruz, regalos sc,recuerdos compartidos Santa Cruz, regalos personalizados Bolivia, tazas personalizadas SCZ, álbumes fotos Santa Cruz de la Sierra, regalos únicos Bolivia, regalos personalizados Santa Cruz, recuerdos compartidos Bolivia, regalos personalizados Santa Cruz de la Sierra"

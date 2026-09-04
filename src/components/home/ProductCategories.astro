@@ -62,8 +62,11 @@ const availableCategories = categories
                 <img
                   src={optimizeImage(cat.image, { width: 400 })}
                   alt={cat.name}
-                  class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                  width="400"
+                  height="400"
+                  decoding="async"
                   loading="lazy"
+                  class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                 />
               ) : (
                 <div class="w-full h-full bg-gradient-to-br from-primary/80 to-accent/80 flex items-center justify-center">
