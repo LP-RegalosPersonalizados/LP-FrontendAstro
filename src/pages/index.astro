@@ -21,7 +21,7 @@ const [featuredProducts, allProducts, categories] = await Promise.all([
   fetchCategories(),
 ]);
 
-const heroLcp = featuredProducts[0] ? optimizeImage(featuredProducts[0].image, { width: 600 }) : undefined;
+const heroLcp = featuredProducts[0] ? optimizeImage(featuredProducts[0].image, { width: 400 }) : undefined;
 ---
 
 <MainLayout

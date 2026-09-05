@@ -13,7 +13,6 @@ const currentPath = Astro.url.pathname;
 
 <header
   class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-neutral-light shadow-sm"
-  role="banner"
 >
   <div class="container-main">
     <div class="flex items-center justify-between h-16 md:h-20">
@@ -90,13 +89,12 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Mobile nav -->
-    <div
+    <nav
       id="mobile-menu"
       class="md:hidden hidden border-t border-neutral-light py-3"
-      role="navigation"
       aria-label="Navegación móvil"
     >
-      <nav class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1">
         {
           navLinks.map(({ href, label }) => (
             <a
@@ -123,8 +121,8 @@ const currentPath = Astro.url.pathname;
           </svg>
           WhatsApp
         </a>
-      </nav>
-    </div>
+      </div>
+    </nav>
   </div>
 </header>
 

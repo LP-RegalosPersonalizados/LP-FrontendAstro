@@ -1,12 +1,17 @@
 ---
 import ProductCarousel from './ProductCarousel';
 import type { Product } from '../../data/products';
+import { optimizeImage } from '../../utils/cloudinary';
 
 interface Props {
   products: Product[];
 }
 
 const { products } = Astro.props;
+const lcpImage = products[0] ? optimizeImage(products[0].image, { width: 400 }) : null;
+const lcpSrcSet = products[0]
+  ? `${optimizeImage(products[0].image, { width: 330 })} 330w, ${optimizeImage(products[0].image, { width: 400 })} 400w, ${optimizeImage(products[0].image, { width: 600 })} 600w`
+  : null;
 ---
 
 <!-- ============ HERO ============ -->
@@ -31,7 +36,7 @@ const { products } = Astro.props;
           Regalos Personalizados para
           <span class="text-secondary"> Momentos Especiales</span>
         </h1>
-        <p class="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+        <p class="text-white/90 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
           Regalos con diseños personalizados. Cada regalo es único, creado especialmente para vos.
         </p>
         <div class="flex flex-wrap gap-4">
@@ -52,8 +57,35 @@ const { products } = Astro.props;
         </div>
       </div>
 
-      <!-- Hero Carousel -->
-      <ProductCarousel client:load products={products} />
+      <!-- Hero LCP SSR + Carousel: SSR pinta LCP inmediato, React hidrata con client:idle (no bloquea Element render delay) -->
+      <div class="relative w-full max-w-sm">
+        {lcpImage && (
+          <div id="hero-lcp-static" class="overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+            <div class="aspect-square relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-950">
+              <img src={lcpImage} srcset={lcpSrcSet} sizes="400px" alt={products[0].name} width="400" height="400" loading="eager" fetchpriority="high" decoding="sync" crossorigin="anonymous" class="w-full h-full object-cover" />
+            </div>
+            <p class="text-white font-bold text-base text-center px-2 py-3">{products[0].name}</p>
+          </div>
+        )}
+        <div id="hero-carousel-island">
+          <ProductCarousel client:idle products={products} />
+        </div>
+      </div>
+      <script is:inline>
+        // Tras hidratar el carousel, oculta el SSR estático para evitar duplicado visual en desktop
+        const lcp = document.getElementById('hero-lcp-static');
+        const island = document.getElementById('hero-carousel-island');
+        if (lcp && island) {
+          const observer = new MutationObserver(() => {
+            if (island.querySelector('[data-carousel-ready]') || island.querySelector('img')) {
+              lcp.style.display = 'none';
+              observer.disconnect();
+            }
+          });
+          observer.observe(island, { childList: true, subtree: true });
+          setTimeout(() => { if (lcp) lcp.style.display = 'none'; }, 3000);
+        }
+      </script>
     </div>
   </div>
 </section>

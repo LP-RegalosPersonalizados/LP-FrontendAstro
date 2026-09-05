@@ -38,12 +38,14 @@ export default function ProductCard({ product, showBusinessBadge, businessMode }
       >
         <img
           src={optimizeImage(product.image, { width: 400 })}
+          srcSet={`${optimizeImage(product.image, { width: 330 })} 330w, ${optimizeImage(product.image, { width: 400 })} 400w, ${optimizeImage(product.image, { width: 600 })} 600w`}
+          sizes="(max-width: 640px) 50vw, 330px"
           alt={product.name}
           loading="lazy"
           width="400"
           height="400"
           decoding="async"
-          sizes="(max-width: 640px) 100vw, 400px"
+          crossOrigin="anonymous"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         {/* Badges */}
@@ -69,7 +71,7 @@ export default function ProductCard({ product, showBusinessBadge, businessMode }
               {product.name}
             </h3>
           </a>
-          <p className="text-sm text-gray-500 mt-1 line-clamp-2">{product.description}</p>
+          <p className="text-sm text-gray-600 mt-1 line-clamp-2">{product.description}</p>
           {product.price && (
             <p className="text-primary font-semibold mt-2 font-mono text-sm">
               {formatPrice(product.price)}
