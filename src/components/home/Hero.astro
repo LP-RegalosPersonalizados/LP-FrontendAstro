@@ -31,7 +31,7 @@ const { products } = Astro.props;
           Regalos Personalizados para
           <span class="text-secondary"> Momentos Especiales</span>
         </h1>
-        <p class="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+        <p class="text-white/90 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
           Regalos con diseños personalizados. Cada regalo es único, creado especialmente para vos.
         </p>
         <div class="flex flex-wrap gap-4">
@@ -52,8 +52,12 @@ const { products } = Astro.props;
         </div>
       </div>
 
-      <!-- Hero Carousel -->
-      <ProductCarousel client:load products={products} />
+      <!-- Hero Carousel: SSR de la isla pinta el HTML inicial (primera imagen eager + fetchpriority high); React hidrata con client:idle -->
+      <div class="relative w-full max-w-sm">
+        <div id="hero-carousel-island">
+          <ProductCarousel client:idle products={products} />
+        </div>
+      </div>
     </div>
   </div>
 </section>

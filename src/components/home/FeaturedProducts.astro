@@ -23,7 +23,7 @@ const { products } = Astro.props;
         Ver catálogo completo →
       </a>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {products.map((product) => (
         <ProductCard product={product} client:visible />
       ))}

@@ -44,6 +44,11 @@ export default function ProductDetail({ product, categoryName }: Props) {
             src={optimizeImage(activeImage, { width: 700 })}
             alt={product.name}
             className="w-full h-full object-cover transition-opacity duration-300"
+            width="700"
+            height="700"
+            decoding="async"
+            loading="eager"
+            crossOrigin="anonymous"
           />
         </div>
 
@@ -62,7 +67,7 @@ export default function ProductDetail({ product, categoryName }: Props) {
                 }
                 aria-label={`Ver imagen ${index + 1}`}
               >
-                <img src={optimizeImage(img, { width: 200 })} className="w-full h-full object-cover" alt={`${product.name} - Vista ${index + 1}`} />
+                <img src={optimizeImage(img, { width: 200 })} width="200" height="200" loading="lazy" decoding="async" crossOrigin="anonymous" className="w-full h-full object-cover" alt={`${product.name} - Vista ${index + 1}`} />
               </button>
             ))}
           </div>

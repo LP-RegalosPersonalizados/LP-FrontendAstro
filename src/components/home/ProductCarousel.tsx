@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Product } from '../../data/products';
 import { optimizeImage } from '../../utils/cloudinary';
 
@@ -15,23 +15,27 @@ export default function ProductCarousel({
 }: ProductCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoplay, setIsAutoplay] = useState(autoplay);
+  const timeoutRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!isAutoplay || products.length === 0) return;
 
-    const interval = setInterval(() => {
+    intervalRef.current = window.setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % products.length);
     }, autoplayInterval);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current !== null) clearInterval(intervalRef.current);
+      if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
+    };
   }, [isAutoplay, products.length, autoplayInterval]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
+    if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
     setIsAutoplay(false);
-    // Reinicia el autoplay después de 10 segundos de inactividad
-    const timeout = setTimeout(() => setIsAutoplay(autoplay), 10000);
-    return () => clearTimeout(timeout);
+    timeoutRef.current = window.setTimeout(() => setIsAutoplay(autoplay), 10000);
   };
 
   if (products.length === 0) return null;
@@ -52,14 +56,22 @@ export default function ProductCarousel({
               }`}
             >
               <a
-                href="/catalogo"
+                href={`/producto/${product.slug}`}
                 className="block w-full h-full"
+                aria-label={`Ver detalle de ${product.name}`}
               >
                 <img
-                  src={optimizeImage(product.image, { width: 600 })}
+                  src={optimizeImage(product.image, { width: 400 })}
+                  srcSet={`${optimizeImage(product.image, { width: 330 })} 330w, ${optimizeImage(product.image, { width: 400 })} 400w, ${optimizeImage(product.image, { width: 600 })} 600w`}
+                  sizes="(max-width: 1024px) 382px, 400px"
                   alt={product.name}
                   className="w-full h-full object-cover"
-                  loading="eager"
+                  width="400"
+                  height="400"
+                  decoding={index === 0 ? "sync" : "async"}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  {...({ fetchpriority: index === 0 ? "high" : "low" } as any)}
+                  crossOrigin="anonymous"
                 />
               </a>
             </div>
@@ -70,24 +82,25 @@ export default function ProductCarousel({
       </div>
 
       {/* Product Title */}
-      <div className="w-full max-w-md text-center px-2">
-        <h3 className="text-white font-bold text-base">{currentProduct.name}</h3>
+      <div className="w-full max-w-md text-center px-2" aria-live="polite" aria-atomic="true">
+        <p className="text-white font-bold text-base">{currentProduct.name}</p>
       </div>
 
       {/* Indicators */}
-      <div className="flex gap-2 justify-center">
+      <div className="flex gap-1 justify-center">
         {products.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
-              index === currentIndex
-                ? 'bg-secondary w-3 h-3'
-                : 'bg-white/30 hover:bg-white/50 w-2.5 h-2.5'
-            }`}
-            aria-label={`Ir a producto ${index + 1}`}
+            className="min-w-6 min-h-6 p-2 flex items-center justify-center transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50"
+            aria-label={`Ir a producto ${index + 1}: ${products[index].name}`}
             aria-current={index === currentIndex}
-          />
+          >
+            <span
+              className={`block rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-secondary w-3 h-3' : 'bg-white/30 hover:bg-white/50 w-2.5 h-2.5'}`}
+              aria-hidden="true"
+            />
+          </button>
         ))}
       </div>
     </div>

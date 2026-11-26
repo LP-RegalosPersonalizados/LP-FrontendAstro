@@ -26,9 +26,16 @@ export default function CasoExitoCard({ caso, index = 0 }: Props) {
           {caso.image && (
             <div className="relative h-56 overflow-hidden bg-gray-200">
               <img
-                src={optimizeImage(caso.image, { width: 700 })}
+                src={optimizeImage(caso.image, { width: 400 })}
+                srcSet={`${optimizeImage(caso.image, { width: 330 })} 330w, ${optimizeImage(caso.image, { width: 400 })} 400w, ${optimizeImage(caso.image, { width: 600 })} 600w`}
+                sizes="(max-width: 768px) 100vw, 400px"
                 alt={caso.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                width="700"
+                height="400"
+                loading="lazy"
+                decoding="async"
+                crossOrigin="anonymous"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
             </div>
@@ -79,9 +86,16 @@ export default function CasoExitoCard({ caso, index = 0 }: Props) {
           {caso.image && (
             <div className="relative h-64 overflow-hidden bg-gray-200">
               <img
-                src={optimizeImage(caso.image, { width: 700 })}
+                src={optimizeImage(caso.image, { width: 400 })}
+                srcSet={`${optimizeImage(caso.image, { width: 330 })} 330w, ${optimizeImage(caso.image, { width: 400 })} 400w, ${optimizeImage(caso.image, { width: 600 })} 600w`}
+                sizes="(max-width: 768px) 100vw, 400px"
                 alt={caso.title}
                 className="w-full h-full object-cover"
+                width="700"
+                height="400"
+                loading="lazy"
+                decoding="async"
+                crossOrigin="anonymous"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             </div>
